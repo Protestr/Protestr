@@ -38,3 +38,8 @@ captures/
 
 # Keystore files
 *.jks
+
+.idea
+
+**/google_dev_api_key.xml
+**/google-services.json
