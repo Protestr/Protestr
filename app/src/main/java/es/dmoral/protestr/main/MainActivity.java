@@ -1,30 +1,31 @@
 package es.dmoral.protestr.main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.fragments.events.EventsFragment;
 import es.dmoral.protestr.login.LoginActivity;
+import es.dmoral.protestr.settings.SettingsActivity;
 import es.dmoral.protestr.utils.Constants;
-import es.dmoral.prefs.Prefs;
-import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainView {
@@ -38,6 +39,7 @@ public class MainActivity extends BaseActivity
 
     private int lastSelectedMenuItemId;
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_main);
@@ -93,6 +95,9 @@ public class MainActivity extends BaseActivity
                 Prefs.with(this).writeBoolean(Constants.PREFERENCES_LOGGED_IN, false);
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
+                return true;
+            case R.id.action_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             default:
                 return false;

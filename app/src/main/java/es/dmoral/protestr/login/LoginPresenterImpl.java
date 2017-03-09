@@ -2,10 +2,10 @@ package es.dmoral.protestr.login;
 
 import android.support.annotation.NonNull;
 
+import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.InternetUtils;
-import es.dmoral.prefs.Prefs;
 
 /**
  * Created by grender on 13/02/17.

@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.login.LoginActivity;
 import es.dmoral.protestr.main.MainActivity;
 import es.dmoral.protestr.utils.Constants;
-import es.dmoral.prefs.Prefs;
 
 public class SplashActivity extends AppCompatActivity implements SplashView {
 

@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
  */
 
 public class Sha256Utils {
+
     public static @Nullable String digest(@NonNull final String data) {
         final MessageDigest md;
         try {

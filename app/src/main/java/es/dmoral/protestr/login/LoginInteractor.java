@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
  */
 
 interface LoginInteractor {
+
     interface OnAttemptLoginListener {
         void onLoginSuccess(final String username, final String password);
         void onLoginError(boolean isFailure);

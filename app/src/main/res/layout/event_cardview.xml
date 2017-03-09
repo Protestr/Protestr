@@ -50,13 +50,13 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
-                android:src="@drawable/ic_thumbs_up_down_black_48dp"
+                android:src="@drawable/ic_people_black_48dp"
                 android:alpha="0.6"
                 android:layout_width="16dp"
                 android:layout_height="16dp" />
 
             <TextView
-                android:id="@+id/event_rating"
+                android:id="@+id/event_participants"
                 android:layout_marginLeft="@dimen/half_activity_default_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:textStyle="italic"

@@ -11,6 +11,7 @@ import retrofit2.Response;
  */
 
 class SplashInteractorImpl implements SplashInteractor {
+
     @Override
     public void confirmLogin(final OnConfirmLoginListener onConfirmLoginListener, final String username, final String password) {
         new WebService().getApiInterface().attemptLogin(username, password).enqueue(new Callback<ResponseStatus>() {

@@ -1,36 +1,37 @@
 package es.dmoral.protestr.fragments.events;
 
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.TelephonyManager;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ProgressBar;
+
+import com.github.pwittchen.infinitescroll.library.InfiniteScrollListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.MissingResourceException;
 
 import butterknife.BindView;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.adapters.EventAdapter;
 import es.dmoral.protestr.api.models.Event;
 import es.dmoral.protestr.base.BaseFragment;
-import es.dmoral.protestr.main.MainActivity;
-import es.dmoral.protestr.utils.LocaleUtils;
+import es.dmoral.protestr.utils.Constants;
+import es.dmoral.toasty.Toasty;
 
 public class EventsFragment extends BaseFragment implements EventsFragmentView {
+
     @BindView(R.id.events_recyclerview) RecyclerView eventsRecyclerView;
+    @BindView(R.id.swipe_container) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.progress_bar) ProgressBar progressBar;
 
     private EventsPresenter eventsPresenter;
+    private int scrollPage = 1;
+    private boolean allEventsLoaded = false;
+    private boolean loading = true;
 
     public static EventsFragment newInstance() {
         return new EventsFragment();
@@ -46,16 +47,50 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
     @Override
     protected void setupViews() {
         eventsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        eventsPresenter.getNewEvents();
+        eventsRecyclerView.setAdapter(new EventAdapter(new ArrayList<Event>()));
+        swipeRefreshLayout.setRefreshing(true);
+        eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL);
     }
 
     @Override
     protected void setListeners() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                scrollPage = 1;
+                loading = true;
+                ((EventAdapter) eventsRecyclerView.getAdapter()).clearAll();
+                eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL);
+            }
+        });
+        eventsRecyclerView.addOnScrollListener(new InfiniteScrollListener(Constants.EVENT_LIMIT_CALL, (LinearLayoutManager) eventsRecyclerView.getLayoutManager()) {
+            @Override
+            public void onScrolledToEnd(int firstVisibleItemPosition) {
+                if (!allEventsLoaded && !loading) {
+                    loading = true;
+                    progressBar.setVisibility(View.VISIBLE);
+                    int offset = scrollPage++ * Constants.EVENT_LIMIT_CALL;
+                    eventsPresenter.getNewEvents(offset, Constants.EVENT_LIMIT_CALL);
+                }
+            }
+        });
     }
 
     @Override
     public void populateNewEventList(ArrayList<Event> newEvents) {
-        eventsRecyclerView.setAdapter(new EventAdapter(newEvents));
+        if (swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(false);
+        if (progressBar.getVisibility() == View.VISIBLE)
+            progressBar.setVisibility(View.GONE);
+        loading = false;
+        if (newEvents.size() != 0) {
+            ((EventAdapter) eventsRecyclerView.getAdapter()).addNewItems(newEvents);
+            if (allEventsLoaded)
+                allEventsLoaded = false;
+        } else {
+            allEventsLoaded = true;
+            Toasty.info(getActivity(), getString(R.string.no_more_events_toast)).show();
+        }
     }
 
     @Override

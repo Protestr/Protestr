@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class WebService {
+
     private Retrofit retrofit;
 
     public WebService() {

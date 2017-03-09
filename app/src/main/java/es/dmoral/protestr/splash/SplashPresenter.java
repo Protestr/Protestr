@@ -5,6 +5,7 @@ package es.dmoral.protestr.splash;
  */
 
 public interface SplashPresenter {
+
     void confirmLoginAttempt(final String username, final String password);
     void onDestroy();
 }

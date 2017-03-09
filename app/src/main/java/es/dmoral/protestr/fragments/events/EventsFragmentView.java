@@ -9,5 +9,6 @@ import es.dmoral.protestr.api.models.Event;
  */
 
 public interface EventsFragmentView {
+
     void populateNewEventList(ArrayList<Event> newEvents);
 }

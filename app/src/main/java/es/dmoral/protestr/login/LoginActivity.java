@@ -1,5 +1,6 @@
 package es.dmoral.protestr.login;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     private MaterialDialog progressDialog;
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_login);

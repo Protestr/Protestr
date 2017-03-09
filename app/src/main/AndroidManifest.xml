@@ -11,12 +11,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="es.dmoral.protestr.login.LoginActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBarLogin"/>
         <activity
-            android:name="es.dmoral.protestr.splash.SplashActivity"
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBarLogin"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".splash.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -26,9 +27,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="es.dmoral.protestr.main.MainActivity"
+            android:name=".main.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

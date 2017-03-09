@@ -5,6 +5,7 @@ package es.dmoral.protestr.login;
  */
 
 public interface LoginView {
+
     void showProgress();
     void hideProgress();
     void loginError(final String message);

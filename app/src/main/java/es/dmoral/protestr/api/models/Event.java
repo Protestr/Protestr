@@ -1,33 +1,32 @@
 package es.dmoral.protestr.api.models;
 
-import java.util.Date;
-
 /**
  * Created by grender on 15/02/17.
  */
 
 public class Event {
+
     private long event_id;
     private long user_id;
     private String title;
     private String description;
     private long from;
     private long to;
-    private int rating;
+    private int participants;
     private String location_name;
     private String image_url;
     private long latitude;
     private long longitude;
     private String iso3_country;
 
-    public Event(long event_id, long user_id, String title, String description, long from, long to, int rating, String location_name, String image_url, long latitude, long longitude, String iso3_country) {
+    public Event(long event_id, long user_id, String title, String description, long from, long to, int participants, String location_name, String image_url, long latitude, long longitude, String iso3_country) {
         this.event_id = event_id;
         this.user_id = user_id;
         this.title = title;
         this.description = description;
         this.from = from;
         this.to = to;
-        this.rating = rating;
+        this.participants = participants;
         this.location_name = location_name;
         this.image_url = image_url;
         this.latitude = latitude;
@@ -83,12 +82,12 @@ public class Event {
         this.to = to;
     }
 
-    public int getRating() {
-        return rating;
+    public int getParticipants() {
+        return participants;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setParticipants(int participants) {
+        this.participants = participants;
     }
 
     public String getLocation_name() {

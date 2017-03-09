@@ -12,6 +12,7 @@ import static android.content.Context.CONNECTIVITY_SERVICE;
  */
 
 public class InternetUtils {
+
     public static boolean isInternetAvailable(@NonNull Context context) {
         NetworkInfo ni = ((ConnectivityManager) context
                 .getSystemService(CONNECTIVITY_SERVICE)).getActiveNetworkInfo();

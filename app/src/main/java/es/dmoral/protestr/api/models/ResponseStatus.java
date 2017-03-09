@@ -5,6 +5,7 @@ package es.dmoral.protestr.api.models;
  */
 
 public class ResponseStatus {
+
     public static final int STATUS_OK = 200;
     public static final int STATUS_FORBIDDEN = 403;
     public static final int STATUS_INTERNAL_SERVER_ERROR = 500;

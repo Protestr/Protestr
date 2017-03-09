@@ -5,6 +5,7 @@ package es.dmoral.protestr.splash;
  */
 
 public interface SplashInteractor {
+
     interface OnConfirmLoginListener {
         void onLoginConfirmed();
         void onLoginUnconfirmed();

@@ -13,6 +13,7 @@ import retrofit2.Response;
  */
 
 class LoginInteractorImpl implements LoginInteractor {
+
     @Override
     public void attemptLogin(final OnAttemptLoginListener onAttemptLoginListener, @NonNull final String username, @NonNull final String password) {
         new WebService().getApiInterface().attemptLogin(username, password).enqueue(new Callback<ResponseStatus>() {

@@ -5,6 +5,7 @@ package es.dmoral.protestr.fragments.events;
  */
 
 public interface EventsPresenter {
-    void getNewEvents();
+
+    void getNewEvents(int offset, int limit);
     void onDestroy();
 }

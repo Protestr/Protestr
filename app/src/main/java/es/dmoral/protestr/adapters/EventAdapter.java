@@ -2,7 +2,6 @@ package es.dmoral.protestr.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +48,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 .into(holder.imgEventImage);
         holder.tvEventTitle.setText(event.getTitle());
         holder.tvEventFrom.setText(simpleDateFormat.format(event.getFrom()));
-        holder.tvEventRating.setText(String.valueOf(event.getRating()));
+        holder.tvEventParticipants.setText(String.valueOf(event.getParticipants()));
         holder.tvEventLocation.setText(event.getLocation_name());
     }
 
@@ -58,11 +57,22 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         return events.size();
     }
 
+    public void addNewItems(ArrayList<Event> newEvents) {
+        int countBeforeAdding = events.size();
+        events.addAll(newEvents);
+        notifyItemRangeChanged(countBeforeAdding, newEvents.size());
+    }
+
+    public void clearAll() {
+        events.clear();
+        notifyDataSetChanged();
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.event_image) ImageView imgEventImage;
         @BindView(R.id.event_from) TextView tvEventFrom;
         @BindView(R.id.event_title) TextView tvEventTitle;
-        @BindView(R.id.event_rating) TextView tvEventRating;
+        @BindView(R.id.event_participants) TextView tvEventParticipants;
         @BindView(R.id.event_location) TextView tvEventLocation;
 
         ViewHolder(View itemView) {
