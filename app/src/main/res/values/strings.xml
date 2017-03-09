@@ -33,6 +33,7 @@
     <string name="title_activity_settings">Ajustes</string>
     <string name="event_location_title">Localización de los eventos</string>
     <string name="no_more_events_toast">No hay más eventos que mostrar</string>
+    <string name="filter_location_events_default_value">only_selected_country</string>
 
     <string-array name="filter_location_events">
         <item>Mostrar eventos de todo el mundo</item>
@@ -40,8 +41,8 @@
     </string-array>
 
     <string-array name="filter_location_events_values">
-        <item>true</item>
-        <item>false</item>
+        <item>all</item>
+        <item>only_selected_country</item>
     </string-array>
 
 

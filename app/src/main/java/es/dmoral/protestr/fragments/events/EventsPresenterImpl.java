@@ -3,8 +3,10 @@ package es.dmoral.protestr.fragments.events;
 import java.util.ArrayList;
 
 import es.dmoral.prefs.Prefs;
+import es.dmoral.protestr.R;
 import es.dmoral.protestr.api.models.Event;
 import es.dmoral.protestr.utils.Constants;
+import es.dmoral.protestr.utils.LocaleUtils;
 
 /**
  * Created by grender on 16/02/17.
@@ -23,8 +25,13 @@ public class EventsPresenterImpl implements EventsPresenter, EventsInteractor.On
     @Override
     public void getNewEvents(int offset, int limit) {
         String iso3 = null;
-        if (!Prefs.with(((EventsFragment) eventsFragmentView).getContext()).readBoolean(Constants.PREFERENCES_SHOW_ALL_EVENTS_LOCATION))
-            iso3 = Prefs.with(((EventsFragment) eventsFragmentView).getContext()).read(Constants.PREFERENCES_SELECTED_COUNTRY);
+        if (Prefs.with(((EventsFragment) eventsFragmentView).getContext())
+                .read(Constants.PREFERENCES_FILTER_LOCATION_EVENTS)
+                .equals(((EventsFragment) eventsFragmentView).getString(R.string.filter_location_events_default_value))) {
+            iso3 = Prefs.with(((EventsFragment) eventsFragmentView)
+                    .getContext())
+                    .read(Constants.PREFERENCES_SELECTED_COUNTRY, LocaleUtils.getDeviceLocale(((EventsFragment) eventsFragmentView).getContext()));
+        }
         eventsInteractor.getNewEvents(this, iso3, offset, limit);
     }
 

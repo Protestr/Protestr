@@ -47,11 +47,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 // Set the summary to reflect the new value.
                 preference.setSummary(listPreference.getEntries()[index]);
 
-                if (preference.getKey().equals(Constants.PREFERENCES_SHOW_ALL_EVENTS_LOCATION)) {
-                    Prefs.with(preference.getContext()).writeBoolean(preference.getKey(), Boolean.parseBoolean(stringValue));
-                } else {
-                    Prefs.with(preference.getContext()).write(preference.getKey(), stringValue);
-                }
+                Prefs.with(preference.getContext()).write(preference.getKey(), stringValue);
 
             } else {
                 // For all other preferences, set the summary to the value's
@@ -99,9 +95,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         // Trigger the listener immediately with the preference's
         // current value.
         switch (key) {
-            case Constants.PREFERENCES_SHOW_ALL_EVENTS_LOCATION:
+            case Constants.PREFERENCES_FILTER_LOCATION_EVENTS:
                 onPreferenceChangeListener.onPreferenceChange(preference,
-                        Prefs.with(preference.getContext()).readBoolean(key));
+                        Prefs.with(preference.getContext()).read(key));
                 break;
             case Constants.PREFERENCES_SELECTED_COUNTRY:
                 onPreferenceChangeListener.onPreferenceChange(preference,
@@ -156,7 +152,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.general_settings);
 
-            bindPreferenceSummaryToValue(findPreference(Constants.PREFERENCES_SHOW_ALL_EVENTS_LOCATION));
+            bindPreferenceSummaryToValue(findPreference(Constants.PREFERENCES_FILTER_LOCATION_EVENTS));
             inflateCountrySelection();
         }
 
@@ -165,7 +161,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             countrySelectionPreference.setEntries(LocaleUtils.getAvailableLocales());
             countrySelectionPreference.setEntryValues(LocaleUtils.getAvailableIso3Codes());
             countrySelectionPreference.setDefaultValue(LocaleUtils.getDeviceLocale(countrySelectionPreference.getContext()));
-            countrySelectionPreference.setValueIndex(countrySelectionPreference.findIndexOfValue(Prefs.with(countrySelectionPreference.getContext()).read(countrySelectionPreference.getKey())));
+            countrySelectionPreference.setValueIndex(countrySelectionPreference.findIndexOfValue(Prefs.with(countrySelectionPreference.getContext()).read(countrySelectionPreference.getKey(), LocaleUtils.getDeviceLocale(countrySelectionPreference.getContext()))));
             bindPreferenceSummaryToValue(countrySelectionPreference);
         }
     }

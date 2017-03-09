@@ -5,10 +5,10 @@
 
         <ListPreference
             android:title="@string/event_location_title"
-            android:key="show_all_events_location"
-            android:defaultValue="false"
+            android:key="filter_location_events"
             android:entries="@array/filter_location_events"
-            android:entryValues="@array/filter_location_events_values" />
+            android:entryValues="@array/filter_location_events_values"
+            android:defaultValue="@string/filter_location_events_default_value"/>
 
         <ListPreference
             android:title="País seleccionado"

@@ -18,6 +18,6 @@ public class Constants {
     public static final String PREFERENCES_LOGGED_IN = "logged_in";
     public static final String PREFERENCES_USERNAME = "username";
     public static final String PREFERENCES_PASSWORD = "password";
-    public static final String PREFERENCES_SHOW_ALL_EVENTS_LOCATION = "show_all_events_location";
+    public static final String PREFERENCES_FILTER_LOCATION_EVENTS = "filter_location_events";
     public static final String PREFERENCES_SELECTED_COUNTRY = "selected_country";
 }
