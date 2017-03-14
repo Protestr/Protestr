@@ -34,6 +34,10 @@
     <string name="event_location_title">Localización de los eventos</string>
     <string name="no_more_events_toast">No hay más eventos que mostrar</string>
     <string name="filter_location_events_default_value">only_selected_country</string>
+    <string name="sort_events">Ordenar eventos</string>
+    <string name="order_by_numerous">Ordenar por más numerosos</string>
+    <string name="order_by_newest">Ordenar por recientes</string>
+    <string name="order_by_oldest">Ordenar por antiguos</string>
 
     <string-array name="filter_location_events">
         <item>Mostrar eventos de todo el mundo</item>
@@ -44,6 +48,9 @@
         <item>all</item>
         <item>only_selected_country</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

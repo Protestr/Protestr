@@ -6,15 +6,18 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.github.pwittchen.infinitescroll.library.InfiniteScrollListener;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.adapters.EventAdapter;
 import es.dmoral.protestr.api.models.Event;
@@ -26,7 +29,6 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
 
     @BindView(R.id.events_recyclerview) RecyclerView eventsRecyclerView;
     @BindView(R.id.swipe_container) SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.progress_bar) ProgressBar progressBar;
 
     private EventsPresenter eventsPresenter;
     private int scrollPage = 1;
@@ -46,10 +48,12 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
 
     @Override
     protected void setupViews() {
+        setHasOptionsMenu(true);
         eventsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         eventsRecyclerView.setAdapter(new EventAdapter(new ArrayList<Event>()));
         swipeRefreshLayout.setRefreshing(true);
-        eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL);
+        eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL,
+                Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_FROM_DESC));
     }
 
     @Override
@@ -60,7 +64,8 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
                 scrollPage = 1;
                 loading = true;
                 ((EventAdapter) eventsRecyclerView.getAdapter()).clearAll();
-                eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL);
+                eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL,
+                        Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_FROM_DESC));
             }
         });
         eventsRecyclerView.addOnScrollListener(new InfiniteScrollListener(Constants.EVENT_LIMIT_CALL, (LinearLayoutManager) eventsRecyclerView.getLayoutManager()) {
@@ -68,9 +73,10 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
             public void onScrolledToEnd(int firstVisibleItemPosition) {
                 if (!allEventsLoaded && !loading) {
                     loading = true;
-                    progressBar.setVisibility(View.VISIBLE);
+                    ((EventAdapter) eventsRecyclerView.getAdapter()).showProgress();
                     int offset = scrollPage++ * Constants.EVENT_LIMIT_CALL;
-                    eventsPresenter.getNewEvents(offset, Constants.EVENT_LIMIT_CALL);
+                    eventsPresenter.getNewEvents(offset, Constants.EVENT_LIMIT_CALL,
+                            Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_FROM_DESC));
                 }
             }
         });
@@ -80,10 +86,9 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
     public void populateNewEventList(ArrayList<Event> newEvents) {
         if (swipeRefreshLayout.isRefreshing())
             swipeRefreshLayout.setRefreshing(false);
-        if (progressBar.getVisibility() == View.VISIBLE)
-            progressBar.setVisibility(View.GONE);
+        ((EventAdapter) eventsRecyclerView.getAdapter()).removeProgress();
         loading = false;
-        if (newEvents.size() != 0) {
+        if (newEvents != null && newEvents.size() != 0) {
             ((EventAdapter) eventsRecyclerView.getAdapter()).addNewItems(newEvents);
             if (allEventsLoaded)
                 allEventsLoaded = false;
@@ -91,6 +96,37 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
             allEventsLoaded = true;
             Toasty.info(getActivity(), getString(R.string.no_more_events_toast)).show();
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_events, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String order;
+        switch (item.getItemId()) {
+            case R.id.sort_by_participants:
+                order = Constants.ORDER_FROM_PARTICIPANTS_DESC;
+                break;
+            case R.id.sort_by_newest:
+                order = Constants.ORDER_FROM_DESC;
+                break;
+            case R.id.sort_by_oldest:
+                order = Constants.ORDER_FROM_ASC;
+                break;
+            default:
+                return false;
+        }
+        scrollPage = 1;
+        loading = true;
+        swipeRefreshLayout.setRefreshing(true);
+        ((EventAdapter) eventsRecyclerView.getAdapter()).clearAll();
+        eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL, order);
+        Prefs.with(getActivity()).write(Constants.PREFERENCES_ORDER_BY, order);
+        return true;
     }
 
     @Override

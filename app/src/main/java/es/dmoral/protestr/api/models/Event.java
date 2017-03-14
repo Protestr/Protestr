@@ -10,8 +10,8 @@ public class Event {
     private long user_id;
     private String title;
     private String description;
-    private long from;
-    private long to;
+    private long from_date;
+    private long to_date;
     private int participants;
     private String location_name;
     private String image_url;
@@ -19,13 +19,13 @@ public class Event {
     private long longitude;
     private String iso3_country;
 
-    public Event(long event_id, long user_id, String title, String description, long from, long to, int participants, String location_name, String image_url, long latitude, long longitude, String iso3_country) {
+    public Event(long event_id, long user_id, String title, String description, long from_date, long to_date, int participants, String location_name, String image_url, long latitude, long longitude, String iso3_country) {
         this.event_id = event_id;
         this.user_id = user_id;
         this.title = title;
         this.description = description;
-        this.from = from;
-        this.to = to;
+        this.from_date = from_date;
+        this.to_date = to_date;
         this.participants = participants;
         this.location_name = location_name;
         this.image_url = image_url;
@@ -66,20 +66,20 @@ public class Event {
         this.description = description;
     }
 
-    public long getFrom() {
-        return from;
+    public long getFrom_date() {
+        return from_date;
     }
 
-    public void setFrom(long from) {
-        this.from = from;
+    public void setFrom_date(long from_date) {
+        this.from_date = from_date;
     }
 
-    public long getTo() {
-        return to;
+    public long getTo_date() {
+        return to_date;
     }
 
-    public void setTo(long to) {
-        this.to = to;
+    public void setTo_date(long to_date) {
+        this.to_date = to_date;
     }
 
     public int getParticipants() {

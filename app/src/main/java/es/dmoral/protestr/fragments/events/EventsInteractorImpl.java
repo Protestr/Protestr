@@ -17,9 +17,9 @@ import retrofit2.Response;
 public class EventsInteractorImpl implements EventsInteractor {
 
     @Override
-    public void getNewEvents(final OnGetNewEventsListener onGetNewEventsListener, @Nullable String iso3Code, int offset, int limit) {
+    public void getNewEvents(final OnGetNewEventsListener onGetNewEventsListener, @Nullable String iso3Code, int offset, int limit, String order) {
         if (iso3Code == null)
-            new WebService().getApiInterface().getAllNewEvents(offset, limit).enqueue(new Callback<ArrayList<Event>>() {
+            new WebService().getApiInterface().getAllNewEvents(offset, limit, order).enqueue(new Callback<ArrayList<Event>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Event>> call, Response<ArrayList<Event>> response) {
                     onGetNewEventsListener.onNewEventsReceived(response.body());
@@ -31,7 +31,7 @@ public class EventsInteractorImpl implements EventsInteractor {
                 }
             });
         else
-            new WebService().getApiInterface().getNewEvents(iso3Code, offset, limit).enqueue(new Callback<ArrayList<Event>>() {
+            new WebService().getApiInterface().getNewEvents(iso3Code, offset, limit, order).enqueue(new Callback<ArrayList<Event>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Event>> call, Response<ArrayList<Event>> response) {
                     onGetNewEventsListener.onNewEventsReceived(response.body());

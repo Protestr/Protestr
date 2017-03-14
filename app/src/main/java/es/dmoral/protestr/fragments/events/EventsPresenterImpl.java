@@ -1,5 +1,7 @@
 package es.dmoral.protestr.fragments.events;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import es.dmoral.prefs.Prefs;
@@ -23,16 +25,16 @@ public class EventsPresenterImpl implements EventsPresenter, EventsInteractor.On
     }
 
     @Override
-    public void getNewEvents(int offset, int limit) {
+    public void getNewEvents(int offset, int limit, String order) {
         String iso3 = null;
         if (Prefs.with(((EventsFragment) eventsFragmentView).getContext())
-                .read(Constants.PREFERENCES_FILTER_LOCATION_EVENTS)
+                .read(Constants.PREFERENCES_FILTER_LOCATION_EVENTS, ((EventsFragment) eventsFragmentView).getString(R.string.filter_location_events_default_value))
                 .equals(((EventsFragment) eventsFragmentView).getString(R.string.filter_location_events_default_value))) {
             iso3 = Prefs.with(((EventsFragment) eventsFragmentView)
                     .getContext())
                     .read(Constants.PREFERENCES_SELECTED_COUNTRY, LocaleUtils.getDeviceLocale(((EventsFragment) eventsFragmentView).getContext()));
         }
-        eventsInteractor.getNewEvents(this, iso3, offset, limit);
+        eventsInteractor.getNewEvents(this, iso3, offset, limit, order);
     }
 
     @Override

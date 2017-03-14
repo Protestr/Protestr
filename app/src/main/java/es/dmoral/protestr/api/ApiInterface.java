@@ -28,8 +28,8 @@ public interface ApiInterface {
     Call<ResponseStatus> attemptSignup(@Field("username") String username, @Field("password") String password);
 
     @GET(Constants.EVENTS_ENDPOINT + "?")
-    Call<ArrayList<Event>> getAllNewEvents(@Query("offset") int offset, @Query("limit") int limit);
+    Call<ArrayList<Event>> getAllNewEvents(@Query("offset") int offset, @Query("limit") int limit, @Query("order") String order);
 
     @GET(Constants.EVENTS_ENDPOINT + "/{iso3}" + "?")
-    Call<ArrayList<Event>> getNewEvents(@Path("iso3") String iso3Code, @Query("offset") int offset, @Query("limit") int limit);
+    Call<ArrayList<Event>> getNewEvents(@Path("iso3") String iso3Code, @Query("offset") int offset, @Query("limit") int limit, @Query("order") String order);
 }

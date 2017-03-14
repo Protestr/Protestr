@@ -17,5 +17,5 @@ public interface EventsInteractor {
         void onNewEventsError();
     }
 
-    void getNewEvents(final OnGetNewEventsListener onGetNewEventsListener, @Nullable String iso3Code, int offset, int limit);
+    void getNewEvents(final OnGetNewEventsListener onGetNewEventsListener, @Nullable String iso3Code, int offset, int limit, String order);
 }
