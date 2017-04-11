@@ -46,9 +46,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
                 // Set the summary to reflect the new value.
                 preference.setSummary(listPreference.getEntries()[index]);
-
-                Prefs.with(preference.getContext()).write(preference.getKey(), stringValue);
-
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
@@ -62,9 +59,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getFragmentManager().beginTransaction()
-                .add(android.R.id.content, new GeneralPreferenceFragment(), GeneralPreferenceFragment.class.getName())
-                .commit();
+        // See http://stackoverflow.com/a/14304020/4208583
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(android.R.id.content, new GeneralPreferenceFragment(), GeneralPreferenceFragment.class.getName())
+                    .commit();
+        }
 
         setupActionBar();
     }

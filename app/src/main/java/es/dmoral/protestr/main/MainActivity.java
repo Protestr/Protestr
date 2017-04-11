@@ -26,6 +26,7 @@ import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
+import es.dmoral.protestr.detention_alert.DetentionAlertActivity;
 import es.dmoral.protestr.fragments.events.EventsFragment;
 import es.dmoral.protestr.fragments.subscribed_events.SubscribedEventsFragment;
 import es.dmoral.protestr.login.LoginActivity;
@@ -116,24 +117,34 @@ public class MainActivity extends BaseActivity
             return false;
         }
 
+        boolean isFragment;
+
         switch (item.getItemId()) {
             case R.id.nav_events:
                 setTitle(item.getTitle());
                 addFragment(false, EventsFragment.newInstance());
                 fab.show();
+                isFragment = true;
                 break;
             case R.id.nav_subscribed_events:
                 setTitle(item.getTitle());
                 addFragment(false, SubscribedEventsFragment.newInstance());
                 fab.hide();
+                isFragment = true;
                 break;
             case R.id.nav_detention_alert:
+                startActivity(new Intent(this, DetentionAlertActivity.class));
+                isFragment = false;
                 break;
+            default:
+                isFragment = false;
         }
 
-        lastSelectedMenuItemId = item.getItemId();
+        if (isFragment) {
+            lastSelectedMenuItemId = item.getItemId();
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
 
-        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
