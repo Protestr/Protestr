@@ -39,7 +39,7 @@
         <activity
             android:name=".detention_alert.DetentionAlertActivity"
             android:label="@string/title_activity_detention_alert"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

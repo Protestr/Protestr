@@ -25,4 +25,5 @@ public class Constants {
     public static final String PREFERENCES_FILTER_LOCATION_EVENTS = "filter_location_events";
     public static final String PREFERENCES_SELECTED_COUNTRY = "selected_country";
     public static final String PREFERENCES_ORDER_BY = "order_by";
+    public static final String PREFERENCES_ALERT_ENABLED = "alert_enabled";
 }

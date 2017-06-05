@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Protestr</string>
-    <string name="title_activity_splash">SplashActivity</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_splash">Splash Activity</string>
+    <string name="title_activity_main">Main Activity</string>
+    <string name="title_activity_detention_alert">Aviso de detención</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Abrir menú lateral</string>
+    <string name="navigation_drawer_close">Cerrar menú lateral</string>
 
     <string name="action_settings">Ajustes</string>
     <string name="action_logout">Cerrar sesión</string>
@@ -49,9 +50,13 @@
         <item>only_selected_country</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_detention_alert">DetentionAlertActivity</string>
+    <string name="detention_alert_text_hint">SMS a enviar</string>
+    <string name="detention_alert_explanation">Cuando tengas activado el aviso de detención y tu móvil se apague (de cualquier forma) se enviará el texto indicado arriba junto con tu localización por SMS al contacto que hayas elegido.</string>
+    <string name="no_selected_contact">Ningún contacto seleccionado</string>
+    <string name="enable_alert">Activar alerta</string>
+    <string name="disable_alert">Desactivar alerta</string>
+    <string name="alert_notification_title">Alerta de detención activada</string>
+    <string name="alert_notification_body">Desactívala en su lugar correspondiente</string>
 
 
 </resources>
