@@ -26,4 +26,7 @@ public class Constants {
     public static final String PREFERENCES_SELECTED_COUNTRY = "selected_country";
     public static final String PREFERENCES_ORDER_BY = "order_by";
     public static final String PREFERENCES_ALERT_ENABLED = "alert_enabled";
+    public static final String PREFERENCES_SELECTED_CONTACT_NAME = "selected_contact_name";
+    public static final String PREFERENCES_SELECTED_CONTACT_NUMBER = "selected_contact_number";
+
 }

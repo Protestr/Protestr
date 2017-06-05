@@ -57,6 +57,8 @@
     <string name="disable_alert">Desactivar alerta</string>
     <string name="alert_notification_title">Alerta de detención activada</string>
     <string name="alert_notification_body">Desactívala en su lugar correspondiente.</string>
+    <string name="contact_selected">Contacto seleccionado</string>
+    <string name="error_selecting_contact">Error seleccionando contacto</string>
 
 
 </resources>
