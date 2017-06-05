@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/detention_alert_hint"
+                    android:id="@+id/detention_alert_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/activity_default_margin"
@@ -51,13 +51,14 @@
                     android:lines="20"
                     android:maxLines="20"
                     android:minLines="5"
+                    android:maxLength="132"
                     android:scrollHorizontally="false"
                     android:scrollbars="vertical"
                     android:singleLine="false" />
 
                 <LinearLayout
                     android:id="@+id/select_contact_container"
-                    android:layout_below="@id/detention_alert_hint"
+                    android:layout_below="@id/detention_alert_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"

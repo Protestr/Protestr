@@ -12,5 +12,6 @@ interface DetentionAlertView {
     void clearNotification();
     void setNotificationState();
     void setButtonState();
+    void setMessage();
     void setContactName();
 }

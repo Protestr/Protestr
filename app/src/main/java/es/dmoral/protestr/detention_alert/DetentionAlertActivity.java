@@ -1,16 +1,20 @@
 package es.dmoral.protestr.detention_alert;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -19,6 +23,7 @@ import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.toasty.Toasty;
+import im.delight.android.location.SimpleLocation;
 
 public class DetentionAlertActivity extends BaseActivity implements DetentionAlertView {
 
@@ -26,9 +31,11 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
     @BindView(R.id.enable_alert_button) Button enableAlertButton;
     @BindView(R.id.select_contact_bt) Button selectContactButton;
     @BindView(R.id.contact_name) TextView tvContactName;
+    @BindView(R.id.detention_alert_message) EditText detentionAlertMessage;
 
-    private static final int ALERT_NOTIFICATION_ID = 0x1000;
     private static final int PICK_CONTACT = 0x0001;
+    private static final int ALERT_NOTIFICATION_ID = 0x1000;
+    private static final int LOCATION_PERMISSION = 0x2000;
 
     private boolean alertEnabled;
     private DetentionAlertPresenter detentionAlertPresenter;
@@ -40,8 +47,14 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
         detentionAlertPresenter = new DetentionAlertPresenterImpl(this);
         alertEnabled = Prefs.with(this).readBoolean(Constants.PREFERENCES_ALERT_ENABLED);
 
+        requestLocationPermissions();
+        final SimpleLocation simpleLocation = new SimpleLocation(this);
+        if (!simpleLocation.hasLocationEnabled())
+            SimpleLocation.openSettings(this);
+
         setNotificationState();
         setButtonState();
+        setMessage();
         setContactName();
     }
 
@@ -146,9 +159,18 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
             enableAlertButton.setBackgroundResource(R.drawable.alert_button_background_disabled);
             enableAlertButton.setText(R.string.disable_alert);
         } else {
+            Prefs.with(DetentionAlertActivity.this).write(Constants.PREFERENCES_SMS_MESSAGE,
+                    detentionAlertMessage.getText().toString().trim());
             enableAlertButton.setBackgroundResource(R.drawable.alert_button_background);
             enableAlertButton.setText(R.string.enable_alert);
         }
+    }
+
+    @Override
+    public void setMessage() {
+        final String smsMessage = Prefs.with(this).read(Constants.PREFERENCES_SMS_MESSAGE);
+        if (!smsMessage.isEmpty())
+            detentionAlertMessage.setText(smsMessage);
     }
 
     @Override
@@ -156,6 +178,18 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
         final String displayName = Prefs.with(this).read(Constants.PREFERENCES_SELECTED_CONTACT_NAME);
         if (!displayName.isEmpty())
             tvContactName.setText(displayName);
+    }
+
+    private boolean requestLocationPermissions() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION);
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -28,5 +28,6 @@ public class Constants {
     public static final String PREFERENCES_ALERT_ENABLED = "alert_enabled";
     public static final String PREFERENCES_SELECTED_CONTACT_NAME = "selected_contact_name";
     public static final String PREFERENCES_SELECTED_CONTACT_NUMBER = "selected_contact_number";
+    public static final String PREFERENCES_SMS_MESSAGE = "sms_message";
 
 }
