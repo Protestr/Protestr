@@ -56,7 +56,7 @@
     <string name="enable_alert">Activar alerta</string>
     <string name="disable_alert">Desactivar alerta</string>
     <string name="alert_notification_title">Alerta de detención activada</string>
-    <string name="alert_notification_body">Desactívala en su lugar correspondiente</string>
+    <string name="alert_notification_body">Desactívala en su lugar correspondiente.</string>
 
 
 </resources>

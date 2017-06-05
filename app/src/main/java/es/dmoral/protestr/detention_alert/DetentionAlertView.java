@@ -7,5 +7,6 @@ package es.dmoral.protestr.detention_alert;
 public interface DetentionAlertView {
     void showOngoingNotification();
     void clearNotification();
+    void setNotificationState();
     void setButtonState();
 }

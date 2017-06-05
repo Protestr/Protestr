@@ -29,6 +29,8 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_detention_alert);
         alertEnabled = Prefs.with(this).readBoolean(Constants.PREFERENCES_ALERT_ENABLED);
+
+        setNotificationState();
         setButtonState();
     }
 
@@ -43,16 +45,11 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (alertEnabled) {
-                    clearNotification();
-                    alertEnabled = false;
-                } else {
-                    showOngoingNotification();
-                    alertEnabled = true;
-                }
-
+                alertEnabled = !alertEnabled;
                 Prefs.with(DetentionAlertActivity.this)
                         .writeBoolean(Constants.PREFERENCES_ALERT_ENABLED, alertEnabled);
+
+                setNotificationState();
                 setButtonState();
             }
         });
@@ -75,6 +72,14 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
         final NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(ALERT_NOTIFICATION_ID);
+    }
+
+    @Override
+    public void setNotificationState() {
+        if (alertEnabled)
+            showOngoingNotification();
+        else
+            clearNotification();
     }
 
     @Override
