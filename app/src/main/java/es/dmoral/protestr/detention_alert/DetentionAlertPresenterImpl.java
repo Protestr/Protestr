@@ -12,7 +12,7 @@ import es.dmoral.protestr.utils.Constants;
  * Created by grender on 5/06/17.
  */
 
-public class DetentionAlertPresenterImpl implements DetentionAlertPresenter,
+class DetentionAlertPresenterImpl implements DetentionAlertPresenter,
         DetentionAlertInteractor.OnContactRetrievedListener {
 
     private DetentionAlertView detentionAlertView;
