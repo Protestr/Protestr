@@ -159,8 +159,10 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
             enableAlertButton.setBackgroundResource(R.drawable.alert_button_background_disabled);
             enableAlertButton.setText(R.string.disable_alert);
         } else {
-            Prefs.with(DetentionAlertActivity.this).write(Constants.PREFERENCES_SMS_MESSAGE,
-                    detentionAlertMessage.getText().toString().trim());
+            final String smsMessage = detentionAlertMessage.getText().toString().trim();
+            if (!smsMessage.isEmpty())
+                Prefs.with(DetentionAlertActivity.this).write(Constants.PREFERENCES_SMS_MESSAGE,
+                        detentionAlertMessage.getText().toString().trim());
             enableAlertButton.setBackgroundResource(R.drawable.alert_button_background);
             enableAlertButton.setText(R.string.enable_alert);
         }
