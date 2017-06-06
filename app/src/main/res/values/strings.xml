@@ -51,7 +51,7 @@
     </string-array>
 
     <string name="detention_alert_text_hint">SMS a enviar</string>
-    <string name="detention_alert_explanation">Cuando tengas activado el aviso de detención y tu móvil se apague (de cualquier forma) se enviará el texto indicado arriba junto con tu localización por SMS al contacto que hayas elegido.</string>
+    <string name="detention_alert_explanation">Cuando tengas activado el aviso de detención tu móvil deberá ser agitado, en ese instante se enviará el texto indicado arriba junto con tu localización por SMS al contacto que hayas elegido.</string>
     <string name="no_selected_contact">Ningún contacto seleccionado</string>
     <string name="enable_alert">Activar alerta</string>
     <string name="disable_alert">Desactivar alerta</string>

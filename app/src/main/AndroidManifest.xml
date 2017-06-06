@@ -44,15 +44,10 @@
             android:label="@string/title_activity_detention_alert"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <receiver
-            android:name=".detention_alert.receivers.ShutdownReceiver"
+        <service
+            android:name=".detention_alert.services.ShakeToAlertService"
             android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-                <action android:name="android.intent.action.QUICKBOOT_POWEROFF" />
-            </intent-filter>
-        </receiver>
+            android:exported="false" />
     </application>
 
 </manifest>

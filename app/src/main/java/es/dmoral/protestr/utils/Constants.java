@@ -19,6 +19,8 @@ public class Constants {
     public static final String ORDER_FROM_DESC = "from_date_desc";
     public static final String ORDER_FROM_PARTICIPANTS_DESC = "participants_desc";
 
+    public static final String BROADCAST_SMS_SENT = "broadcast_sms_sent";
+
     public static final String PREFERENCES_LOGGED_IN = "logged_in";
     public static final String PREFERENCES_USERNAME = "username";
     public static final String PREFERENCES_PASSWORD = "password";

@@ -3,8 +3,10 @@ package es.dmoral.protestr.detention_alert;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -21,6 +23,7 @@ import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
+import es.dmoral.protestr.detention_alert.services.ShakeToAlertService;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.toasty.Toasty;
 import im.delight.android.location.SimpleLocation;
@@ -40,6 +43,8 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
     private boolean alertEnabled;
     private DetentionAlertPresenter detentionAlertPresenter;
 
+    private BroadcastReceiver broadcastReceiver;
+
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +57,12 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
         if (!simpleLocation.hasLocationEnabled())
             SimpleLocation.openSettings(this);
 
+        registerReceiver();
         setNotificationState();
         setButtonState();
         setMessage();
         setContactName();
+        setServiceState();
     }
 
     @Override
@@ -77,6 +84,7 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
 
                 setNotificationState();
                 setButtonState();
+                setServiceState();
             }
         });
         selectContactButton.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +93,37 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
                 pickContact();
             }
         });
+    }
+
+    private void registerReceiver() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constants.BROADCAST_SMS_SENT);
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals(Constants.BROADCAST_SMS_SENT)) {
+                    alertEnabled = false;
+                    Prefs.with(DetentionAlertActivity.this)
+                            .writeBoolean(Constants.PREFERENCES_ALERT_ENABLED, alertEnabled);
+
+                    setNotificationState();
+                    setButtonState();
+
+                    //TODO for testing
+                    Toasty.info(DetentionAlertActivity.this, "Alert sms has been sent").show();
+                }
+            }
+        };
+        registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    private void setServiceState() {
+        if (alertEnabled) {
+            startService(new Intent(this, ShakeToAlertService.class));
+        } else {
+            stopService(new Intent(this, ShakeToAlertService.class));
+        }
     }
 
     @Override
@@ -198,5 +237,9 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
     protected void onDestroy() {
         super.onDestroy();
         detentionAlertPresenter.onDestroy();
+        if (broadcastReceiver != null) {
+            unregisterReceiver(broadcastReceiver);
+            broadcastReceiver = null;
+        }
     }
 }
