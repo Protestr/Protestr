@@ -21,7 +21,7 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
     private int shakeCount = 0;
     private long lastShake = 0;
 
-    private static final int SHAKE_COUNT_THRESHOLD = 12; // 12 shakes to trigger
+    private static final int SHAKE_COUNT_THRESHOLD = 6; // 6 shakes to trigger
     private static final long SHAKE_RESET_THRESHOLD = 500; // 0.5 s
 
     @Override
@@ -38,7 +38,7 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
     private void listenForShakes() {
         final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         shakeDetector = new ShakeDetector(this);
-        shakeDetector.setSensitivity(ShakeDetector.SENSITIVITY_LIGHT);
+        shakeDetector.setSensitivity(ShakeDetector.SENSITIVITY_MEDIUM);
         shakeDetector.start(sensorManager);
     }
 

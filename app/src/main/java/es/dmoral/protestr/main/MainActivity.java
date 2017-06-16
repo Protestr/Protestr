@@ -9,23 +9,20 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
+import es.dmoral.protestr.create_event.CreateEventActivity;
 import es.dmoral.protestr.detention_alert.DetentionAlertActivity;
 import es.dmoral.protestr.fragments.events.EventsFragment;
 import es.dmoral.protestr.fragments.subscribed_events.SubscribedEventsFragment;
@@ -45,6 +42,8 @@ public class MainActivity extends BaseActivity
 
     private int lastSelectedMenuItemId;
 
+    private Intent pendingIntent;
+
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +60,15 @@ public class MainActivity extends BaseActivity
                 super.onDrawerSlide(drawerView, 0); // this disables the hamburger to arrow animation
             }
 
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                if (pendingIntent != null) {
+                    startActivity(pendingIntent);
+                    overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+                    pendingIntent = null;
+                }
+            }
         };
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
@@ -71,12 +79,19 @@ public class MainActivity extends BaseActivity
         navigationView.getMenu().findItem(R.id.nav_events).setCheckable(true);
         navigationView.getMenu().findItem(R.id.nav_events).setChecked(true);
         lastSelectedMenuItemId = R.id.nav_events;
-        addFragment(true, EventsFragment.newInstance());
+        addFragment(EventsFragment.newInstance());
     }
 
     @Override
     protected void setListeners() {
         navigationView.setNavigationItemSelectedListener(this);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CreateEventActivity.class));
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+            }
+        });
     }
 
     @Override
@@ -122,18 +137,18 @@ public class MainActivity extends BaseActivity
         switch (item.getItemId()) {
             case R.id.nav_events:
                 setTitle(item.getTitle());
-                addFragment(false, EventsFragment.newInstance());
+                addFragment(EventsFragment.newInstance());
                 fab.show();
                 isFragment = true;
                 break;
             case R.id.nav_subscribed_events:
                 setTitle(item.getTitle());
-                addFragment(false, SubscribedEventsFragment.newInstance());
+                addFragment(SubscribedEventsFragment.newInstance());
                 fab.hide();
                 isFragment = true;
                 break;
             case R.id.nav_detention_alert:
-                startActivity(new Intent(this, DetentionAlertActivity.class));
+                pendingIntent = new Intent(this, DetentionAlertActivity.class);
                 isFragment = false;
                 break;
             default:
@@ -142,9 +157,9 @@ public class MainActivity extends BaseActivity
 
         if (isFragment) {
             lastSelectedMenuItemId = item.getItemId();
-            drawerLayout.closeDrawer(GravityCompat.START);
         }
 
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -154,12 +169,9 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    public void addFragment(boolean firstFragment, @NonNull Fragment newFragment) {
+    public void addFragment(@NonNull Fragment newFragment) {
         final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if (firstFragment)
-            fragmentTransaction.add(R.id.content_main, newFragment);
-        else
-            fragmentTransaction.replace(R.id.content_main, newFragment);
+        fragmentTransaction.replace(R.id.content_main, newFragment);
         fragmentTransaction.commitNow();
     }
 

@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
@@ -53,9 +57,7 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
         alertEnabled = Prefs.with(this).readBoolean(Constants.PREFERENCES_ALERT_ENABLED);
 
         requestLocationPermissions();
-        final SimpleLocation simpleLocation = new SimpleLocation(this);
-        if (!simpleLocation.hasLocationEnabled())
-            SimpleLocation.openSettings(this);
+        showLocationRequestDialog();
 
         registerReceiver();
         setNotificationState();
@@ -123,17 +125,6 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
             startService(new Intent(this, ShakeToAlertService.class));
         } else {
             stopService(new Intent(this, ShakeToAlertService.class));
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return false;
         }
     }
 
@@ -219,6 +210,25 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
         final String displayName = Prefs.with(this).read(Constants.PREFERENCES_SELECTED_CONTACT_NAME);
         if (!displayName.isEmpty())
             tvContactName.setText(displayName);
+    }
+
+    @Override
+    public void showLocationRequestDialog() {
+        final SimpleLocation simpleLocation = new SimpleLocation(DetentionAlertActivity.this);
+        if (!simpleLocation.hasLocationEnabled()) {
+            new MaterialDialog.Builder(this)
+                    .title(R.string.location_dialog_title)
+                    .content(R.string.location_dialog_msg)
+                    .positiveText(android.R.string.ok)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            SimpleLocation.openSettings(DetentionAlertActivity.this);
+                        }
+                    })
+                    .negativeText(android.R.string.cancel)
+                    .show();
+        }
     }
 
     private boolean requestLocationPermissions() {

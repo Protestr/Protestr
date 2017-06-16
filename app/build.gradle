@@ -44,5 +44,6 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.github.delight-im:Android-SimpleLocation:v1.0.1'
     compile 'com.squareup:seismic:1.0.2'
+    compile 'com.github.Mariovc:ImagePicker:1.1.1'
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 }

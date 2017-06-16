@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -32,13 +33,14 @@
         </activity>
         <activity
             android:name=".main.MainActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".create_event.CreateEventActivity" />
+        <activity
+            android:name=".create_event.CreateEventActivity"
+            android:label="@string/create_event"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".detention_alert.DetentionAlertActivity"
             android:label="@string/title_activity_detention_alert"

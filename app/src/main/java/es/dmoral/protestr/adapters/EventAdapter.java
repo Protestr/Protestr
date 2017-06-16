@@ -12,13 +12,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.api.models.Event;
+import es.dmoral.protestr.utils.FormatUtils;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
@@ -29,8 +32,6 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private final ArrayList<Event> events;
     private Context context;
-    @SuppressLint("SimpleDateFormat")
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyy");
 
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_EVENT = 1;
@@ -57,7 +58,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     .load(event.getImage_url())
                     .into(((EventViewHolder) holder).imgEventImage);
             ((EventViewHolder) holder).tvEventTitle.setText(event.getTitle());
-            ((EventViewHolder) holder).tvEventFrom.setText(simpleDateFormat.format(event.getFrom_date()));
+            ((EventViewHolder) holder).tvEventFrom.setText(FormatUtils.formatDateByDefaultLocale(event.getFrom_date()));
             ((EventViewHolder) holder).tvEventParticipants.setText(String.valueOf(event.getParticipants()));
             ((EventViewHolder) holder).tvEventLocation.setText(event.getLocation_name());
         } else if (holder instanceof LoadingViewHolder) {

@@ -48,8 +48,6 @@
                     android:gravity="start"
                     android:hint="@string/detention_alert_text_hint"
                     android:padding="@dimen/half_activity_default_margin"
-                    android:lines="20"
-                    android:maxLines="20"
                     android:minLines="5"
                     android:maxLength="132"
                     android:scrollHorizontally="false"

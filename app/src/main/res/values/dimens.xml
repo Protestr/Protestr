@@ -13,4 +13,6 @@
     <item name="match_parent" format="integer" type="dimen">-1</item>
     <dimen name="nav_drawer_width">@dimen/wrap_content</dimen>
     <dimen name="nav_header_height">160dp</dimen>
+
+    <dimen name="card_margin_horizontal">-3dp</dimen>
 </resources>

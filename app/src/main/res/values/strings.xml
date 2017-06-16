@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Protestr</string>
-    <string name="title_activity_splash">Splash Activity</string>
-    <string name="title_activity_main">Main Activity</string>
     <string name="title_activity_detention_alert">Aviso de detención</string>
 
     <string name="navigation_drawer_open">Abrir menú lateral</string>
@@ -60,6 +58,15 @@
     <string name="contact_selected">Contacto seleccionado</string>
     <string name="error_selecting_contact">Error seleccionando contacto</string>
     <string name="select_contact">Seleccionar contacto</string>
+    <string name="create_event">Crear evento</string>
+    <string name="choose_image">Elige una imagen</string>
+    <string name="location_dialog_msg">Para enviar la localización al contacto que hayas elegido necesitas activar la localización en tu dispositivo.</string>
+    <string name="location_dialog_title">Activar localización</string>
+    <string name="event_name">Nombre del evento</string>
+    <string name="date">Fecha de comienzo: %s</string>
+    <string name="time">Hora de comienzo: %1$s:%2$s</string>
+    <string name="hour_not_valid">Hora no válida</string>
+    <string name="event_description">Descripción del evento</string>
 
 
 </resources>

@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment;
 
 interface MainView {
 
-    void addFragment(boolean firstFragment, @NonNull Fragment newFragment);
+    void addFragment(@NonNull Fragment newFragment);
     void showFab();
     void hideFab();
 }
