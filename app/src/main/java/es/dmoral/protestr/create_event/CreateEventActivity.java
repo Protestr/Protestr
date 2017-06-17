@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -40,6 +41,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     @BindView(R.id.image_placeholder) ImageView imagePlaceholder;
     @BindView(R.id.event_image) ImageView eventImage;
     @BindView(R.id.image_cardview) CardView imageCardView;
+    @BindView(R.id.et_event_name) EditText etEventName;
+    @BindView(R.id.et_event_description) EditText etEventDescription;
     @BindView(R.id.tv_date) TextView tvDate;
     @BindView(R.id.tv_time) TextView tvTime;
 
@@ -53,6 +56,13 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     private int minutes = calendar.get(Calendar.MINUTE);
 
     private static final String EVENT_BITMAP_SAVED_STATE = "EVENT_BITMAP_SAVED_STATE";
+    private static final String EVENT_NAME_SAVED_STATE = "EVENT_NAME_SAVED_STATE";
+    private static final String EVENT_DESCRIPTION_SAVED_STATE= "EVENT_DESCRIPTION_SAVED_STATE";
+    private static final String YEAR_SAVED_STATE = "YEAR_SAVED_STATE";
+    private static final String MONTH_SAVED_SAVED_STATE = "MONTH_SAVED_STATE";
+    private static final String DAY_OF_MONTH_SAVED_STATE = "DAY_OF_MONTH_SAVED_STATE";
+    private static final String HOUR_SAVED_STATE = "HOUR_SAVED_STATE";
+    private static final String MINUTES_SAVED_STATE = "MINUTES_SAVED_STATE";
 
     private BroadcastReceiver minuteReceiver = new BroadcastReceiver() {
         @Override
@@ -67,9 +77,10 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_create_event);
-        if (savedInstanceState != null) {
-            updateEventImage((Bitmap) savedInstanceState.getParcelable(EVENT_BITMAP_SAVED_STATE));
-        }
+        restoreStates(savedInstanceState);
+
+        setDate(TimeUtils.getTimeInMillis(year, month, dayOfMonth));
+        setTime();
 
         registerReceiver(minuteReceiver, new IntentFilter(Intent.ACTION_TIME_TICK));
 
@@ -85,12 +96,6 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getWindow().getDecorView().requestFocus();
-
-        tvDate.setText(getString(R.string.date,
-                FormatUtils.formatDateByDefaultLocale(calendar.getTimeInMillis())));
-        tvTime.setText(getString(R.string.time,
-                FormatUtils.addLeadingZero(hour),
-                FormatUtils.addLeadingZero(minutes)));
 
         // https://stackoverflow.com/a/40674771/4208583
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -116,17 +121,16 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                         CreateEventActivity.this.year = year;
                         CreateEventActivity.this.month = month;
                         CreateEventActivity.this.dayOfMonth = dayOfMonth;
-                        tvDate.setText(getString(R.string.date,
-                                FormatUtils.formatDateByDefaultLocale(timeInMillis)));
+                        setDate(timeInMillis);
                         final int minHour = TimeUtils.getHourOfDayFromMillis(System.currentTimeMillis());
                         final int minMinutes = TimeUtils.getMinuteFromMillis(System.currentTimeMillis());
                         if (timeInMillis == calendar.getTimeInMillis()
                                 || (hour < minHour || hour < minHour && minutes < minMinutes)) {
-                            hour = TimeUtils.getHourOfDayFromMillis(timeInMillis);
-                            minutes = TimeUtils.getMinuteFromMillis(timeInMillis);
-                            tvTime.setText(getString(R.string.time,
-                                    FormatUtils.addLeadingZero(hour),
-                                    FormatUtils.addLeadingZero(minutes)));
+                            hour = TimeUtils.getHourOfDayFromMillis(TimeUtils
+                                    .getCurrentTimeInMillisStartingFromMinutes());
+                            minutes = TimeUtils.getMinuteFromMillis(TimeUtils
+                                    .getCurrentTimeInMillisStartingFromMinutes());
+                            setTime();
                         }
                     }
                 }, year, month, dayOfMonth);
@@ -148,9 +152,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                                 || (hour >= minHour || hour >= minHour && minutes >= minMinutes)) {
                             CreateEventActivity.this.hour = hour;
                             CreateEventActivity.this.minutes = minutes;
-                            tvTime.setText(getString(R.string.time,
-                                    FormatUtils.addLeadingZero(hour),
-                                    FormatUtils.addLeadingZero(minutes)));
+                            setTime();
                         } else {
                             Toasty.error(CreateEventActivity.this, getString(R.string.hour_not_valid)).show();
                         }
@@ -164,6 +166,20 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         updateEventImage(ImagePicker.getImageFromResult(this, requestCode, resultCode, data));
+    }
+
+    @Override
+    public void restoreStates(@Nullable Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            updateEventImage((Bitmap) savedInstanceState.getParcelable(EVENT_BITMAP_SAVED_STATE));
+            etEventName.setText(savedInstanceState.getString(EVENT_NAME_SAVED_STATE));
+            etEventDescription.setText(savedInstanceState.getString(EVENT_DESCRIPTION_SAVED_STATE));
+            year = savedInstanceState.getInt(YEAR_SAVED_STATE);
+            month = savedInstanceState.getInt(MONTH_SAVED_SAVED_STATE);
+            dayOfMonth = savedInstanceState.getInt(DAY_OF_MONTH_SAVED_STATE);
+            hour = savedInstanceState.getInt(HOUR_SAVED_STATE);
+            minutes = savedInstanceState.getInt(MINUTES_SAVED_STATE);
+        }
     }
 
     @Override
@@ -189,12 +205,22 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
             dayOfMonth = auxCalendar.get(Calendar.DAY_OF_MONTH);
             hour = auxCalendar.get(Calendar.HOUR_OF_DAY);
             minutes = auxCalendar.get(Calendar.MINUTE);
-            tvDate.setText(getString(R.string.date,
-                    FormatUtils.formatDateByDefaultLocale(timeInMillis)));
-            tvTime.setText(getString(R.string.time,
-                    FormatUtils.addLeadingZero(hour),
-                    FormatUtils.addLeadingZero(minutes)));
+            setDate(timeInMillis);
+            setTime();
         }
+    }
+
+    @Override
+    public void setDate(long timeInMillis) {
+        tvDate.setText(getString(R.string.date,
+                FormatUtils.formatDateByDefaultLocale(timeInMillis)));
+    }
+
+    @Override
+    public void setTime() {
+        tvTime.setText(getString(R.string.time,
+                FormatUtils.addLeadingZero(hour),
+                FormatUtils.addLeadingZero(minutes)));
     }
 
     @Override
@@ -217,6 +243,13 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(EVENT_BITMAP_SAVED_STATE, eventBitmap);
+        outState.putString(EVENT_NAME_SAVED_STATE, etEventName.getText().toString().trim());
+        outState.putString(EVENT_DESCRIPTION_SAVED_STATE, etEventDescription.getText().toString().trim());
+        outState.putInt(YEAR_SAVED_STATE, year);
+        outState.putInt(MONTH_SAVED_SAVED_STATE, month);
+        outState.putInt(DAY_OF_MONTH_SAVED_STATE, dayOfMonth);
+        outState.putInt(HOUR_SAVED_STATE, hour);
+        outState.putInt(MINUTES_SAVED_STATE, minutes);
     }
 
     @Override

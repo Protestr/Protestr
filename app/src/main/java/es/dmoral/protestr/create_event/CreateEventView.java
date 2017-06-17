@@ -1,6 +1,7 @@
 package es.dmoral.protestr.create_event;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 /**
@@ -8,6 +9,9 @@ import android.support.annotation.Nullable;
  */
 
 public interface CreateEventView {
+    void restoreStates(@Nullable Bundle savedInstanceState);
     void updateEventImage(@Nullable Bitmap bitmap);
     void updateTimeIfNeeded();
+    void setDate(long timeInMillis);
+    void setTime();
 }
