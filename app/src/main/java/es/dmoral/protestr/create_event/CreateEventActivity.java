@@ -13,6 +13,8 @@ import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +25,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.mvc.imagepicker.ImagePicker;
 
 import java.util.Calendar;
@@ -30,12 +39,15 @@ import java.util.Calendar;
 import butterknife.BindView;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
+import es.dmoral.protestr.custom.ScrollFriendlyMapView;
 import es.dmoral.protestr.utils.FormatUtils;
 import es.dmoral.protestr.utils.ImageUtils;
+import es.dmoral.protestr.utils.LocationUtils;
 import es.dmoral.protestr.utils.TimeUtils;
 import es.dmoral.toasty.Toasty;
 
-public class CreateEventActivity extends BaseActivity implements CreateEventView {
+public class CreateEventActivity extends BaseActivity implements CreateEventView,
+        OnMapReadyCallback {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.image_placeholder) ImageView imagePlaceholder;
@@ -43,17 +55,23 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     @BindView(R.id.image_cardview) CardView imageCardView;
     @BindView(R.id.et_event_name) EditText etEventName;
     @BindView(R.id.et_event_description) EditText etEventDescription;
+    @BindView(R.id.et_event_location) EditText etEventLocation;
     @BindView(R.id.tv_date) TextView tvDate;
     @BindView(R.id.tv_time) TextView tvTime;
+    @BindView(R.id.map_view) ScrollFriendlyMapView mapView;
 
     private Bitmap eventBitmap;
     private Calendar calendar = Calendar.getInstance();
+    private GoogleMap googleMap;
 
     private int year = calendar.get(Calendar.YEAR);
     private int month = calendar.get(Calendar.MONTH);
     private int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
     private int hour = calendar.get(Calendar.HOUR_OF_DAY);
     private int minutes = calendar.get(Calendar.MINUTE);
+
+    private double latitude = 0;
+    private double longitude = 0;
 
     private static final String EVENT_BITMAP_SAVED_STATE = "EVENT_BITMAP_SAVED_STATE";
     private static final String EVENT_NAME_SAVED_STATE = "EVENT_NAME_SAVED_STATE";
@@ -63,6 +81,10 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     private static final String DAY_OF_MONTH_SAVED_STATE = "DAY_OF_MONTH_SAVED_STATE";
     private static final String HOUR_SAVED_STATE = "HOUR_SAVED_STATE";
     private static final String MINUTES_SAVED_STATE = "MINUTES_SAVED_STATE";
+    private static final String EVENT_LOCATION_SAVED_STATE = "EVENT_LOCATION_STATE";
+    private static final String EVENT_LATITUDE_SAVED_STATE = "EVENT_LATITUDE_SAVED_STATE";
+    private static final String EVENT_LONGITUDE_SAVED_STATE = "EVENT_LONGITUDE_SAVED_STATE";
+    private static final String MAP_VIEW_SAVED_STATE = "MAP_VIEW_STATE";
 
     private BroadcastReceiver minuteReceiver = new BroadcastReceiver() {
         @Override
@@ -96,6 +118,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getWindow().getDecorView().requestFocus();
+
+        mapView.getMapAsync(this);
 
         // https://stackoverflow.com/a/40674771/4208583
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -161,6 +185,41 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                 rangeTimePickerDialog.show();
             }
         });
+        etEventLocation.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence cs, int start, int count, int after) {
+                // unused
+            }
+
+            @Override
+            public void onTextChanged(CharSequence cs, int start, int before, int count) {
+                if (googleMap != null) {
+                    LocationUtils.getLocationFromAddress(CreateEventActivity.this,
+                            cs.toString(), new LocationUtils.OnAddressDecodedListener() {
+                                @Override
+                                public void onAddressDecoded(final LatLng latLng) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            moveMapCamera(latLng);
+                                        }
+                                    });
+                                }
+                            });
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable e) {
+                // unused
+            }
+        });
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        this.googleMap = googleMap;
+        moveMapCamera(new LatLng(latitude, longitude));
     }
 
     @Override
@@ -170,6 +229,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
 
     @Override
     public void restoreStates(@Nullable Bundle savedInstanceState) {
+        Bundle mapViewSavedInstanceState = null;
         if (savedInstanceState != null) {
             updateEventImage((Bitmap) savedInstanceState.getParcelable(EVENT_BITMAP_SAVED_STATE));
             etEventName.setText(savedInstanceState.getString(EVENT_NAME_SAVED_STATE));
@@ -179,7 +239,13 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
             dayOfMonth = savedInstanceState.getInt(DAY_OF_MONTH_SAVED_STATE);
             hour = savedInstanceState.getInt(HOUR_SAVED_STATE);
             minutes = savedInstanceState.getInt(MINUTES_SAVED_STATE);
+            etEventLocation.setText(savedInstanceState.getString(EVENT_LOCATION_SAVED_STATE));
+            latitude = savedInstanceState.getDouble(EVENT_LATITUDE_SAVED_STATE);
+            longitude = savedInstanceState.getDouble(EVENT_LONGITUDE_SAVED_STATE);
+            mapViewSavedInstanceState = savedInstanceState.getBundle(MAP_VIEW_SAVED_STATE);
         }
+        if (mapView != null)
+            mapView.onCreate(mapViewSavedInstanceState);
     }
 
     @Override
@@ -208,6 +274,31 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
             setDate(timeInMillis);
             setTime();
         }
+    }
+
+    @Override
+    public void moveMapCamera(final LatLng latLng) {
+        if (latLng.latitude == 0 && latLng.longitude == 0)
+            return;
+        final CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(latLng)
+                .zoom(12f)
+                .build();
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),
+                new GoogleMap.CancelableCallback() {
+                    @Override
+                    public void onFinish() {
+                        googleMap.clear();
+                        latitude = latLng.latitude;
+                        longitude = latLng.longitude;
+                        googleMap.addMarker(new MarkerOptions().position(latLng));
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // ignored
+                    }
+                });
     }
 
     @Override
@@ -250,6 +341,30 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         outState.putInt(DAY_OF_MONTH_SAVED_STATE, dayOfMonth);
         outState.putInt(HOUR_SAVED_STATE, hour);
         outState.putInt(MINUTES_SAVED_STATE, minutes);
+        outState.putString(EVENT_LOCATION_SAVED_STATE, etEventLocation.getText().toString().trim());
+        outState.putDouble(EVENT_LATITUDE_SAVED_STATE, latitude);
+        outState.putDouble(EVENT_LONGITUDE_SAVED_STATE, longitude);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mapView != null)
+            mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mapView != null)
+            mapView.onPause();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        if (mapView != null)
+            this.mapView.onLowMemory();
     }
 
     @Override
@@ -257,5 +372,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         super.onDestroy();
         unregisterReceiver(minuteReceiver);
         eventBitmap = null;
+        if (mapView != null)
+            mapView.onDestroy();
+
     }
 }

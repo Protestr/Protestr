@@ -41,5 +41,6 @@ captures/
 
 .idea
 
-**/google_dev_api_key.xml
+**/geo_api_key.xml
+**/imgur_api_key.xml
 **/google-services.json

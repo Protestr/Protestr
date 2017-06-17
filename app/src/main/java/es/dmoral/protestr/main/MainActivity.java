@@ -119,6 +119,7 @@ public class MainActivity extends BaseActivity
                 return true;
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
                 return true;
             default:
                 return false;

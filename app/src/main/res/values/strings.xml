@@ -67,6 +67,7 @@
     <string name="time">Hora de comienzo: %1$s:%2$s</string>
     <string name="hour_not_valid">Hora no válida</string>
     <string name="event_description">Descripción del evento</string>
+    <string name="event_location">Localización del evento</string>
 
 
 </resources>
