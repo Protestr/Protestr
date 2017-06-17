@@ -3,7 +3,10 @@ package es.dmoral.protestr.create_event;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
@@ -28,6 +31,7 @@ import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.utils.FormatUtils;
 import es.dmoral.protestr.utils.ImageUtils;
+import es.dmoral.protestr.utils.TimeUtils;
 import es.dmoral.toasty.Toasty;
 
 public class CreateEventActivity extends BaseActivity implements CreateEventView {
@@ -50,6 +54,15 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
 
     private static final String EVENT_BITMAP_SAVED_STATE = "EVENT_BITMAP_SAVED_STATE";
 
+    private BroadcastReceiver minuteReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
+                updateTimeIfNeeded();
+            }
+        }
+    };
+
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +70,9 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         if (savedInstanceState != null) {
             updateEventImage((Bitmap) savedInstanceState.getParcelable(EVENT_BITMAP_SAVED_STATE));
         }
+
+        registerReceiver(minuteReceiver, new IntentFilter(Intent.ACTION_TIME_TICK));
+
         calendar.clear(Calendar.HOUR_OF_DAY);
         calendar.clear(Calendar.MINUTE);
         calendar.clear(Calendar.SECOND);
@@ -96,26 +112,18 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                         new DatePickerDialog(CreateEventActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                        final Calendar auxCalendar = Calendar.getInstance();
-                        auxCalendar.set(Calendar.YEAR, year);
-                        auxCalendar.set(Calendar.MONTH, month);
-                        auxCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        auxCalendar.clear(Calendar.HOUR_OF_DAY);
-                        auxCalendar.clear(Calendar.MINUTE);
-                        auxCalendar.clear(Calendar.SECOND);
-                        auxCalendar.clear(Calendar.MILLISECOND);
+                        final long timeInMillis = TimeUtils.getTimeInMillis(year, month, dayOfMonth);
                         CreateEventActivity.this.year = year;
                         CreateEventActivity.this.month = month;
                         CreateEventActivity.this.dayOfMonth = dayOfMonth;
                         tvDate.setText(getString(R.string.date,
-                                FormatUtils.formatDateByDefaultLocale(auxCalendar.getTimeInMillis())));
-                        auxCalendar.setTimeInMillis(System.currentTimeMillis());
-                        final int minHour = auxCalendar.get(Calendar.HOUR_OF_DAY);
-                        final int minMinutes = auxCalendar.get(Calendar.MINUTE);
-                        if (auxCalendar.getTimeInMillis() == calendar.getTimeInMillis()
+                                FormatUtils.formatDateByDefaultLocale(timeInMillis)));
+                        final int minHour = TimeUtils.getHourOfDayFromMillis(System.currentTimeMillis());
+                        final int minMinutes = TimeUtils.getMinuteFromMillis(System.currentTimeMillis());
+                        if (timeInMillis == calendar.getTimeInMillis()
                                 || (hour < minHour || hour < minHour && minutes < minMinutes)) {
-                            hour = auxCalendar.get(Calendar.HOUR_OF_DAY);
-                            minutes = auxCalendar.get(Calendar.MINUTE);
+                            hour = TimeUtils.getHourOfDayFromMillis(timeInMillis);
+                            minutes = TimeUtils.getMinuteFromMillis(timeInMillis);
                             tvTime.setText(getString(R.string.time,
                                     FormatUtils.addLeadingZero(hour),
                                     FormatUtils.addLeadingZero(minutes)));
@@ -135,15 +143,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                     public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
                         final int minHour = calendar.get(Calendar.HOUR_OF_DAY);
                         final int minMinutes = calendar.get(Calendar.MINUTE);
-                        final Calendar auxCalendar = Calendar.getInstance();
-                        auxCalendar.set(Calendar.YEAR, year);
-                        auxCalendar.set(Calendar.MONTH, month);
-                        auxCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        auxCalendar.clear(Calendar.HOUR_OF_DAY);
-                        auxCalendar.clear(Calendar.MINUTE);
-                        auxCalendar.clear(Calendar.SECOND);
-                        auxCalendar.clear(Calendar.MILLISECOND);
-                        if (auxCalendar.getTimeInMillis() > calendar.getTimeInMillis()
+                        final long timeInMillis = TimeUtils.getTimeInMillis(year, month, dayOfMonth);
+                        if (timeInMillis > calendar.getTimeInMillis()
                                 || (hour >= minHour || hour >= minHour && minutes >= minMinutes)) {
                             CreateEventActivity.this.hour = hour;
                             CreateEventActivity.this.minutes = minutes;
@@ -178,6 +179,25 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     }
 
     @Override
+    public void updateTimeIfNeeded() {
+        final long timeInMillis = TimeUtils.getTimeInMillis(year, month, dayOfMonth, hour, minutes);
+        final long currentTimeInMillis = TimeUtils.getCurrentTimeInMillisStartingFromMinutes();
+        if (timeInMillis < currentTimeInMillis) {
+            final Calendar auxCalendar = Calendar.getInstance();
+            year = auxCalendar.get(Calendar.YEAR);
+            month = auxCalendar.get(Calendar.MONTH);
+            dayOfMonth = auxCalendar.get(Calendar.DAY_OF_MONTH);
+            hour = auxCalendar.get(Calendar.HOUR_OF_DAY);
+            minutes = auxCalendar.get(Calendar.MINUTE);
+            tvDate.setText(getString(R.string.date,
+                    FormatUtils.formatDateByDefaultLocale(timeInMillis)));
+            tvTime.setText(getString(R.string.time,
+                    FormatUtils.addLeadingZero(hour),
+                    FormatUtils.addLeadingZero(minutes)));
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.create_event, menu);
         return true;
@@ -202,6 +222,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(minuteReceiver);
         eventBitmap = null;
     }
 }

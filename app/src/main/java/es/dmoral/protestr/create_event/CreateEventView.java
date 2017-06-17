@@ -9,4 +9,5 @@ import android.support.annotation.Nullable;
 
 public interface CreateEventView {
     void updateEventImage(@Nullable Bitmap bitmap);
+    void updateTimeIfNeeded();
 }
