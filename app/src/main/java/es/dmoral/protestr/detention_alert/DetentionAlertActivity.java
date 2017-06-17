@@ -41,7 +41,7 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
     @BindView(R.id.detention_alert_message) EditText detentionAlertMessage;
 
     private static final int PICK_CONTACT = 0x0001;
-    private static final int ALERT_NOTIFICATION_ID = 0x1000;
+    public static final int ALERT_NOTIFICATION_ID = 0x1000;
     private static final int LOCATION_PERMISSION = 0x2000;
 
     private boolean alertEnabled;
@@ -106,10 +106,6 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(Constants.BROADCAST_SMS_SENT)) {
                     alertEnabled = false;
-                    Prefs.with(DetentionAlertActivity.this)
-                            .writeBoolean(Constants.PREFERENCES_ALERT_ENABLED, alertEnabled);
-
-                    setNotificationState();
                     setButtonState();
 
                     //TODO for testing
@@ -169,18 +165,9 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
     }
 
     @Override
-    public void clearNotification() {
-        final NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(ALERT_NOTIFICATION_ID);
-    }
-
-    @Override
     public void setNotificationState() {
         if (alertEnabled)
             showOngoingNotification();
-        else
-            clearNotification();
     }
 
     @Override
