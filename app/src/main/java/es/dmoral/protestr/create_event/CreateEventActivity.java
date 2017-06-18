@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -60,9 +62,12 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     @BindView(R.id.tv_time) TextView tvTime;
     @BindView(R.id.map_view) ScrollFriendlyMapView mapView;
 
+    private MaterialDialog progressDialog;
+
     private Bitmap eventBitmap;
     private Calendar calendar = Calendar.getInstance();
     private GoogleMap googleMap;
+    private CreateEventPresenter createEventPresenter;
 
     private int year = calendar.get(Calendar.YEAR);
     private int month = calendar.get(Calendar.MONTH);
@@ -72,6 +77,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
 
     private double latitude = 0;
     private double longitude = 0;
+    private String iso3 = "";
 
     private static final String EVENT_BITMAP_SAVED_STATE = "EVENT_BITMAP_SAVED_STATE";
     private static final String EVENT_NAME_SAVED_STATE = "EVENT_NAME_SAVED_STATE";
@@ -84,7 +90,34 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     private static final String EVENT_LOCATION_SAVED_STATE = "EVENT_LOCATION_STATE";
     private static final String EVENT_LATITUDE_SAVED_STATE = "EVENT_LATITUDE_SAVED_STATE";
     private static final String EVENT_LONGITUDE_SAVED_STATE = "EVENT_LONGITUDE_SAVED_STATE";
+    private static final String EVENT_ISO3_CODE_SAVED_STATE = "EVENT_ISO3_CODE_SAVED_STATE";
     private static final String MAP_VIEW_SAVED_STATE = "MAP_VIEW_STATE";
+
+    private static final long TEXT_DELAY_THRESHOLD = 750;
+    private long lastTypeTimestamp = 0;
+    private String lastTypedMessage = "";
+    private Handler typeHandler = new Handler();
+
+    private Runnable typeRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (System.currentTimeMillis() > (lastTypeTimestamp + TEXT_DELAY_THRESHOLD - 500)) {
+                LocationUtils.getLocationFromAddress(CreateEventActivity.this,
+                        lastTypedMessage, new LocationUtils.OnAddressDecodedListener() {
+                            @Override
+                            public void onAddressDecoded(final LatLng latLng, String iso3) {
+                                CreateEventActivity.this.iso3 = iso3;
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        moveMapCamera(latLng);
+                                    }
+                                });
+                            }
+                        });
+            }
+        }
+    };
 
     private BroadcastReceiver minuteReceiver = new BroadcastReceiver() {
         @Override
@@ -100,6 +133,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_create_event);
         restoreStates(savedInstanceState);
+        createEventPresenter = new CreateEventPresenterImpl(this);
 
         setDate(TimeUtils.getTimeInMillis(year, month, dayOfMonth));
         setTime();
@@ -193,25 +227,16 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
 
             @Override
             public void onTextChanged(CharSequence cs, int start, int before, int count) {
-                if (googleMap != null) {
-                    LocationUtils.getLocationFromAddress(CreateEventActivity.this,
-                            cs.toString(), new LocationUtils.OnAddressDecodedListener() {
-                                @Override
-                                public void onAddressDecoded(final LatLng latLng) {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            moveMapCamera(latLng);
-                                        }
-                                    });
-                                }
-                            });
-                }
+                typeHandler.removeCallbacks(typeRunnable);
             }
 
             @Override
             public void afterTextChanged(Editable e) {
-                // unused
+                if (googleMap != null) {
+                    lastTypeTimestamp = System.currentTimeMillis();
+                    lastTypedMessage = e.toString();
+                    typeHandler.postDelayed(typeRunnable, TEXT_DELAY_THRESHOLD);
+                }
             }
         });
     }
@@ -242,6 +267,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
             etEventLocation.setText(savedInstanceState.getString(EVENT_LOCATION_SAVED_STATE));
             latitude = savedInstanceState.getDouble(EVENT_LATITUDE_SAVED_STATE);
             longitude = savedInstanceState.getDouble(EVENT_LONGITUDE_SAVED_STATE);
+            iso3 = savedInstanceState.getString(EVENT_ISO3_CODE_SAVED_STATE);
             mapViewSavedInstanceState = savedInstanceState.getBundle(MAP_VIEW_SAVED_STATE);
         }
         if (mapView != null)
@@ -274,6 +300,12 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
             setDate(timeInMillis);
             setTime();
         }
+    }
+
+    @Override
+    public boolean checkIfCanSubmit() {
+        return latitude != 0 && longitude != 0 && !etEventName.getText().toString().trim().isEmpty()
+                && !etEventDescription.getText().toString().isEmpty() && eventBitmap != null;
     }
 
     @Override
@@ -315,6 +347,33 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     }
 
     @Override
+    public void onEventCreated() {
+        Toasty.success(this, getString(R.string.event_created)).show();
+        onBackPressed();
+    }
+
+    @Override
+    public void showProgress() {
+        progressDialog = new MaterialDialog.Builder(this)
+                .content(R.string.creating_event)
+                .progress(true, 0)
+                .show();
+    }
+
+    @Override
+    public void hideProgress() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+    }
+
+    @Override
+    public void showError(String message) {
+        Toasty.error(this, message).show();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.create_event, menu);
         return true;
@@ -324,6 +383,15 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_create_event:
+                if (checkIfCanSubmit()) {
+                    showProgress();
+                    createEventPresenter.createEvent(eventBitmap, etEventName.getText().toString().trim(),
+                            etEventDescription.getText().toString().trim(), TimeUtils.getTimeInMillis(year,
+                                    month, dayOfMonth, hour, minutes), etEventLocation.getText().toString().trim(),
+                            latitude, longitude, iso3);
+                } else {
+                    Toasty.error(CreateEventActivity.this, getString(R.string.fill_all_fields_error)).show();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -344,6 +412,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         outState.putString(EVENT_LOCATION_SAVED_STATE, etEventLocation.getText().toString().trim());
         outState.putDouble(EVENT_LATITUDE_SAVED_STATE, latitude);
         outState.putDouble(EVENT_LONGITUDE_SAVED_STATE, longitude);
+        outState.putString(EVENT_ISO3_CODE_SAVED_STATE, iso3);
     }
 
     @Override

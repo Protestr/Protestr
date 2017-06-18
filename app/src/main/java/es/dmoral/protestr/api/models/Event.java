@@ -15,11 +15,11 @@ public class Event {
     private int participants;
     private String location_name;
     private String image_url;
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
     private String iso3_country;
 
-    public Event(long event_id, long user_id, String title, String description, long from_date, long to_date, int participants, String location_name, String image_url, long latitude, long longitude, String iso3_country) {
+    public Event(long event_id, long user_id, String title, String description, long from_date, long to_date, int participants, String location_name, String image_url, double latitude, double longitude, String iso3_country) {
         this.event_id = event_id;
         this.user_id = user_id;
         this.title = title;
@@ -106,7 +106,7 @@ public class Event {
         this.image_url = image_url;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -114,7 +114,7 @@ public class Event {
         this.latitude = latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 

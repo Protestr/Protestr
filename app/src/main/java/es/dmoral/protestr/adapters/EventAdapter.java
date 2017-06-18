@@ -105,7 +105,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void addNewItems(ArrayList<Event> newEvents) {
         int countBeforeAdding = events.size();
         events.addAll(newEvents);
-        notifyItemRangeChanged(countBeforeAdding, newEvents.size());
+            notifyItemRangeInserted(countBeforeAdding, newEvents.size());
     }
 
     public void clearAll() {

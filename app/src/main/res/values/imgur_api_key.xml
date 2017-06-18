@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="imgur_api_key">Client-ID dd12c3289d977e6</string>
+    <string name="imgur_client_id">0b6b745a0cad74b</string>
+    <string name="imgur_client_secret">fb0c62ae3db87c5999527c6aef497b5e7b594ef0</string>
 </resources>

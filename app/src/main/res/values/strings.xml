@@ -68,6 +68,12 @@
     <string name="hour_not_valid">Hora no válida</string>
     <string name="event_description">Descripción del evento</string>
     <string name="event_location">Localización del evento</string>
+    <string name="fill_all_fields_error">Debes rellenar todos los campos</string>
+    <string name="creating_event">Creando evento…</string>
+    <string name="error_uploading_image">Error subiendo la imagen</string>
+    <string name="error_creating_event">Error creando evento</string>
+    <string name="event_created">Evento creado</string>
+    <string name="finish_event_info">Cuando termine el evento recuerda darlo como finalizado en su pantalla correspondiente.</string>
 
 
 </resources>

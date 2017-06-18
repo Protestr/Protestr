@@ -1,5 +1,9 @@
 package es.dmoral.protestr.utils;
 
+import android.content.Context;
+
+import es.dmoral.protestr.R;
+
 /**
  * Created by grender on 13/02/17.
  */
@@ -13,6 +17,8 @@ public class Constants {
     public static final String LOGIN_ENDPOINT = USERS_ENDPOINT + "/login";
     public static final String SIGN_UP_ENDPOINT = USERS_ENDPOINT + "/signup";
     public static final String EVENTS_ENDPOINT = "events";
+    public static final String NEW_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/new";
+    public static final String UPLOAD_IMAGE_URL = "https://api.imgur.com/3/image";
 
     public static final int EVENT_LIMIT_CALL = 2;
     public static final String ORDER_FROM_ASC = "from_date_asc";
@@ -31,5 +37,9 @@ public class Constants {
     public static final String PREFERENCES_SELECTED_CONTACT_NAME = "selected_contact_name";
     public static final String PREFERENCES_SELECTED_CONTACT_NUMBER = "selected_contact_number";
     public static final String PREFERENCES_SMS_MESSAGE = "sms_message";
+
+    public static String getImgurAuthHeader(Context context) {
+        return "Client-ID " + context.getString(R.string.imgur_client_id);
+    }
 
 }

@@ -165,9 +165,18 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
     }
 
     @Override
+    public void clearNotification() {
+        final NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(ALERT_NOTIFICATION_ID);
+    }
+
+    @Override
     public void setNotificationState() {
         if (alertEnabled)
             showOngoingNotification();
+        else
+            clearNotification();
     }
 
     @Override

@@ -47,7 +47,7 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
         final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         shakeDetector = new ShakeDetector(this);
-        shakeDetector.setSensitivity(ShakeDetector.SENSITIVITY_MEDIUM);
+        shakeDetector.setSensitivity(ShakeDetector.SENSITIVITY_LIGHT);
         shakeDetector.start(sensorManager);
     }
 

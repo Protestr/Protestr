@@ -9,6 +9,7 @@ interface DetentionAlertView {
     void contactSelected(String displayName);
     void contactError();
     void showOngoingNotification();
+    void clearNotification();
     void setNotificationState();
     void setButtonState();
     void setMessage();

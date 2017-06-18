@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
  */
 
 public interface LoginPresenter {
-
     void attemptLogin(@NonNull final String username, @NonNull final String password);
     void attemptSignUp(@NonNull final String username, @NonNull final String password);
     void onDestroy();

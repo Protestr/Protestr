@@ -70,6 +70,10 @@ public class LocaleUtils {
         return new Locale("", telephonyManager.getNetworkCountryIso()).getISO3Country();
     }
 
+    public static String iso2ToIso3(String iso2) {
+        return new Locale("", iso2).getISO3Country();
+    }
+
     private static LinkedHashMap<String, String> sortHashMapByValues(HashMap<String, String> passedMap) {
         List<String> mapKeys = new ArrayList<>(passedMap.keySet());
         List<String> mapValues = new ArrayList<>(passedMap.values());
