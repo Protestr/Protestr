@@ -20,7 +20,7 @@ public class Constants {
     public static final String NEW_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/new";
     public static final String UPLOAD_IMAGE_URL = "https://api.imgur.com/3/image";
 
-    public static final int EVENT_LIMIT_CALL = 2;
+    public static final int EVENT_LIMIT_CALL = 32;
     public static final String ORDER_CREATION_DATE_ASC = "creation_date_asc";
     public static final String ORDER_CREATION_DATE_DESC = "creation_date_desc";
     public static final String ORDER_FROM_PARTICIPANTS_DESC = "participants_desc";

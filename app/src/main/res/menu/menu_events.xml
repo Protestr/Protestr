@@ -8,15 +8,18 @@
         android:icon="@drawable/ic_sort_white_24dp">
 
         <menu>
-            <item
-                android:id="@+id/sort_by_participants"
-                android:title="@string/order_by_numerous"/>
-            <item
-                android:id="@+id/sort_by_newest"
-                android:title="@string/order_by_newest"/>
-            <item
-                android:id="@+id/sort_by_oldest"
-                android:title="@string/order_by_oldest"/>
+            <group android:id="@+id/sort_group"
+                   android:checkableBehavior="single">
+                <item
+                    android:id="@+id/sort_by_participants"
+                    android:title="@string/order_by_numerous"/>
+                <item
+                    android:id="@+id/sort_by_newest"
+                    android:title="@string/order_by_newest"/>
+                <item
+                    android:id="@+id/sort_by_oldest"
+                    android:title="@string/order_by_oldest"/>
+            </group>
         </menu>
 
     </item>

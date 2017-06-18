@@ -99,9 +99,27 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
     }
 
     @Override
+    public void setFirstMenuItemChecked(Menu menu) {
+        final String order = Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY,
+                Constants.ORDER_CREATION_DATE_DESC);
+        switch (order) {
+            case Constants.ORDER_CREATION_DATE_ASC:
+                menu.findItem(R.id.sort_by_oldest).setChecked(true);
+                break;
+            case Constants.ORDER_CREATION_DATE_DESC:
+                menu.findItem(R.id.sort_by_newest).setChecked(true);
+                break;
+            case Constants.ORDER_FROM_PARTICIPANTS_DESC:
+                menu.findItem(R.id.sort_by_participants).setChecked(true);
+                break;
+        }
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_events, menu);
+        setFirstMenuItemChecked(menu);
     }
 
     @Override
@@ -125,6 +143,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
         swipeRefreshLayout.setRefreshing(true);
         ((EventAdapter) eventsRecyclerView.getAdapter()).clearAll();
         eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL, order);
+        item.setChecked(true);
         Prefs.with(getActivity()).write(Constants.PREFERENCES_ORDER_BY, order);
         return true;
     }
