@@ -11,7 +11,7 @@ import es.dmoral.protestr.R;
 public class Constants {
 
     public static final String BASE_URL = "http://protestr.tk/";
-    //public static final String BASE_URL = "http://192.168.1.134:5006/";
+    //public static final String BASE_URL = "http://192.168.1.135:5000/";
     public static final String API_URL = BASE_URL + "api/v1/";
     public static final String USERS_ENDPOINT = "users";
     public static final String LOGIN_ENDPOINT = USERS_ENDPOINT + "/login";
@@ -21,8 +21,8 @@ public class Constants {
     public static final String UPLOAD_IMAGE_URL = "https://api.imgur.com/3/image";
 
     public static final int EVENT_LIMIT_CALL = 2;
-    public static final String ORDER_FROM_ASC = "from_date_asc";
-    public static final String ORDER_FROM_DESC = "from_date_desc";
+    public static final String ORDER_CREATION_DATE_ASC = "creation_date_asc";
+    public static final String ORDER_CREATION_DATE_DESC = "creation_date_desc";
     public static final String ORDER_FROM_PARTICIPANTS_DESC = "participants_desc";
 
     public static final String BROADCAST_SMS_SENT = "broadcast_sms_sent";

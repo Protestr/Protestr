@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -54,7 +53,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
         eventsRecyclerView.setAdapter(new EventAdapter(new ArrayList<Event>()));
         swipeRefreshLayout.setRefreshing(true);
         eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL,
-                Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_FROM_DESC));
+                Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
     }
 
     @Override
@@ -66,7 +65,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
                 loading = true;
                 ((EventAdapter) eventsRecyclerView.getAdapter()).clearAll();
                 eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL,
-                        Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_FROM_DESC));
+                        Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
             }
         });
         eventsRecyclerView.addOnScrollListener(new InfiniteScrollListener(Constants.EVENT_LIMIT_CALL, (LinearLayoutManager) eventsRecyclerView.getLayoutManager()) {
@@ -77,7 +76,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
                     ((EventAdapter) eventsRecyclerView.getAdapter()).showProgress();
                     int offset = scrollPage++ * Constants.EVENT_LIMIT_CALL;
                         eventsPresenter.getNewEvents(offset, Constants.EVENT_LIMIT_CALL,
-                            Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_FROM_DESC));
+                            Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
                 }
             }
         });
@@ -113,10 +112,10 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
                 order = Constants.ORDER_FROM_PARTICIPANTS_DESC;
                 break;
             case R.id.sort_by_newest:
-                order = Constants.ORDER_FROM_DESC;
+                order = Constants.ORDER_CREATION_DATE_DESC;
                 break;
             case R.id.sort_by_oldest:
-                order = Constants.ORDER_FROM_ASC;
+                order = Constants.ORDER_CREATION_DATE_ASC;
                 break;
             default:
                 return false;
