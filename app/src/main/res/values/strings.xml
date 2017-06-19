@@ -74,6 +74,15 @@
     <string name="error_creating_event">Error creando evento</string>
     <string name="event_created">Evento creado</string>
     <string name="finish_event_info">Cuando termine el evento recuerda darlo como finalizado en su pantalla correspondiente.</string>
+    <string name="configure_detection_alert">Configurar alerta de detención</string>
+    <string name="configure_sensor">Configurar sensor</string>
+    <string name="shake_number">Número de agitaciones</string>
+    <string name="shake_number_explanation">Número de agitaciones necesarias para activar la alerta de detención.</string>
+    <string name="sensor_sensitivity">Sensibilidad del sensor</string>
+    <string name="sensor_sensitivity_explanation">Cuanto más alta sea la sensibilidad, más fuerte tendrás que agitar tu móvil.</string>
+    <string name="time_until_restart">Tiempo para reiniciar</string>
+    <string name="time_until_restart_explanation">El tiempo máximo en milisegundos que debe existir entre dos agitaciones para no reiniciar el contador.</string>
+    <string name="save_sensor_config">Guardar configuración del sensor</string>
 
 
 </resources>

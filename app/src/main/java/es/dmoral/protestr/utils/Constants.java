@@ -37,6 +37,9 @@ public class Constants {
     public static final String PREFERENCES_SELECTED_CONTACT_NAME = "selected_contact_name";
     public static final String PREFERENCES_SELECTED_CONTACT_NUMBER = "selected_contact_number";
     public static final String PREFERENCES_SMS_MESSAGE = "sms_message";
+    public static final String PREFERENCES_SHAKE_NUMBER = "shake_number";
+    public static final String PREFERENCES_SENSOR_SENSITIVITY = "sensor_sensitivity";
+    public static final String PREFERENCES_TIME_TO_RESTART = "time_to_restart";
 
     public static String getImgurAuthHeader(Context context) {
         return "Client-ID " + context.getString(R.string.imgur_client_id);

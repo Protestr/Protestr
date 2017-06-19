@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,7 @@ import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
+import es.dmoral.protestr.detention_alert.detention_alert_config.DetentionAlertConfigActivity;
 import es.dmoral.protestr.detention_alert.services.ShakeToAlertService;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.toasty.Toasty;
@@ -95,6 +97,24 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
                 pickContact();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detention_alert, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_configure_detection_alert:
+                startActivity(new Intent(DetentionAlertActivity.this, DetentionAlertConfigActivity.class));
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void registerReceiver() {

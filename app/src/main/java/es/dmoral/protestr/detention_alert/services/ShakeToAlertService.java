@@ -29,8 +29,9 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
     private int shakeCount = 0;
 
     private long lastShake = 0;
-    private static final int SHAKE_COUNT_THRESHOLD = 6; // 6 shakes to trigger
-    private static final long SHAKE_RESET_THRESHOLD = 500; // 0.5 s
+    private int shakeCountThreshold;
+    private int shakeResetThreshold;
+    private int sensorSensitivity;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -39,6 +40,11 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        shakeCountThreshold = Prefs.with(this).readInt(Constants.PREFERENCES_SHAKE_NUMBER, 6);
+        sensorSensitivity = Prefs.with(this).readInt(Constants.PREFERENCES_SENSOR_SENSITIVITY,
+                ShakeDetector.SENSITIVITY_LIGHT);
+        shakeResetThreshold = Prefs.with(this).readInt(Constants.PREFERENCES_TIME_TO_RESTART, 500);
+
         listenForShakes();
         return START_STICKY_COMPATIBILITY;
     }
@@ -47,7 +53,7 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
         final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         shakeDetector = new ShakeDetector(this);
-        shakeDetector.setSensitivity(ShakeDetector.SENSITIVITY_LIGHT);
+        shakeDetector.setSensitivity(sensorSensitivity);
         shakeDetector.start(sensorManager);
     }
 
@@ -60,7 +66,7 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
 
     @Override
     public void hearShake() {
-        if (shakeCount == SHAKE_COUNT_THRESHOLD && active) {
+        if (shakeCount == shakeCountThreshold && active) {
             vibrator.vibrate(500);
             updateState();
             clearNotification();
@@ -70,7 +76,7 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
             active = false;
             stopSelf();
         } else {
-            if (lastShake > System.currentTimeMillis() + SHAKE_RESET_THRESHOLD) {
+            if (lastShake > System.currentTimeMillis() + shakeResetThreshold) {
                 shakeCount = 1;
             } else {
                 shakeCount++;
