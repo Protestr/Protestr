@@ -93,7 +93,9 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     private static final String EVENT_ISO3_CODE_SAVED_STATE = "EVENT_ISO3_CODE_SAVED_STATE";
     private static final String MAP_VIEW_SAVED_STATE = "MAP_VIEW_STATE";
 
-    private static final long TEXT_DELAY_THRESHOLD = 750;
+    private static final long TEXT_DELAY = 750;
+    private static final long TEXT_DELAY_THRESHOLD = 250;
+
     private long lastTypeTimestamp = 0;
     private String lastTypedMessage = "";
     private Handler typeHandler = new Handler();
@@ -101,7 +103,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     private Runnable typeRunnable = new Runnable() {
         @Override
         public void run() {
-            if (System.currentTimeMillis() > (lastTypeTimestamp + TEXT_DELAY_THRESHOLD - 500)) {
+            if (System.currentTimeMillis() > lastTypeTimestamp + TEXT_DELAY_THRESHOLD) {
                 LocationUtils.getLocationFromAddress(CreateEventActivity.this,
                         lastTypedMessage, new LocationUtils.OnAddressDecodedListener() {
                             @Override
@@ -235,7 +237,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                 if (googleMap != null) {
                     lastTypeTimestamp = System.currentTimeMillis();
                     lastTypedMessage = e.toString();
-                    typeHandler.postDelayed(typeRunnable, TEXT_DELAY_THRESHOLD);
+                    typeHandler.postDelayed(typeRunnable, TEXT_DELAY);
                 }
             }
         });
@@ -297,7 +299,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
             dayOfMonth = auxCalendar.get(Calendar.DAY_OF_MONTH);
             hour = auxCalendar.get(Calendar.HOUR_OF_DAY);
             minutes = auxCalendar.get(Calendar.MINUTE);
-            setDate(timeInMillis);
+            setDate(currentTimeInMillis);
             setTime();
         }
     }
