@@ -7,4 +7,5 @@ package es.dmoral.protestr.detention_alert.detention_alert_config;
 public interface DetentionAlertConfigView {
     void setUpSeekBars();
     void setSeekBarListeners();
+    void setButtonState();
 }

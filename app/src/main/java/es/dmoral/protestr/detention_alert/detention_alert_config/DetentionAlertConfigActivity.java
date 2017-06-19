@@ -1,20 +1,35 @@
 package es.dmoral.protestr.detention_alert.detention_alert_config;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Parcel;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.squareup.seismic.ShakeDetector;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
+import es.dmoral.protestr.custom.ScrollFriendlyScrollView;
 import es.dmoral.protestr.detention_alert.detention_alert_config.listeners.UpdatingOnSeekBarChangeListener;
+import es.dmoral.protestr.detention_alert.services.ShakeToAlertService;
 import es.dmoral.protestr.utils.Constants;
 
 public class DetentionAlertConfigActivity extends BaseActivity implements DetentionAlertConfigView {
@@ -25,15 +40,52 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
     @BindView(R.id.seekbar_sensitivity) SeekBar seekbarSensitivity;
     @BindView(R.id.tv_time_until_restart) TextView tvTimeUntilRestart;
     @BindView(R.id.seekbar_time_until_restart) SeekBar seekbarTimeUntilRestart;
+    @BindView(R.id.tv_sensor_log) TextView tvSensorLog;
+    @BindView(R.id.enable_test_sensor_button) Button btEnableTestSensor;
+    @BindView(R.id.log_scroll_view) ScrollFriendlyScrollView logScrollView;
 
     private int shakeNumber;
     private int sensorSensitivity;
     private int timeUntilRestart;
+    private boolean testEnabled = false;
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            long when = 0;
+            if (intent.hasExtra(ShakeToAlertService.WHEN_EXTRA))
+                when = intent.getLongExtra(ShakeToAlertService.WHEN_EXTRA, 0);
+
+            switch (intent.getAction()) {
+                case Constants.BROADCAST_SHAKE_DETECTED:
+                    final int count = intent.getIntExtra(ShakeToAlertService.COUNT_EXTRA, 0);
+                    tvSensorLog.append(getString(R.string.shake_detected, logTimeFormatter.format(when), count));
+                    break;
+                case Constants.BROADCAST_SHAKE_COMPLETED:
+                    testEnabled = false;
+                    setButtonState();
+                    unregisterReceiver(broadcastReceiver);
+                    tvSensorLog.append(getString(R.string.shake_completed, logTimeFormatter.format(when)));
+                    break;
+                case Constants.BROADCAST_SHAKE_RESTARTED:
+                    tvSensorLog.append(getString(R.string.shake_restarted, logTimeFormatter.format(when)));
+                    break;
+            }
+            logScrollView.fullScroll(View.FOCUS_DOWN);
+        }
+    };
+
+    private SimpleDateFormat logTimeFormatter = new SimpleDateFormat("HH:mm:ss.SSS", Locale.ENGLISH);
+    private IntentFilter intentFilter;
 
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_detention_alert_config);
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(Constants.BROADCAST_SHAKE_COMPLETED);
+        intentFilter.addAction(Constants.BROADCAST_SHAKE_DETECTED);
+        intentFilter.addAction(Constants.BROADCAST_SHAKE_RESTARTED);
     }
 
     @Override
@@ -48,6 +100,28 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
     @Override
     protected void setListeners() {
         setSeekBarListeners();
+        btEnableTestSensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (testEnabled) {
+                    stopService(new Intent(DetentionAlertConfigActivity.this, ShakeToAlertService.class));
+                    unregisterReceiver(broadcastReceiver);
+                    testEnabled = false;
+                } else {
+                    final Intent serviceIntent = new Intent(DetentionAlertConfigActivity.this,
+                            ShakeToAlertService.class);
+                    final Bundle interfaceBundle = new Bundle();
+                    interfaceBundle.putInt(ShakeToAlertService.SHAKE_COUNT_THRESHOLD_EXTRA, shakeNumber);
+                    interfaceBundle.putInt(ShakeToAlertService.SHAKE_RESET_THRESHOLD_EXTRA, timeUntilRestart);
+                    interfaceBundle.putInt(ShakeToAlertService.SENSOR_SENSITIVITY_EXTRA, sensorSensitivity);
+                    serviceIntent.putExtras(interfaceBundle);
+                    startService(serviceIntent);
+                    registerReceiver(broadcastReceiver, intentFilter);
+                    testEnabled = true;
+                }
+                setButtonState();
+            }
+        });
     }
 
     @Override
@@ -96,6 +170,18 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
     }
 
     @Override
+    public void setButtonState() {
+        if (testEnabled) {
+            btEnableTestSensor.setBackgroundResource(R.drawable.alert_button_background_disabled);
+            btEnableTestSensor.setText(R.string.stop_testing_sensor);
+            tvSensorLog.setText("");
+        } else {
+            btEnableTestSensor.setBackgroundResource(R.drawable.alert_button_background);
+            btEnableTestSensor.setText(R.string.test_sensor);
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.configure_sensor, menu);
         return true;
@@ -112,6 +198,15 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (testEnabled) {
+            stopService(new Intent(this, ShakeToAlertService.class));
+            unregisterReceiver(broadcastReceiver);
         }
     }
 }

@@ -26,6 +26,9 @@ public class Constants {
     public static final String ORDER_FROM_PARTICIPANTS_DESC = "participants_desc";
 
     public static final String BROADCAST_SMS_SENT = "broadcast_sms_sent";
+    public static final String BROADCAST_SHAKE_DETECTED = "broadcast_shake_detected";
+    public static final String BROADCAST_SHAKE_COMPLETED = "broadcast_shake_completed";
+    public static final String BROADCAST_SHAKE_RESTARTED = "broadcast_shake_restarted";
 
     public static final String PREFERENCES_LOGGED_IN = "logged_in";
     public static final String PREFERENCES_USERNAME = "username";

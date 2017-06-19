@@ -83,6 +83,9 @@
     <string name="time_until_restart">Tiempo para reiniciar</string>
     <string name="time_until_restart_explanation">El tiempo máximo en milisegundos que debe existir entre dos agitaciones para no reiniciar el contador.</string>
     <string name="save_sensor_config">Guardar configuración del sensor</string>
-
-
+    <string name="test_sensor">Probar sensor</string>
+    <string name="stop_testing_sensor">Dejar de probar sensor</string>
+    <string name="shake_completed">[%s] AGITACIÓN COMPLETADA\n</string>
+    <string name="shake_detected">[%1$s] Agitación detectada (%2$d)\n</string>
+    <string name="shake_restarted">[%s] AGITACIÓN REINICIADA\n</string>
 </resources>
