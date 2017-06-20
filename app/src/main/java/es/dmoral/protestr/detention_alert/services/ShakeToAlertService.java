@@ -10,6 +10,7 @@ import android.os.Parcelable;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.support.annotation.IntDef;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.squareup.seismic.ShakeDetector;
@@ -138,18 +139,18 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
         final Intent intent = new Intent(Constants.BROADCAST_SHAKE_DETECTED);
         intent.putExtra(WHEN_EXTRA, when);
         intent.putExtra(COUNT_EXTRA, shakeCount);
-        sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     private void sendShakeCompletedBroadcast(long when) {
         final Intent intent = new Intent(Constants.BROADCAST_SHAKE_COMPLETED);
         intent.putExtra(WHEN_EXTRA, when);
-        sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     private void sendShakeCountRestartedBroadcast(long when) {
         final Intent intent = new Intent(Constants.BROADCAST_SHAKE_RESTARTED);
         intent.putExtra(WHEN_EXTRA, when);
-        sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 }

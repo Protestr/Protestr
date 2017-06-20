@@ -10,6 +10,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcel;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.custom.ScrollFriendlyScrollView;
+import es.dmoral.protestr.detention_alert.DetentionAlertActivity;
 import es.dmoral.protestr.detention_alert.detention_alert_config.listeners.UpdatingOnSeekBarChangeListener;
 import es.dmoral.protestr.detention_alert.services.ShakeToAlertService;
 import es.dmoral.protestr.utils.Constants;
@@ -64,7 +66,8 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
                 case Constants.BROADCAST_SHAKE_COMPLETED:
                     testEnabled = false;
                     setButtonState();
-                    unregisterReceiver(broadcastReceiver);
+                    LocalBroadcastManager.getInstance(DetentionAlertConfigActivity.this)
+                            .unregisterReceiver(broadcastReceiver);
                     tvSensorLog.append(getString(R.string.shake_completed, logTimeFormatter.format(when)));
                     break;
                 case Constants.BROADCAST_SHAKE_RESTARTED:
@@ -105,7 +108,8 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
             public void onClick(View view) {
                 if (testEnabled) {
                     stopService(new Intent(DetentionAlertConfigActivity.this, ShakeToAlertService.class));
-                    unregisterReceiver(broadcastReceiver);
+                    LocalBroadcastManager.getInstance(DetentionAlertConfigActivity.this)
+                            .unregisterReceiver(broadcastReceiver);
                     testEnabled = false;
                 } else {
                     final Intent serviceIntent = new Intent(DetentionAlertConfigActivity.this,
@@ -116,7 +120,8 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
                     interfaceBundle.putInt(ShakeToAlertService.SENSOR_SENSITIVITY_EXTRA, sensorSensitivity);
                     serviceIntent.putExtras(interfaceBundle);
                     startService(serviceIntent);
-                    registerReceiver(broadcastReceiver, intentFilter);
+                    LocalBroadcastManager.getInstance(DetentionAlertConfigActivity.this)
+                            .registerReceiver(broadcastReceiver, intentFilter);
                     testEnabled = true;
                 }
                 setButtonState();
@@ -206,7 +211,7 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
         super.onDestroy();
         if (testEnabled) {
             stopService(new Intent(this, ShakeToAlertService.class));
-            unregisterReceiver(broadcastReceiver);
+            LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
         }
     }
 }
