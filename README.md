@@ -17,7 +17,7 @@ App for organizing demonstrations.
 - [ ] Users can view a detailed description of an event.
 - [ ] Users can view their subscribed events (including created by themselves or only subscribed ones).
 - [ ] Real time chat / feed (Twitter-style) for every subscribed event (split into Admin Messages and All).
-- [ ] **Everything that will come to my mind.**
+- [ ] **Everything that will eventually come to my mind.**
 
 ## Screenshots of the current available work.
 
