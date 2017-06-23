@@ -11,7 +11,7 @@ App for organizing demonstrations.
 - [x] Users can create an account and login.
 - [x] Users can view a list of events.
 - [x] Users can create events.
-- [x] Users can set up the detention alert.
+- [x] Users can set up the detention alert. (Maybe a redesign of this screen would be nice).
 - [x] Users can edit detention alert sensitivity sensor parameters.
 - [ ] Detailed register screen.
 - [ ] Users can view a detailed description of an event.
