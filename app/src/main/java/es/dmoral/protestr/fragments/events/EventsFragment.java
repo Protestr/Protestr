@@ -20,7 +20,7 @@ import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.adapters.EventAdapter;
-import es.dmoral.protestr.api.models.Event;
+import es.dmoral.protestr.models.models.Event;
 import es.dmoral.protestr.base.BaseFragment;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.toasty.Toasty;

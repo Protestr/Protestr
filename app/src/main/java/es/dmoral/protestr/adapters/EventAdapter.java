@@ -1,6 +1,5 @@
 package es.dmoral.protestr.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
@@ -12,15 +11,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.protestr.R;
-import es.dmoral.protestr.api.models.Event;
+import es.dmoral.protestr.models.models.Event;
 import es.dmoral.protestr.utils.FormatUtils;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 

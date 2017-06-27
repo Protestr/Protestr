@@ -1,4 +1,4 @@
-package es.dmoral.protestr.api.models;
+package es.dmoral.protestr.models.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

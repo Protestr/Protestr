@@ -2,9 +2,9 @@ package es.dmoral.protestr.api;
 
 import java.util.ArrayList;
 
-import es.dmoral.protestr.api.models.Event;
-import es.dmoral.protestr.api.models.ImgurStatus;
-import es.dmoral.protestr.api.models.ResponseStatus;
+import es.dmoral.protestr.models.models.Event;
+import es.dmoral.protestr.models.models.ImgurStatus;
+import es.dmoral.protestr.models.models.ResponseStatus;
 import es.dmoral.protestr.utils.Constants;
 import okhttp3.RequestBody;
 import retrofit2.Call;

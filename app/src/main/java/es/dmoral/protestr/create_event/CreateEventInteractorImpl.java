@@ -1,10 +1,8 @@
 package es.dmoral.protestr.create_event;
 
-import android.graphics.Bitmap;
-
 import es.dmoral.protestr.api.WebService;
-import es.dmoral.protestr.api.models.ImgurStatus;
-import es.dmoral.protestr.api.models.ResponseStatus;
+import es.dmoral.protestr.models.models.ImgurStatus;
+import es.dmoral.protestr.models.models.ResponseStatus;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;

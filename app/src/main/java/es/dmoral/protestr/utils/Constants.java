@@ -30,6 +30,7 @@ public class Constants {
     public static final String BROADCAST_SHAKE_COMPLETED = "broadcast_shake_completed";
     public static final String BROADCAST_SHAKE_RESTARTED = "broadcast_shake_restarted";
 
+    public static final String PREFERENCES_FIRST_BOOT = "first_boot";
     public static final String PREFERENCES_LOGGED_IN = "logged_in";
     public static final String PREFERENCES_USERNAME = "username";
     public static final String PREFERENCES_PASSWORD = "password";

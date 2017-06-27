@@ -24,6 +24,8 @@ import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.create_event.CreateEventActivity;
 import es.dmoral.protestr.detention_alert.DetentionAlertActivity;
+import es.dmoral.protestr.fcm.FCMHelper;
+import es.dmoral.protestr.fcm.ProtestrMessagingService;
 import es.dmoral.protestr.fragments.events.EventsFragment;
 import es.dmoral.protestr.fragments.subscribed_events.SubscribedEventsFragment;
 import es.dmoral.protestr.login.LoginActivity;
@@ -48,6 +50,7 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_main);
+        FCMHelper.subscribeToFCMTopic(this, FCMHelper.ENTIRE_APP_TOPIC);
     }
 
     @Override

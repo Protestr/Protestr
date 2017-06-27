@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 
 import es.dmoral.protestr.api.WebService;
-import es.dmoral.protestr.api.models.Event;
+import es.dmoral.protestr.models.models.Event;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

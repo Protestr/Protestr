@@ -1,7 +1,7 @@
 package es.dmoral.protestr.splash;
 
 import es.dmoral.protestr.api.WebService;
-import es.dmoral.protestr.api.models.ResponseStatus;
+import es.dmoral.protestr.models.models.ResponseStatus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

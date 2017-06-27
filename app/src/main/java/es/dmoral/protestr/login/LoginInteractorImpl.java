@@ -3,7 +3,7 @@ package es.dmoral.protestr.login;
 import android.support.annotation.NonNull;
 
 import es.dmoral.protestr.api.WebService;
-import es.dmoral.protestr.api.models.ResponseStatus;
+import es.dmoral.protestr.models.models.ResponseStatus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

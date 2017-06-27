@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import es.dmoral.protestr.api.models.Event;
+import es.dmoral.protestr.models.models.Event;
 
 /**
  * Created by grender on 16/02/17.
