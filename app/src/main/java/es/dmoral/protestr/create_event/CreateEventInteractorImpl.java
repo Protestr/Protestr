@@ -16,7 +16,7 @@ class CreateEventInteractorImpl implements CreateEventInteractor {
     @Override
     public void uploadImage(final OnImageUploadedListener onImageUploadedListener, String clientId,
                             RequestBody imageBody) {
-        new WebService().getApiInterface().uploadImage(clientId, imageBody).enqueue(new Callback<ImgurStatus>() {
+        WebService.getInstance().getApiInterface().uploadImage(clientId, imageBody).enqueue(new Callback<ImgurStatus>() {
             @Override
             public void onResponse(Call<ImgurStatus> call, Response<ImgurStatus> response) {
                 onImageUploadedListener.onImageUploaded(response.body().getData().getLink());
@@ -31,10 +31,10 @@ class CreateEventInteractorImpl implements CreateEventInteractor {
 
     @Override
     public void createEvent(final OnEventCreatedListener onEventCreatedListener,
-                            String userName, String password, String imageUrl, String eventName,
+                            String email, String password, String imageUrl, String eventName,
                             String eventDescription, String eventTime,
                             String locationName, String latitude, String longitude, String iso3) {
-        new WebService().getApiInterface().createNewEvent(userName, password, eventName,
+        WebService.getInstance().getApiInterface().createNewEvent(email, password, eventName,
                 imageUrl, eventDescription, eventTime, locationName, latitude, longitude,
                 iso3).enqueue(new Callback<ResponseStatus>() {
             @Override

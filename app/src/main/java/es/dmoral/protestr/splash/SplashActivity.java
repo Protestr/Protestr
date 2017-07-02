@@ -19,7 +19,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         super.onCreate(savedInstanceState);
         this.splashPresenter = new SplashPresenterImpl(this);
         if (Prefs.with(this).readBoolean(Constants.PREFERENCES_LOGGED_IN, false)) {
-            splashPresenter.confirmLoginAttempt(Prefs.with(this).read(Constants.PREFERENCES_USERNAME), Prefs.with(this).read(Constants.PREFERENCES_PASSWORD));
+            splashPresenter.confirmLoginAttempt(Prefs.with(this).read(Constants.PREFERENCES_EMAIL), Prefs.with(this).read(Constants.PREFERENCES_PASSWORD));
         } else {
             startActivity(new Intent(this, LoginActivity.class));
             finish();

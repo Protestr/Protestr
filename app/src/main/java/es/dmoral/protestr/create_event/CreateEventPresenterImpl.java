@@ -7,7 +7,6 @@ import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.ImageUtils;
-import es.dmoral.protestr.utils.LocaleUtils;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -33,7 +32,7 @@ class CreateEventPresenterImpl implements CreateEventPresenter, CreateEventInter
             @Override
             public void onImageUploaded(String imageUrl) {
                 createEventInteractor.createEvent(CreateEventPresenterImpl.this, Prefs.with(((CreateEventActivity) createEventView))
-                        .read(Constants.PREFERENCES_USERNAME), Prefs.with(((CreateEventActivity) createEventView))
+                        .read(Constants.PREFERENCES_EMAIL), Prefs.with(((CreateEventActivity) createEventView))
                         .read(Constants.PREFERENCES_PASSWORD), imageUrl, eventName, eventDescription,
                         String.valueOf(eventTime), locationName, String.valueOf(latitude), String.valueOf(longitude),
                         iso3);

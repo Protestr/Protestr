@@ -10,16 +10,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WebService {
 
-    private Retrofit retrofit;
+    private static ApiInterface apiInterface;
+    private static WebService webService;
+    private final Retrofit retrofit;
 
-    public WebService() {
+    private WebService() {
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
+    public static WebService getInstance() {
+        if (webService == null)
+            webService = new WebService();
+        return webService;
+    }
+
     public ApiInterface getApiInterface() {
-        return retrofit.create(ApiInterface.class);
+        if (apiInterface == null)
+            apiInterface = retrofit.create(ApiInterface.class);
+        return apiInterface;
     }
 }

@@ -6,12 +6,13 @@ import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.InternetUtils;
+import es.dmoral.protestr.utils.UsernameGenerator;
 
 /**
  * Created by grender on 13/02/17.
  */
 
-class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnAttemptLoginListener, LoginInteractor.OnAttemptSignUpListener {
+class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnAttemptLoginListener {
 
     private LoginView loginView;
     private LoginInteractor loginInteractor;
@@ -22,20 +23,10 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnAttemptLog
     }
 
     @Override
-    public void attemptLogin(@NonNull String username, @NonNull String password) {
+    public void attemptLogin(@NonNull String email, @NonNull String password) {
         if (InternetUtils.isInternetAvailable((LoginActivity) loginView)) {
             loginView.showProgress();
-            loginInteractor.attemptLogin(this, username, password);
-        } else {
-            loginView.connectionError();
-        }
-    }
-
-    @Override
-    public void attemptSignUp(@NonNull String username, @NonNull String password) {
-        if (InternetUtils.isInternetAvailable((LoginActivity) loginView)) {
-            loginView.showProgress();
-            loginInteractor.attemptSignUp(this, username, password);
+            loginInteractor.attemptLogin(this, email, password);
         } else {
             loginView.connectionError();
         }
@@ -47,9 +38,9 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnAttemptLog
     }
 
     @Override
-    public void onLoginSuccess(final String username, final String password) {
+    public void onLoginSuccess(final String email, final String password) {
         Prefs.with((LoginActivity) loginView).writeBoolean(Constants.PREFERENCES_LOGGED_IN, true);
-        Prefs.with((LoginActivity) loginView).write(Constants.PREFERENCES_USERNAME, username);
+        Prefs.with((LoginActivity) loginView).write(Constants.PREFERENCES_EMAIL, email);
         Prefs.with((LoginActivity) loginView).write(Constants.PREFERENCES_PASSWORD, password);
         loginView.hideProgress();
         loginView.loginSuccess();
@@ -62,19 +53,5 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnAttemptLog
             loginView.connectionError();
         else
             loginView.loginError(((LoginActivity) loginView).getString(R.string.invalid_credentials));
-    }
-
-    @Override
-    public void onSignUpSuccess(final String username, final String password) {
-        onLoginSuccess(username, password);
-    }
-
-    @Override
-    public void onSignUpError(boolean isFailure) {
-        loginView.hideProgress();
-        if (isFailure)
-            loginView.connectionError();
-        else
-            loginView.signUpError(((LoginActivity) loginView).getString(R.string.username_not_valid_error));
     }
 }

@@ -25,7 +25,6 @@ import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.create_event.CreateEventActivity;
 import es.dmoral.protestr.detention_alert.DetentionAlertActivity;
 import es.dmoral.protestr.fcm.FCMHelper;
-import es.dmoral.protestr.fcm.ProtestrMessagingService;
 import es.dmoral.protestr.fragments.events.EventsFragment;
 import es.dmoral.protestr.fragments.subscribed_events.SubscribedEventsFragment;
 import es.dmoral.protestr.login.LoginActivity;
@@ -77,7 +76,7 @@ public class MainActivity extends BaseActivity
         actionBarDrawerToggle.syncState();
         headerView = (LinearLayout) navigationView.getHeaderView(0);
         headerView.findViewById(R.id.navigation_header_container).setBackgroundResource(R.drawable.nav_header_background);
-        ((TextView) headerView.findViewById(R.id.nav_title)).setText(Prefs.with(this).read(Constants.PREFERENCES_USERNAME));
+        ((TextView) headerView.findViewById(R.id.nav_title)).setText(Prefs.with(this).read(Constants.PREFERENCES_EMAIL));
         setTitle(navigationView.getMenu().findItem(R.id.nav_events).getTitle());
         navigationView.getMenu().findItem(R.id.nav_events).setCheckable(true);
         navigationView.getMenu().findItem(R.id.nav_events).setChecked(true);

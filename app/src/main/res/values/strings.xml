@@ -13,18 +13,19 @@
     <string name="btn_sign_up_text">Crear cuenta</string>
     <string name="btn_login_text">Entrar</string>
     <string name="password_empty_error">La contraseña no puede estar vacía</string>
-    <string name="username_not_valid_error">El usuario no es válido</string>
+    <string name="email_not_valid_error">El email no es válido</string>
     <string name="processing_text">Procesando…</string>
     <string name="invalid_credentials">Credenciales inválidas</string>
     <string name="existing_user">Usuario existente</string>
     <string name="dialog_create_new_account">Crear nueva cuenta</string>
-    <string name="dialog_create_new_account_message">Estás a punto de crear una nueva cuenta con nombre de usuario %1$s\n\nVuelve a escibir la contraseña</string>
+    <string name="dialog_create_new_account_message">Estás a punto de crear una nueva cuenta con email %1$s.\n\nPosteriormente podrás cambiar tu nombre de usuario.\n\nVuelve a escibir la contraseña:</string>
     <string name="connection_error">Ha ocurrido un error de conexión</string>
     <string name="password_doesnt_match">Las contraseñas no coinciden</string>
     <string name="utilities">Utilidades</string>
     <string name="detention_alert">Aviso de detención</string>
     <string name="subscribed_events">Eventos suscritos</string>
     <string name="new_events">Nuevos eventos</string>
+    <string name="register">Registro</string>
     <string name="nav_header_subtitle">Levántate y lucha por lo que es tuyo</string>
 
     <string name="settings_event_filter">Filtrado de eventos</string>
@@ -88,4 +89,5 @@
     <string name="shake_completed">[%s] AGITACIÓN COMPLETADA\n</string>
     <string name="shake_detected">[%1$s] Agitación detectada (%2$d)\n</string>
     <string name="shake_restarted">[%s] AGITACIÓN REINICIADA\n</string>
+    <string name="email_login_hint">Email</string>
 </resources>

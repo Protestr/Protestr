@@ -358,6 +358,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     public void showProgress() {
         progressDialog = new MaterialDialog.Builder(this)
                 .content(R.string.creating_event)
+                .cancelable(false)
                 .progress(true, 0)
                 .show();
     }

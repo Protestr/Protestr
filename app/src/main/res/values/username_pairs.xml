@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="adjectives">
+        <item>Grumpy</item>
+        <item>Happy</item>
+        <item>Playful</item>
+        <item>Smiling</item>
+        <item>Peevish</item>
+        <item>Stubborn</item>
+    </string-array>
+
+    <string-array name="names">
+        <item>cat</item>
+        <item>dog</item>
+        <item>carp</item>
+        <item>squirrel</item>
+        <item>turtle</item>
+        <item>platypus</item>
+    </string-array>
+</resources>

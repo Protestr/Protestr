@@ -10,7 +10,5 @@ public interface LoginView {
     void hideProgress();
     void loginError(final String message);
     void loginSuccess();
-    void signUpError(final String message);
-    void showSignUpConfirmation(final String username, final String password);
     void connectionError();
 }

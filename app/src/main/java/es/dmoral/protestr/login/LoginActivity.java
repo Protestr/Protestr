@@ -22,13 +22,14 @@ import butterknife.BindView;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.main.MainActivity;
+import es.dmoral.protestr.signup.SignUpActivity;
 import es.dmoral.protestr.utils.Sha256Utils;
 import es.dmoral.toasty.Toasty;
 
 public class LoginActivity extends BaseActivity implements LoginView {
 
     @BindView(R.id.input_layout_username) TextInputLayout txInUsername;
-    @BindView(R.id.et_username) EditText etUsername;
+    @BindView(R.id.et_email) EditText etEmail;
     @BindView(R.id.input_layout_password) TextInputLayout txInPassword;
     @BindView(R.id.et_password) EditText etPassword;
     @BindView(R.id.button_login) Button btnLogin;
@@ -49,7 +50,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     protected void setupViews() {
         txLoginLogo.setTypeface(Typeface.createFromAsset(getAssets(), "PermanentMarker.ttf"));
-        etUsername.setError(null);
+        etEmail.setError(null);
         etPassword.setError(null);
     }
 
@@ -75,42 +76,17 @@ public class LoginActivity extends BaseActivity implements LoginView {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                etUsername.setError(null);
-                etPassword.setError(null);
-
-                final String username = etUsername.getText().toString();
-                final String password = etPassword.getText().toString();
-
-                boolean cancel = false;
-                View focusViewOnError = null;
-
-                if (TextUtils.isEmpty(password)) {
-                    txInPassword.setPasswordVisibilityToggleEnabled(false);
-                    etPassword.setError(getString(R.string.password_empty_error));
-                    focusViewOnError = etPassword;
-                    cancel = true;
-                }
-
-                if (TextUtils.isEmpty(username)) {
-                    etUsername.setError(getString(R.string.username_not_valid_error));
-                    focusViewOnError = etUsername;
-                    cancel = true;
-                }
-
-                if (cancel)
-                    focusViewOnError.requestFocus();
-                else {
-                    showSignUpConfirmation(username, Sha256Utils.digest(password));
-                }
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                etUsername.setError(null);
+                etEmail.setError(null);
                 etPassword.setError(null);
 
-                final String username = etUsername.getText().toString();
+                final String email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
 
                 boolean cancel = false;
@@ -123,16 +99,16 @@ public class LoginActivity extends BaseActivity implements LoginView {
                     cancel = true;
                 }
 
-                if (TextUtils.isEmpty(username)) {
-                    etUsername.setError(getString(R.string.username_not_valid_error));
-                    focusViewOnError = etUsername;
+                if (TextUtils.isEmpty(email)) {
+                    etEmail.setError(getString(R.string.email_not_valid_error));
+                    focusViewOnError = etEmail;
                     cancel = true;
                 }
 
                 if (cancel)
                     focusViewOnError.requestFocus();
                 else {
-                    loginPresenter.attemptLogin(username, Sha256Utils.digest(password));
+                    loginPresenter.attemptLogin(email.trim(), Sha256Utils.digest(password));
                 }
             }
         });
@@ -143,6 +119,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         progressDialog = new MaterialDialog.Builder(this)
                 .content(R.string.processing_text)
                 .progress(true, 0)
+                .cancelable(false)
                 .show();
     }
 
@@ -162,39 +139,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void loginSuccess() {
         startActivity(new Intent(this, MainActivity.class));
+        overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
         finish();
-    }
-
-    @Override
-    public void signUpError(final String message) {
-        Toasty.error(this, message).show();
-    }
-
-    @Override
-    public void showSignUpConfirmation(final String username, final String password) {
-        new MaterialDialog.Builder(this)
-                .title(R.string.dialog_create_new_account)
-                .content(getString(R.string.dialog_create_new_account_message, username))
-                .negativeText(android.R.string.cancel)
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                })
-                .inputRange(1, -1)
-                .autoDismiss(false)
-                .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)
-                .input(getString(R.string.password_login_hint), null, new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                        if (!Sha256Utils.digest(input.toString()).equals(password))
-                            dialog.getInputEditText().setError(getString(R.string.password_doesnt_match));
-                        else
-                            loginPresenter.attemptSignUp(username, password);
-                    }
-                })
-                .show();
     }
 
     @Override

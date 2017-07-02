@@ -32,7 +32,7 @@ public class Constants {
 
     public static final String PREFERENCES_FIRST_BOOT = "first_boot";
     public static final String PREFERENCES_LOGGED_IN = "logged_in";
-    public static final String PREFERENCES_USERNAME = "username";
+    public static final String PREFERENCES_EMAIL = "email";
     public static final String PREFERENCES_PASSWORD = "password";
     public static final String PREFERENCES_FILTER_LOCATION_EVENTS = "filter_location_events";
     public static final String PREFERENCES_SELECTED_COUNTRY = "selected_country";

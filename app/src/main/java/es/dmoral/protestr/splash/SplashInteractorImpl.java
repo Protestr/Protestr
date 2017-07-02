@@ -14,7 +14,7 @@ class SplashInteractorImpl implements SplashInteractor {
 
     @Override
     public void confirmLogin(final OnConfirmLoginListener onConfirmLoginListener, final String username, final String password) {
-        new WebService().getApiInterface().attemptLogin(username, password).enqueue(new Callback<ResponseStatus>() {
+        WebService.getInstance().getApiInterface().attemptLogin(username, password).enqueue(new Callback<ResponseStatus>() {
             @Override
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
                 if (response.code() == 200 && response.body().getStatus() == ResponseStatus.STATUS_OK)
