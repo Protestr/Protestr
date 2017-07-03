@@ -6,7 +6,6 @@ import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.InternetUtils;
-import es.dmoral.protestr.utils.UsernameGenerator;
 
 /**
  * Created by grender on 13/02/17.

@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.login.LoginActivity;
 import es.dmoral.protestr.utils.InternetUtils;
-import es.dmoral.protestr.utils.UsernameGenerator;
 
 /**
  * Created by grender on 1/07/17.
@@ -25,7 +24,7 @@ public class SignUpPresenterImpl implements SignUpPresenter, SignUpInteractor.On
     public void attemptSignUp(@NonNull String email, @NonNull String password) {
         if (InternetUtils.isInternetAvailable((LoginActivity) signUpView)) {
             signUpView.showProgress();
-            final String username = UsernameGenerator.generateUsername((LoginActivity) signUpView);
+            final String username = "";
             signUpInteractor.attemptSignUp(this, username, email, password);
         } else {
             signUpView.connectionError();

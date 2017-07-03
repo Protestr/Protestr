@@ -90,4 +90,7 @@
     <string name="shake_detected">[%1$s] Agitación detectada (%2$d)\n</string>
     <string name="shake_restarted">[%s] AGITACIÓN REINICIADA\n</string>
     <string name="email_login_hint">Email</string>
+    <string name="repeat_password_hint">Repetir contraseña</string>
+    <string name="image_generation_notice">La imagen de perfil se genera automáticamente a partir del correo introducido usando el servicio de Gravatar.</string>
+    <string name="privacy_policy">Política de privacidad</string>
 </resources>

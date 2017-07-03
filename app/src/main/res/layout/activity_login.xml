@@ -65,6 +65,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password_login_hint"
                     android:inputType="textPassword"
+                    android:fontFamily="sans-serif"
                     android:singleLine="true"
                     android:maxLines="1" />
 

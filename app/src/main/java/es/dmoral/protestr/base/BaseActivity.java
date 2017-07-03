@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import butterknife.ButterKnife;
 import es.dmoral.protestr.R;
+import es.dmoral.protestr.login.LoginActivity;
 import es.dmoral.protestr.main.MainActivity;
 
 /**
@@ -38,7 +39,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (!(this instanceof MainActivity))
+        if (!(this instanceof MainActivity) &&
+                !(this instanceof LoginActivity))
             overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
     }
 
