@@ -1,5 +1,7 @@
 package es.dmoral.protestr.utils;
 
+import android.support.annotation.NonNull;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,6 +15,7 @@ public class IdenticonUtils {
     private static final String GRAVATAR_URL =
             "https://www.gravatar.com/avatar/%s?s=512&d=identicon";
 
+    @NonNull
     private static String hex(byte[] array) {
         StringBuilder sb = new StringBuilder();
         for (byte anArray : array) {
@@ -21,6 +24,7 @@ public class IdenticonUtils {
         return sb.toString();
     }
 
+    @NonNull
     private static String md5Hex(String message) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

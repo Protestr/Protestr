@@ -117,6 +117,7 @@ public class MainActivity extends BaseActivity
             case R.id.action_logout:
                 Prefs.with(this).writeBoolean(Constants.PREFERENCES_LOGGED_IN, false);
                 startActivity(new Intent(this, LoginActivity.class));
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
                 finish();
                 return true;
             case R.id.action_settings:

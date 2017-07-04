@@ -13,13 +13,13 @@ import java.security.NoSuchAlgorithmException;
 
 public class Sha256Utils {
 
-    public static @Nullable String digest(@NonNull final String data) {
+    public static String digest(@NonNull final String data) {
         final MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-256");
             md.update(data.getBytes("UTF-8"));
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-            return null;
+            return "";
         }
         return String.format("%064x", new java.math.BigInteger(1, md.digest()));
     }

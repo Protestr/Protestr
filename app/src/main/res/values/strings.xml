@@ -14,6 +14,7 @@
     <string name="btn_login_text">Entrar</string>
     <string name="password_empty_error">La contraseña no puede estar vacía</string>
     <string name="email_not_valid_error">El email no es válido</string>
+    <string name="empty_field">El campo no puede estar vacío</string>
     <string name="processing_text">Procesando…</string>
     <string name="invalid_credentials">Credenciales inválidas</string>
     <string name="existing_user">Usuario existente</string>

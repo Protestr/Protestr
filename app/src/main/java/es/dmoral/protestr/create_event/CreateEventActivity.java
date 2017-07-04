@@ -80,14 +80,11 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     private String iso3 = "";
 
     private static final String EVENT_BITMAP_SAVED_STATE = "EVENT_BITMAP_SAVED_STATE";
-    private static final String EVENT_NAME_SAVED_STATE = "EVENT_NAME_SAVED_STATE";
-    private static final String EVENT_DESCRIPTION_SAVED_STATE= "EVENT_DESCRIPTION_SAVED_STATE";
     private static final String YEAR_SAVED_STATE = "YEAR_SAVED_STATE";
     private static final String MONTH_SAVED_SAVED_STATE = "MONTH_SAVED_STATE";
     private static final String DAY_OF_MONTH_SAVED_STATE = "DAY_OF_MONTH_SAVED_STATE";
     private static final String HOUR_SAVED_STATE = "HOUR_SAVED_STATE";
     private static final String MINUTES_SAVED_STATE = "MINUTES_SAVED_STATE";
-    private static final String EVENT_LOCATION_SAVED_STATE = "EVENT_LOCATION_STATE";
     private static final String EVENT_LATITUDE_SAVED_STATE = "EVENT_LATITUDE_SAVED_STATE";
     private static final String EVENT_LONGITUDE_SAVED_STATE = "EVENT_LONGITUDE_SAVED_STATE";
     private static final String EVENT_ISO3_CODE_SAVED_STATE = "EVENT_ISO3_CODE_SAVED_STATE";
@@ -259,14 +256,11 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         Bundle mapViewSavedInstanceState = null;
         if (savedInstanceState != null) {
             updateEventImage((Bitmap) savedInstanceState.getParcelable(EVENT_BITMAP_SAVED_STATE));
-            etEventName.setText(savedInstanceState.getString(EVENT_NAME_SAVED_STATE));
-            etEventDescription.setText(savedInstanceState.getString(EVENT_DESCRIPTION_SAVED_STATE));
             year = savedInstanceState.getInt(YEAR_SAVED_STATE);
             month = savedInstanceState.getInt(MONTH_SAVED_SAVED_STATE);
             dayOfMonth = savedInstanceState.getInt(DAY_OF_MONTH_SAVED_STATE);
             hour = savedInstanceState.getInt(HOUR_SAVED_STATE);
             minutes = savedInstanceState.getInt(MINUTES_SAVED_STATE);
-            etEventLocation.setText(savedInstanceState.getString(EVENT_LOCATION_SAVED_STATE));
             latitude = savedInstanceState.getDouble(EVENT_LATITUDE_SAVED_STATE);
             longitude = savedInstanceState.getDouble(EVENT_LONGITUDE_SAVED_STATE);
             iso3 = savedInstanceState.getString(EVENT_ISO3_CODE_SAVED_STATE);
@@ -405,14 +399,11 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(EVENT_BITMAP_SAVED_STATE, eventBitmap);
-        outState.putString(EVENT_NAME_SAVED_STATE, etEventName.getText().toString().trim());
-        outState.putString(EVENT_DESCRIPTION_SAVED_STATE, etEventDescription.getText().toString().trim());
         outState.putInt(YEAR_SAVED_STATE, year);
         outState.putInt(MONTH_SAVED_SAVED_STATE, month);
         outState.putInt(DAY_OF_MONTH_SAVED_STATE, dayOfMonth);
         outState.putInt(HOUR_SAVED_STATE, hour);
         outState.putInt(MINUTES_SAVED_STATE, minutes);
-        outState.putString(EVENT_LOCATION_SAVED_STATE, etEventLocation.getText().toString().trim());
         outState.putDouble(EVENT_LATITUDE_SAVED_STATE, latitude);
         outState.putDouble(EVENT_LONGITUDE_SAVED_STATE, longitude);
         outState.putString(EVENT_ISO3_CODE_SAVED_STATE, iso3);

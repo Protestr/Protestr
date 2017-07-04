@@ -1,5 +1,7 @@
 package es.dmoral.protestr.utils;
 
+import android.text.TextUtils;
+
 import java.text.DateFormat;
 import java.util.Locale;
 
@@ -15,5 +17,10 @@ public class FormatUtils {
     public static String formatDateByDefaultLocale(long timeInMilliseconds) {
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.getDefault());
         return dateFormat.format(timeInMilliseconds);
+    }
+
+    public static boolean isValidEmailFormat(CharSequence email) {
+        return !TextUtils.isEmpty(email)
+                && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

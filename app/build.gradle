@@ -22,7 +22,7 @@ android {
 
 ext {
     supportLibVersion = '25.3.1'
-    playServicesVersion = '11.0.1'
+    playServicesVersion = '11.0.2'
     butterknifeVersion = '8.5.1'
 }
 
@@ -50,6 +50,7 @@ dependencies {
     compile 'com.squareup:seismic:1.0.2'
     compile 'com.github.Mariovc:ImagePicker:1.1.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'tyrantgit:explosionfield:1.0.1'
 }
 
 
