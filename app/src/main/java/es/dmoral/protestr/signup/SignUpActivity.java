@@ -64,6 +64,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
 
     private ExplosionField explosionField;
 
+    private float[] previousImageCoords = {0, 0};
     private SignUpPresenterImpl signUpPresenter;
     private ValueAnimator animator;
     private boolean loading = false;
@@ -161,6 +162,9 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         RotationUtils.lockOrientation(this);
+
+        previousImageCoords[0] = profileImageContainer.getX();
+        previousImageCoords[1] = profileImageContainer.getY();
 
         TranslateAnimation translateContent =
                 new TranslateAnimation(0, 0, 0, metrics.heightPixels);
@@ -290,6 +294,24 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         translateProfilePic.setStartOffset(100);
         translateProfilePic.setDuration(350);
         translateProfilePic.setFillAfter(true);
+
+        translateProfilePic.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                profileImageContainer.setX(previousImageCoords[0]);
+                profileImageContainer.setY(previousImageCoords[1]);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
         contentScrollView.startAnimation(translateContent);
         fullView.startAnimation(translateFullView);
