@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
@@ -104,30 +105,6 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
     @Override
     protected void setListeners() {
         setSeekBarListeners();
-        btEnableTestSensor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (testEnabled) {
-                    stopService(new Intent(DetentionAlertConfigActivity.this, ShakeToAlertService.class));
-                    LocalBroadcastManager.getInstance(DetentionAlertConfigActivity.this)
-                            .unregisterReceiver(broadcastReceiver);
-                    testEnabled = false;
-                } else {
-                    final Intent serviceIntent = new Intent(DetentionAlertConfigActivity.this,
-                            ShakeToAlertService.class);
-                    final Bundle interfaceBundle = new Bundle();
-                    interfaceBundle.putInt(ShakeToAlertService.SHAKE_COUNT_THRESHOLD_EXTRA, shakeNumber);
-                    interfaceBundle.putInt(ShakeToAlertService.SHAKE_RESET_THRESHOLD_EXTRA, timeUntilRestart);
-                    interfaceBundle.putInt(ShakeToAlertService.SENSOR_SENSITIVITY_EXTRA, sensorSensitivity);
-                    serviceIntent.putExtras(interfaceBundle);
-                    startService(serviceIntent);
-                    LocalBroadcastManager.getInstance(DetentionAlertConfigActivity.this)
-                            .registerReceiver(broadcastReceiver, intentFilter);
-                    testEnabled = true;
-                }
-                setButtonState();
-            }
-        });
     }
 
     @Override
@@ -185,6 +162,30 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
             btEnableTestSensor.setBackgroundResource(R.drawable.alert_button_background);
             btEnableTestSensor.setText(R.string.test_sensor);
         }
+    }
+
+    @OnClick(R.id.enable_test_sensor_button)
+    @Override
+    public void enableTestSensorAction() {
+        if (testEnabled) {
+            stopService(new Intent(DetentionAlertConfigActivity.this, ShakeToAlertService.class));
+            LocalBroadcastManager.getInstance(DetentionAlertConfigActivity.this)
+                    .unregisterReceiver(broadcastReceiver);
+            testEnabled = false;
+        } else {
+            final Intent serviceIntent = new Intent(DetentionAlertConfigActivity.this,
+                    ShakeToAlertService.class);
+            final Bundle interfaceBundle = new Bundle();
+            interfaceBundle.putInt(ShakeToAlertService.SHAKE_COUNT_THRESHOLD_EXTRA, shakeNumber);
+            interfaceBundle.putInt(ShakeToAlertService.SHAKE_RESET_THRESHOLD_EXTRA, timeUntilRestart);
+            interfaceBundle.putInt(ShakeToAlertService.SENSOR_SENSITIVITY_EXTRA, sensorSensitivity);
+            serviceIntent.putExtras(interfaceBundle);
+            startService(serviceIntent);
+            LocalBroadcastManager.getInstance(DetentionAlertConfigActivity.this)
+                    .registerReceiver(broadcastReceiver, intentFilter);
+            testEnabled = true;
+        }
+        setButtonState();
     }
 
     @Override

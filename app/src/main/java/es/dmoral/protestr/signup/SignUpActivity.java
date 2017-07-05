@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Handler;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -33,12 +36,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.create_event.CreateEventActivity;
 import es.dmoral.protestr.custom.SimplifiedTextWatcher;
 import es.dmoral.protestr.main.MainActivity;
 import es.dmoral.protestr.splash.SplashActivity;
+import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.FormatUtils;
 import es.dmoral.protestr.utils.IdenticonUtils;
 import es.dmoral.protestr.utils.KeyboardUtils;
@@ -62,6 +67,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
     @BindView(R.id.content_scroll_view) ScrollView contentScrollView;
     @BindView(R.id.profile_image_container) LinearLayout profileImageContainer;
     @BindView(R.id.logo_image) ImageView logoImage;
+    @BindView(R.id.tv_terms_and_conditions) TextView tvTermsAndConditions;
 
     private ExplosionField explosionField;
 
@@ -409,6 +415,17 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         }
 
         return error;
+    }
+
+    @OnClick(R.id.tv_terms_and_conditions)
+    @Override
+    public void openTermsAndConditions() {
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+        builder.setStartAnimations(this, R.anim.activity_in, R.anim.activity_out);
+        builder.setExitAnimations(this, R.anim.activity_back_in, R.anim.activity_back_out);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(this, Uri.parse(Constants.TERMS_URL));
     }
 
     @Override

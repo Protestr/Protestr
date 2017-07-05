@@ -13,4 +13,5 @@ public interface SignUpView {
     void endLoadingAnimation();
     void connectionError();
     boolean checkParametersErrors();
+    void openTermsAndConditions();
 }

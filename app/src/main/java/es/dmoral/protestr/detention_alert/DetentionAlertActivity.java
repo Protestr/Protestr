@@ -25,6 +25,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
@@ -81,24 +82,7 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
 
     @Override
     protected void setListeners() {
-        enableAlertButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertEnabled = !alertEnabled;
-                Prefs.with(DetentionAlertActivity.this)
-                        .writeBoolean(PreferencesUtils.PREFERENCES_ALERT_ENABLED, alertEnabled);
-
-                setNotificationState();
-                setButtonState();
-                setServiceState();
-            }
-        });
-        selectContactButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickContact();
-            }
-        });
+        // unused
     }
 
     @Override
@@ -155,12 +139,6 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
                 detentionAlertPresenter.requestContactInfo(data.getData());
             }
         }
-    }
-
-    @Override
-    public void pickContact() {
-        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        startActivityForResult(intent, PICK_CONTACT);
     }
 
     @Override
@@ -248,6 +226,25 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
                     .negativeText(android.R.string.cancel)
                     .show();
         }
+    }
+
+    @OnClick(R.id.select_contact_bt)
+    @Override
+    public void selectContactAction() {
+        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+        startActivityForResult(intent, PICK_CONTACT);
+    }
+
+    @OnClick(R.id.enable_alert_button)
+    @Override
+    public void enableAlertAction() {
+        alertEnabled = !alertEnabled;
+        Prefs.with(DetentionAlertActivity.this)
+                .writeBoolean(PreferencesUtils.PREFERENCES_ALERT_ENABLED, alertEnabled);
+
+        setNotificationState();
+        setButtonState();
+        setServiceState();
     }
 
     private boolean requestLocationPermissions() {

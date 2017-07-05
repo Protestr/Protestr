@@ -5,7 +5,6 @@ package es.dmoral.protestr.detention_alert;
  */
 
 interface DetentionAlertView {
-    void pickContact();
     void contactSelected(String displayName);
     void contactError();
     void showOngoingNotification();
@@ -15,4 +14,6 @@ interface DetentionAlertView {
     void setMessage();
     void setContactName();
     void showLocationRequestDialog();
+    void selectContactAction();
+    void enableAlertAction();
 }

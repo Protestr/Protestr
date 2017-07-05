@@ -8,4 +8,5 @@ public interface DetentionAlertConfigView {
     void setUpSeekBars();
     void setSeekBarListeners();
     void setButtonState();
+    void enableTestSensorAction();
 }

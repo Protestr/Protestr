@@ -12,4 +12,5 @@ interface MainView {
     void addFragment(@NonNull Fragment newFragment);
     void showFab();
     void hideFab();
+    void createEventAction();
 }

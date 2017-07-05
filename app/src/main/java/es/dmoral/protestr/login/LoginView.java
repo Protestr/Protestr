@@ -10,4 +10,6 @@ public interface LoginView {
     void loginError(final String message);
     void loginSuccess();
     void connectionError();
+    void loginAction();
+    void signUpAction();
 }

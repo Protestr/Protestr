@@ -19,6 +19,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.main.MainActivity;
@@ -73,45 +74,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
                     txInPassword.setPasswordVisibilityToggleEnabled(true);
             }
         });
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-            }
-        });
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                etEmail.setError(null);
-                etPassword.setError(null);
-
-                final String email = etEmail.getText().toString();
-                final String password = etPassword.getText().toString();
-
-                boolean cancel = false;
-                View focusViewOnError = null;
-
-                if (TextUtils.isEmpty(password)) {
-                    txInPassword.setPasswordVisibilityToggleEnabled(false);
-                    etPassword.setError(getString(R.string.password_empty_error));
-                    focusViewOnError = etPassword;
-                    cancel = true;
-                }
-
-                if (TextUtils.isEmpty(email)) {
-                    etEmail.setError(getString(R.string.email_not_valid_error));
-                    focusViewOnError = etEmail;
-                    cancel = true;
-                }
-
-                if (cancel)
-                    focusViewOnError.requestFocus();
-                else {
-                    loginPresenter.attemptLogin(email.trim(), Sha256Utils.digest(password));
-                }
-            }
-        });
     }
 
     @Override
@@ -146,6 +108,45 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void connectionError() {
         Toasty.error(this, getString(R.string.connection_error)).show();
+    }
+
+    @OnClick(R.id.button_login)
+    @Override
+    public void loginAction() {
+        etEmail.setError(null);
+        etPassword.setError(null);
+
+        final String email = etEmail.getText().toString();
+        final String password = etPassword.getText().toString();
+
+        boolean cancel = false;
+        View focusViewOnError = null;
+
+        if (TextUtils.isEmpty(password)) {
+            txInPassword.setPasswordVisibilityToggleEnabled(false);
+            etPassword.setError(getString(R.string.password_empty_error));
+            focusViewOnError = etPassword;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(email)) {
+            etEmail.setError(getString(R.string.email_not_valid_error));
+            focusViewOnError = etEmail;
+            cancel = true;
+        }
+
+        if (cancel)
+            focusViewOnError.requestFocus();
+        else {
+            loginPresenter.attemptLogin(email.trim(), Sha256Utils.digest(password));
+        }
+    }
+
+    @OnClick(R.id.button_sign_up)
+    @Override
+    public void signUpAction() {
+        startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+        overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }
 
     @Override

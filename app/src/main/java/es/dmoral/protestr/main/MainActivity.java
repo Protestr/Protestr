@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
@@ -97,13 +98,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void setListeners() {
         navigationView.setNavigationItemSelectedListener(this);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CreateEventActivity.class));
-                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-            }
-        });
     }
 
     @Override
@@ -198,5 +192,12 @@ public class MainActivity extends BaseActivity
     public void hideFab() {
         if (fab.isShown())
             fab.hide();
+    }
+
+    @OnClick(R.id.fab)
+    @Override
+    public void createEventAction() {
+        startActivity(new Intent(MainActivity.this, CreateEventActivity.class));
+        overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }
 }
