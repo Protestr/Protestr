@@ -41,6 +41,7 @@ import es.dmoral.protestr.main.MainActivity;
 import es.dmoral.protestr.splash.SplashActivity;
 import es.dmoral.protestr.utils.FormatUtils;
 import es.dmoral.protestr.utils.IdenticonUtils;
+import es.dmoral.protestr.utils.KeyboardUtils;
 import es.dmoral.protestr.utils.RotationUtils;
 import es.dmoral.protestr.utils.Sha256Utils;
 import es.dmoral.protestr.utils.TimeUtils;
@@ -90,7 +91,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         etEmail.addTextChangedListener(new SimplifiedTextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() == 0)
+                if (charSequence.length() == 0 || !FormatUtils.isValidEmailFormat(charSequence))
                     profileImage.setImageDrawable(null);
                 else
                     Glide.with(SignUpActivity.this)
@@ -124,6 +125,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_sign_up:
+                KeyboardUtils.closeKeyboard(getCurrentFocus());
                 if (!checkParametersErrors()) {
                     startAnimation();
                     new Handler().postDelayed(new Runnable() {
@@ -135,7 +137,8 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
                                     signUpPresenter.attemptSignUp(
                                             etUsername.getText().toString().trim(),
                                             etEmail.getText().toString().trim(),
-                                            Sha256Utils.digest(etPassword.getText().toString().trim())
+                                            Sha256Utils.digest(etPassword.getText().toString().trim()),
+                                            IdenticonUtils.generateGravatarUrl(etEmail.getText().toString().trim())
                                     );
                                 }
                             });

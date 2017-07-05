@@ -2,6 +2,7 @@ package es.dmoral.protestr.splash;
 
 import es.dmoral.protestr.api.WebService;
 import es.dmoral.protestr.models.models.ResponseStatus;
+import es.dmoral.protestr.models.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -14,17 +15,17 @@ class SplashInteractorImpl implements SplashInteractor {
 
     @Override
     public void confirmLogin(final OnConfirmLoginListener onConfirmLoginListener, final String username, final String password) {
-        WebService.getInstance().getApiInterface().attemptLogin(username, password).enqueue(new Callback<ResponseStatus>() {
+        WebService.getInstance().getApiInterface().attemptLogin(username, password).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
-                if (response.code() == 200 && response.body().getStatus() == ResponseStatus.STATUS_OK)
-                    onConfirmLoginListener.onLoginConfirmed();
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200)
+                    onConfirmLoginListener.onLoginConfirmed(response.body());
                 else
                     onConfirmLoginListener.onLoginUnconfirmed();
             }
 
             @Override
-            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 onConfirmLoginListener.onLoginUnconfirmed();
             }
         });

@@ -5,8 +5,10 @@ import android.support.annotation.NonNull;
 
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
+import es.dmoral.protestr.models.models.User;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.ImageUtils;
+import es.dmoral.protestr.utils.PreferencesUtils;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -31,9 +33,8 @@ class CreateEventPresenterImpl implements CreateEventPresenter, CreateEventInter
         createEventInteractor.uploadImage(new CreateEventInteractor.OnImageUploadedListener() {
             @Override
             public void onImageUploaded(String imageUrl) {
-                createEventInteractor.createEvent(CreateEventPresenterImpl.this, Prefs.with(((CreateEventActivity) createEventView))
-                        .read(Constants.PREFERENCES_EMAIL), Prefs.with(((CreateEventActivity) createEventView))
-                        .read(Constants.PREFERENCES_PASSWORD), imageUrl, eventName, eventDescription,
+                final User user = PreferencesUtils.getLoggedUser(((CreateEventActivity) createEventView));
+                createEventInteractor.createEvent(CreateEventPresenterImpl.this, user.getId(), user.getPassword(), imageUrl, eventName, eventDescription,
                         String.valueOf(eventTime), locationName, String.valueOf(latitude), String.valueOf(longitude),
                         iso3);
             }

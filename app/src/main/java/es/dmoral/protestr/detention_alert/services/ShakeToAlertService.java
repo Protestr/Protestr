@@ -20,6 +20,7 @@ import java.io.Serializable;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.detention_alert.DetentionAlertActivity;
 import es.dmoral.protestr.utils.Constants;
+import es.dmoral.protestr.utils.PreferencesUtils;
 import es.dmoral.protestr.utils.SmsUtils;
 import im.delight.android.location.SimpleLocation;
 
@@ -60,10 +61,10 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
             shakeResetThreshold = intent.getExtras().getInt(SHAKE_RESET_THRESHOLD_EXTRA);
             testing = true;
         } else {
-            shakeCountThreshold = Prefs.with(this).readInt(Constants.PREFERENCES_SHAKE_NUMBER, 6);
-            sensorSensitivity = Prefs.with(this).readInt(Constants.PREFERENCES_SENSOR_SENSITIVITY,
+            shakeCountThreshold = Prefs.with(this).readInt(PreferencesUtils.PREFERENCES_SHAKE_NUMBER, 6);
+            sensorSensitivity = Prefs.with(this).readInt(PreferencesUtils.PREFERENCES_SENSOR_SENSITIVITY,
                     ShakeDetector.SENSITIVITY_LIGHT);
-            shakeResetThreshold = Prefs.with(this).readInt(Constants.PREFERENCES_TIME_TO_RESTART, 500);
+            shakeResetThreshold = Prefs.with(this).readInt(PreferencesUtils.PREFERENCES_TIME_TO_RESTART, 500);
         }
 
         listenForShakes();
@@ -114,11 +115,11 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
     private void requestSmsSend() {
         final SimpleLocation simpleLocation = new SimpleLocation(getApplicationContext());
         simpleLocation.beginUpdates();
-        if (Prefs.with(getApplicationContext()).readBoolean(Constants.PREFERENCES_ALERT_ENABLED)) {
+        if (Prefs.with(getApplicationContext()).readBoolean(PreferencesUtils.PREFERENCES_ALERT_ENABLED)) {
             final String phoneNumber = Prefs.with(getApplicationContext())
-                    .read(Constants.PREFERENCES_SELECTED_CONTACT_NUMBER);
+                    .read(PreferencesUtils.PREFERENCES_SELECTED_CONTACT_NUMBER);
             final String smsMessage = Prefs.with(getApplicationContext())
-                    .read(Constants.PREFERENCES_SMS_MESSAGE) + " " + simpleLocation.getLatitude()
+                    .read(PreferencesUtils.PREFERENCES_SMS_MESSAGE) + " " + simpleLocation.getLatitude()
                     + ", " + simpleLocation.getLongitude();
             SmsUtils.sendSMS(getApplicationContext(), phoneNumber, smsMessage);
         }
@@ -126,7 +127,7 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
     }
 
     private void updateState() {
-        Prefs.with(this).writeBoolean(Constants.PREFERENCES_ALERT_ENABLED, false);
+        Prefs.with(this).writeBoolean(PreferencesUtils.PREFERENCES_ALERT_ENABLED, false);
     }
 
     private void clearNotification() {

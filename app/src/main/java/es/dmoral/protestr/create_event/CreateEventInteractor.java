@@ -19,7 +19,7 @@ interface CreateEventInteractor {
     }
 
     void uploadImage(OnImageUploadedListener onImageUploadedListener, String clientId, RequestBody imageBody);
-    void createEvent(final OnEventCreatedListener onEventCreatedListener, String userName, String password,
+    void createEvent(final OnEventCreatedListener onEventCreatedListener, String userId, String password,
                      String imageUrl, String eventName, String eventDescription, String eventTime,
                      String locationName, String latitude, String longitude, String iso3);
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import es.dmoral.protestr.models.models.Event;
 import es.dmoral.protestr.models.models.ImgurStatus;
 import es.dmoral.protestr.models.models.ResponseStatus;
+import es.dmoral.protestr.models.models.User;
 import es.dmoral.protestr.utils.Constants;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -25,19 +26,19 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST(Constants.LOGIN_ENDPOINT)
-    Call<ResponseStatus> attemptLogin(@Field("user_email") String email, @Field("password") String password);
+    Call<User> attemptLogin(@Field("user_email") String email, @Field("password") String password);
 
     @FormUrlEncoded
     @POST(Constants.SIGN_UP_ENDPOINT)
-    Call<ResponseStatus> attemptSignup(@Field("user_email") String email, @Field("username") String username,
-                                       @Field("password") String password);
+    Call<User> attemptSignup(@Field("user_email") String email, @Field("username") String username,
+                                       @Field("password") String password, @Field("profile_pic_url") String profilePicUrl);
 
     @POST(Constants.UPLOAD_IMAGE_URL)
     Call<ImgurStatus> uploadImage(@Header("Authorization") String clientId, @Body RequestBody imageBody);
 
     @FormUrlEncoded
     @POST(Constants.NEW_EVENT_ENDPOINT)
-    Call<ResponseStatus> createNewEvent(@Field("user_email") String userName, @Field("password") String password,
+    Call<ResponseStatus> createNewEvent(@Field("user_id") String userId, @Field("password") String password,
                                         @Field("title") String title, @Field("image_url") String imageUrl,
                                         @Field("description") String description, @Field("from") String from,
                                         @Field("location_name") String locationName, @Field("latitude") String latitude,

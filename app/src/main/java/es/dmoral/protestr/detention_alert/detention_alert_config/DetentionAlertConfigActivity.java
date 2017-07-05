@@ -33,6 +33,7 @@ import es.dmoral.protestr.detention_alert.DetentionAlertActivity;
 import es.dmoral.protestr.detention_alert.detention_alert_config.listeners.UpdatingOnSeekBarChangeListener;
 import es.dmoral.protestr.detention_alert.services.ShakeToAlertService;
 import es.dmoral.protestr.utils.Constants;
+import es.dmoral.protestr.utils.PreferencesUtils;
 
 public class DetentionAlertConfigActivity extends BaseActivity implements DetentionAlertConfigView {
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -131,10 +132,10 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
 
     @Override
     public void setUpSeekBars() {
-        shakeNumber = Prefs.with(this).readInt(Constants.PREFERENCES_SHAKE_NUMBER, 6);
-        sensorSensitivity = Prefs.with(this).readInt(Constants.PREFERENCES_SENSOR_SENSITIVITY,
+        shakeNumber = Prefs.with(this).readInt(PreferencesUtils.PREFERENCES_SHAKE_NUMBER, 6);
+        sensorSensitivity = Prefs.with(this).readInt(PreferencesUtils.PREFERENCES_SENSOR_SENSITIVITY,
                 ShakeDetector.SENSITIVITY_LIGHT);
-        timeUntilRestart = Prefs.with(this).readInt(Constants.PREFERENCES_TIME_TO_RESTART, 500);
+        timeUntilRestart = Prefs.with(this).readInt(PreferencesUtils.PREFERENCES_TIME_TO_RESTART, 500);
 
         seekbarShakeNumber.setKeyProgressIncrement(1);
         seekbarSensitivity.setKeyProgressIncrement(1);
@@ -196,9 +197,9 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save_sensor_config:
-                Prefs.with(this).writeInt(Constants.PREFERENCES_SHAKE_NUMBER, shakeNumber);
-                Prefs.with(this).writeInt(Constants.PREFERENCES_SENSOR_SENSITIVITY, sensorSensitivity);
-                Prefs.with(this).writeInt(Constants.PREFERENCES_TIME_TO_RESTART, timeUntilRestart);
+                Prefs.with(this).writeInt(PreferencesUtils.PREFERENCES_SHAKE_NUMBER, shakeNumber);
+                Prefs.with(this).writeInt(PreferencesUtils.PREFERENCES_SENSOR_SENSITIVITY, sensorSensitivity);
+                Prefs.with(this).writeInt(PreferencesUtils.PREFERENCES_TIME_TO_RESTART, timeUntilRestart);
                 onBackPressed();
                 return true;
             default:

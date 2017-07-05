@@ -44,6 +44,7 @@ import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.custom.ScrollFriendlyMapView;
 import es.dmoral.protestr.utils.FormatUtils;
 import es.dmoral.protestr.utils.ImageUtils;
+import es.dmoral.protestr.utils.KeyboardUtils;
 import es.dmoral.protestr.utils.LocationUtils;
 import es.dmoral.protestr.utils.TimeUtils;
 import es.dmoral.toasty.Toasty;
@@ -380,6 +381,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_create_event:
+                KeyboardUtils.closeKeyboard(getCurrentFocus());
                 if (checkIfCanSubmit()) {
                     showProgress();
                     createEventPresenter.createEvent(eventBitmap, etEventName.getText().toString().trim(),

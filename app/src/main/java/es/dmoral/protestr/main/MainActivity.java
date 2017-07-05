@@ -15,8 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
@@ -28,8 +31,10 @@ import es.dmoral.protestr.fcm.FCMHelper;
 import es.dmoral.protestr.fragments.events.EventsFragment;
 import es.dmoral.protestr.fragments.subscribed_events.SubscribedEventsFragment;
 import es.dmoral.protestr.login.LoginActivity;
+import es.dmoral.protestr.models.models.User;
 import es.dmoral.protestr.settings.SettingsActivity;
 import es.dmoral.protestr.utils.Constants;
+import es.dmoral.protestr.utils.PreferencesUtils;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainView {
@@ -76,7 +81,12 @@ public class MainActivity extends BaseActivity
         actionBarDrawerToggle.syncState();
         headerView = (LinearLayout) navigationView.getHeaderView(0);
         headerView.findViewById(R.id.navigation_header_container).setBackgroundResource(R.drawable.nav_header_background);
-        ((TextView) headerView.findViewById(R.id.nav_title)).setText(Prefs.with(this).read(Constants.PREFERENCES_EMAIL));
+        final User user = PreferencesUtils.getLoggedUser(this);
+        Glide.with(this)
+                .load(user.getProfilePicUrl())
+                .into((ImageView) headerView.findViewById(R.id.nav_image));
+        ((TextView) headerView.findViewById(R.id.nav_title)).setText(user.getUsername());
+        ((TextView) headerView.findViewById(R.id.nav_subtitle)).setText(user.getEmail());
         setTitle(navigationView.getMenu().findItem(R.id.nav_events).getTitle());
         navigationView.getMenu().findItem(R.id.nav_events).setCheckable(true);
         navigationView.getMenu().findItem(R.id.nav_events).setChecked(true);
@@ -115,7 +125,7 @@ public class MainActivity extends BaseActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_logout:
-                Prefs.with(this).writeBoolean(Constants.PREFERENCES_LOGGED_IN, false);
+                Prefs.with(this).writeBoolean(PreferencesUtils.PREFERENCES_LOGGED_IN, false);
                 startActivity(new Intent(this, LoginActivity.class));
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
                 finish();

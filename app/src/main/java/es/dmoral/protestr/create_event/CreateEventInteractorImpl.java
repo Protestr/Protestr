@@ -31,10 +31,10 @@ class CreateEventInteractorImpl implements CreateEventInteractor {
 
     @Override
     public void createEvent(final OnEventCreatedListener onEventCreatedListener,
-                            String email, String password, String imageUrl, String eventName,
+                            String userId, String password, String imageUrl, String eventName,
                             String eventDescription, String eventTime,
                             String locationName, String latitude, String longitude, String iso3) {
-        WebService.getInstance().getApiInterface().createNewEvent(email, password, eventName,
+        WebService.getInstance().getApiInterface().createNewEvent(userId, password, eventName,
                 imageUrl, eventDescription, eventTime, locationName, latitude, longitude,
                 iso3).enqueue(new Callback<ResponseStatus>() {
             @Override

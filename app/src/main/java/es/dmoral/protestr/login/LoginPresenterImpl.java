@@ -4,8 +4,10 @@ import android.support.annotation.NonNull;
 
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
+import es.dmoral.protestr.models.models.User;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.InternetUtils;
+import es.dmoral.protestr.utils.PreferencesUtils;
 
 /**
  * Created by grender on 13/02/17.
@@ -37,10 +39,9 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnAttemptLog
     }
 
     @Override
-    public void onLoginSuccess(final String email, final String password) {
-        Prefs.with((LoginActivity) loginView).writeBoolean(Constants.PREFERENCES_LOGGED_IN, true);
-        Prefs.with((LoginActivity) loginView).write(Constants.PREFERENCES_EMAIL, email);
-        Prefs.with((LoginActivity) loginView).write(Constants.PREFERENCES_PASSWORD, password);
+    public void onLoginSuccess(User user) {
+        Prefs.with((LoginActivity) loginView).writeBoolean(PreferencesUtils.PREFERENCES_LOGGED_IN, true);
+        PreferencesUtils.storeLoggedUser((LoginActivity) loginView, user);
         loginView.hideProgress();
         loginView.loginSuccess();
     }

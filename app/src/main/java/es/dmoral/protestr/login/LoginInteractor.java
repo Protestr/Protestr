@@ -2,6 +2,8 @@ package es.dmoral.protestr.login;
 
 import android.support.annotation.NonNull;
 
+import es.dmoral.protestr.models.models.User;
+
 /**
  * Created by grender on 13/02/17.
  */
@@ -9,7 +11,7 @@ import android.support.annotation.NonNull;
 interface LoginInteractor {
 
     interface OnAttemptLoginListener {
-        void onLoginSuccess(final String email, final String password);
+        void onLoginSuccess(User user);
         void onLoginError(boolean isFailure);
     }
 

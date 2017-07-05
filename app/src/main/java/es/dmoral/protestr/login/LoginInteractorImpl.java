@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import es.dmoral.protestr.api.WebService;
 import es.dmoral.protestr.models.models.ResponseStatus;
+import es.dmoral.protestr.models.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,17 +17,17 @@ class LoginInteractorImpl implements LoginInteractor {
 
     @Override
     public void attemptLogin(final OnAttemptLoginListener onAttemptLoginListener, @NonNull final String email, @NonNull final String password) {
-        WebService.getInstance().getApiInterface().attemptLogin(email, password).enqueue(new Callback<ResponseStatus>() {
+        WebService.getInstance().getApiInterface().attemptLogin(email, password).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
-                if (response.code() == 200 && response.body().getStatus() == ResponseStatus.STATUS_OK)
-                    onAttemptLoginListener.onLoginSuccess(email, password);
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200)
+                    onAttemptLoginListener.onLoginSuccess(response.body());
                 else
                     onAttemptLoginListener.onLoginError(false);
             }
 
             @Override
-            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 onAttemptLoginListener.onLoginError(true);
             }
         });

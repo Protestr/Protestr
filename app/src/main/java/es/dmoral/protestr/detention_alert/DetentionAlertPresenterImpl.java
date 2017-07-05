@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.utils.Constants;
+import es.dmoral.protestr.utils.PreferencesUtils;
 
 /**
  * Created by grender on 5/06/17.
@@ -44,10 +45,10 @@ class DetentionAlertPresenterImpl implements DetentionAlertPresenter,
                     (ContactsContract.CommonDataKinds.Phone.NUMBER)).replaceAll("[-() ]", "");
 
             Prefs.with((DetentionAlertActivity) detentionAlertView).write(
-                    Constants.PREFERENCES_SELECTED_CONTACT_NAME, displayName
+                    PreferencesUtils.PREFERENCES_SELECTED_CONTACT_NAME, displayName
             );
             Prefs.with((DetentionAlertActivity) detentionAlertView).write(
-                    Constants.PREFERENCES_SELECTED_CONTACT_NUMBER, phoneNumber
+                    PreferencesUtils.PREFERENCES_SELECTED_CONTACT_NUMBER, phoneNumber
             );
 
             detentionAlertView.contactSelected(displayName);

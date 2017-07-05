@@ -31,6 +31,8 @@ import es.dmoral.protestr.base.BaseActivity;
 import es.dmoral.protestr.detention_alert.detention_alert_config.DetentionAlertConfigActivity;
 import es.dmoral.protestr.detention_alert.services.ShakeToAlertService;
 import es.dmoral.protestr.utils.Constants;
+import es.dmoral.protestr.utils.KeyboardUtils;
+import es.dmoral.protestr.utils.PreferencesUtils;
 import es.dmoral.toasty.Toasty;
 import im.delight.android.location.SimpleLocation;
 
@@ -56,7 +58,7 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_detention_alert);
         detentionAlertPresenter = new DetentionAlertPresenterImpl(this);
-        alertEnabled = Prefs.with(this).readBoolean(Constants.PREFERENCES_ALERT_ENABLED);
+        alertEnabled = Prefs.with(this).readBoolean(PreferencesUtils.PREFERENCES_ALERT_ENABLED);
 
         requestLocationPermissions();
         showLocationRequestDialog();
@@ -84,7 +86,7 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
             public void onClick(View view) {
                 alertEnabled = !alertEnabled;
                 Prefs.with(DetentionAlertActivity.this)
-                        .writeBoolean(Constants.PREFERENCES_ALERT_ENABLED, alertEnabled);
+                        .writeBoolean(PreferencesUtils.PREFERENCES_ALERT_ENABLED, alertEnabled);
 
                 setNotificationState();
                 setButtonState();
@@ -201,14 +203,15 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
 
     @Override
     public void setButtonState() {
+        KeyboardUtils.closeKeyboard(getCurrentFocus());
+        final String smsMessage = detentionAlertMessage.getText().toString().trim();
+        if (!smsMessage.isEmpty())
+            Prefs.with(DetentionAlertActivity.this).write(PreferencesUtils.PREFERENCES_SMS_MESSAGE,
+                    smsMessage);
         if (alertEnabled) {
             enableAlertButton.setBackgroundResource(R.drawable.alert_button_background_disabled);
             enableAlertButton.setText(R.string.disable_alert);
         } else {
-            final String smsMessage = detentionAlertMessage.getText().toString().trim();
-            if (!smsMessage.isEmpty())
-                Prefs.with(DetentionAlertActivity.this).write(Constants.PREFERENCES_SMS_MESSAGE,
-                        detentionAlertMessage.getText().toString().trim());
             enableAlertButton.setBackgroundResource(R.drawable.alert_button_background);
             enableAlertButton.setText(R.string.enable_alert);
         }
@@ -216,14 +219,14 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
 
     @Override
     public void setMessage() {
-        final String smsMessage = Prefs.with(this).read(Constants.PREFERENCES_SMS_MESSAGE);
+        final String smsMessage = Prefs.with(this).read(PreferencesUtils.PREFERENCES_SMS_MESSAGE);
         if (!smsMessage.isEmpty())
             detentionAlertMessage.setText(smsMessage);
     }
 
     @Override
     public void setContactName() {
-        final String displayName = Prefs.with(this).read(Constants.PREFERENCES_SELECTED_CONTACT_NAME);
+        final String displayName = Prefs.with(this).read(PreferencesUtils.PREFERENCES_SELECTED_CONTACT_NAME);
         if (!displayName.isEmpty())
             tvContactName.setText(displayName);
     }

@@ -5,8 +5,10 @@ import android.support.annotation.NonNull;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.login.LoginActivity;
+import es.dmoral.protestr.models.models.User;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.InternetUtils;
+import es.dmoral.protestr.utils.PreferencesUtils;
 
 /**
  * Created by grender on 1/07/17.
@@ -23,19 +25,18 @@ public class SignUpPresenterImpl implements SignUpPresenter, SignUpInteractor.On
     }
 
     @Override
-    public void attemptSignUp(@NonNull String username, @NonNull String email, @NonNull String password) {
+    public void attemptSignUp(@NonNull String username, @NonNull String email, @NonNull String password, @NonNull String profilePicUrl) {
         if (InternetUtils.isInternetAvailable((SignUpActivity) signUpView)) {
-            signUpInteractor.attemptSignUp(this, username, email, password);
+            signUpInteractor.attemptSignUp(this, username, email, password, profilePicUrl);
         } else {
             signUpView.connectionError();
         }
     }
 
     @Override
-    public void onSignUpSuccess(final String email, final String password) {
-        Prefs.with((SignUpActivity) signUpView).writeBoolean(Constants.PREFERENCES_LOGGED_IN, true);
-        Prefs.with((SignUpActivity) signUpView).write(Constants.PREFERENCES_EMAIL, email);
-        Prefs.with((SignUpActivity) signUpView).write(Constants.PREFERENCES_PASSWORD, password);
+    public void onSignUpSuccess(User user) {
+        Prefs.with((SignUpActivity) signUpView).writeBoolean(PreferencesUtils.PREFERENCES_LOGGED_IN, true);
+        PreferencesUtils.storeLoggedUser((SignUpActivity) signUpView, user);
         signUpView.endLoadingAnimation();
     }
 

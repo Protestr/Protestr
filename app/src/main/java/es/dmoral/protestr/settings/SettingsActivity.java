@@ -15,6 +15,7 @@ import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.LocaleUtils;
+import es.dmoral.protestr.utils.PreferencesUtils;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application general_settings. On
@@ -95,11 +96,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         // Trigger the listener immediately with the preference's
         // current value.
         switch (key) {
-            case Constants.PREFERENCES_FILTER_LOCATION_EVENTS:
+            case PreferencesUtils.PREFERENCES_FILTER_LOCATION_EVENTS:
                 onPreferenceChangeListener.onPreferenceChange(preference,
                         Prefs.with(preference.getContext()).read(key));
                 break;
-            case Constants.PREFERENCES_SELECTED_COUNTRY:
+            case PreferencesUtils.PREFERENCES_SELECTED_COUNTRY:
                 onPreferenceChangeListener.onPreferenceChange(preference,
                         Prefs.with(preference.getContext()).read(key, LocaleUtils.getDeviceLocale(preference.getContext())));
                 break;
@@ -158,12 +159,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.general_settings);
 
-            bindPreferenceSummaryToValue(findPreference(Constants.PREFERENCES_FILTER_LOCATION_EVENTS));
+            bindPreferenceSummaryToValue(findPreference(PreferencesUtils.PREFERENCES_FILTER_LOCATION_EVENTS));
             inflateCountrySelection();
         }
 
         private void inflateCountrySelection() {
-            ListPreference countrySelectionPreference = (ListPreference) findPreference(Constants.PREFERENCES_SELECTED_COUNTRY);
+            ListPreference countrySelectionPreference = (ListPreference) findPreference(PreferencesUtils.PREFERENCES_SELECTED_COUNTRY);
             countrySelectionPreference.setEntries(LocaleUtils.getAvailableLocales());
             countrySelectionPreference.setEntryValues(LocaleUtils.getAvailableIso3Codes());
             countrySelectionPreference.setDefaultValue(LocaleUtils.getDeviceLocale(countrySelectionPreference.getContext()));

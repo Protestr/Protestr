@@ -23,6 +23,7 @@ import es.dmoral.protestr.adapters.EventAdapter;
 import es.dmoral.protestr.models.models.Event;
 import es.dmoral.protestr.base.BaseFragment;
 import es.dmoral.protestr.utils.Constants;
+import es.dmoral.protestr.utils.PreferencesUtils;
 import es.dmoral.toasty.Toasty;
 
 public class EventsFragment extends BaseFragment implements EventsFragmentView {
@@ -53,7 +54,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
         eventsRecyclerView.setAdapter(new EventAdapter(new ArrayList<Event>()));
         swipeRefreshLayout.setRefreshing(true);
         eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL,
-                Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
+                Prefs.with(getActivity()).read(PreferencesUtils.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
     }
 
     @Override
@@ -65,7 +66,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
                 loading = true;
                 ((EventAdapter) eventsRecyclerView.getAdapter()).clearAll();
                 eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL,
-                        Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
+                        Prefs.with(getActivity()).read(PreferencesUtils.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
             }
         });
         eventsRecyclerView.addOnScrollListener(new InfiniteScrollListener(Constants.EVENT_LIMIT_CALL, (LinearLayoutManager) eventsRecyclerView.getLayoutManager()) {
@@ -76,7 +77,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
                     ((EventAdapter) eventsRecyclerView.getAdapter()).showProgress();
                     int offset = scrollPage++ * Constants.EVENT_LIMIT_CALL;
                         eventsPresenter.getNewEvents(offset, Constants.EVENT_LIMIT_CALL,
-                            Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
+                            Prefs.with(getActivity()).read(PreferencesUtils.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
                 }
             }
         });
@@ -100,7 +101,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
 
     @Override
     public void setFirstMenuItemChecked(Menu menu) {
-        final String order = Prefs.with(getActivity()).read(Constants.PREFERENCES_ORDER_BY,
+        final String order = Prefs.with(getActivity()).read(PreferencesUtils.PREFERENCES_ORDER_BY,
                 Constants.ORDER_CREATION_DATE_DESC);
         switch (order) {
             case Constants.ORDER_CREATION_DATE_ASC:
@@ -144,7 +145,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
         ((EventAdapter) eventsRecyclerView.getAdapter()).clearAll();
         eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL, order);
         item.setChecked(true);
-        Prefs.with(getActivity()).write(Constants.PREFERENCES_ORDER_BY, order);
+        Prefs.with(getActivity()).write(PreferencesUtils.PREFERENCES_ORDER_BY, order);
         return true;
     }
 

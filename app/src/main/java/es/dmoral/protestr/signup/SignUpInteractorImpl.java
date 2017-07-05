@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import es.dmoral.protestr.api.WebService;
 import es.dmoral.protestr.models.models.ResponseStatus;
+import es.dmoral.protestr.models.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,18 +17,18 @@ public class SignUpInteractorImpl implements SignUpInteractor {
 
     @Override
     public void attemptSignUp(final OnAttemptSignUpListener onAttemptSignUpListener, @NonNull final String username,
-                              @NonNull final String email, @NonNull final String password) {
-        WebService.getInstance().getApiInterface().attemptSignup(email, username, password).enqueue(new Callback<ResponseStatus>() {
+                              @NonNull final String email, @NonNull final String password, @NonNull final String profilePicUrl) {
+        WebService.getInstance().getApiInterface().attemptSignup(email, username, password, profilePicUrl).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
-                if (response.code() == 200 && response.body().getStatus() == ResponseStatus.STATUS_OK)
-                    onAttemptSignUpListener.onSignUpSuccess(email, password);
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200 )
+                    onAttemptSignUpListener.onSignUpSuccess(response.body());
                 else
                     onAttemptSignUpListener.onSignUpError(false);
             }
 
             @Override
-            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 onAttemptSignUpListener.onSignUpError(true);
             }
         });

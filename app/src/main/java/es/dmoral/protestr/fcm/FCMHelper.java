@@ -7,6 +7,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.utils.Constants;
+import es.dmoral.protestr.utils.PreferencesUtils;
 
 /**
  * Created by grender on 26/06/17.
@@ -18,9 +19,9 @@ public class FCMHelper {
     private static String EVENT_TOPIC = "EVENT_";
 
     public static void subscribeToFCMTopic(Context context, @NonNull String topic) {
-        if (Prefs.with(context).readBoolean(Constants.PREFERENCES_FIRST_BOOT, true)) {
+        if (Prefs.with(context).readBoolean(PreferencesUtils.PREFERENCES_FIRST_BOOT, true)) {
             FirebaseMessaging.getInstance().subscribeToTopic(topic);
-            Prefs.with(context).writeBoolean(Constants.PREFERENCES_FIRST_BOOT, false);
+            Prefs.with(context).writeBoolean(PreferencesUtils.PREFERENCES_FIRST_BOOT, false);
         }
     }
 

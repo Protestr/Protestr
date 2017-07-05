@@ -2,6 +2,11 @@ package es.dmoral.protestr.splash;
 
 import android.support.annotation.NonNull;
 
+import es.dmoral.prefs.Prefs;
+import es.dmoral.protestr.models.models.User;
+import es.dmoral.protestr.signup.SignUpActivity;
+import es.dmoral.protestr.utils.PreferencesUtils;
+
 /**
  * Created by grender on 15/02/17.
  */
@@ -22,7 +27,9 @@ public class SplashPresenterImpl implements SplashPresenter, SplashInteractor.On
     }
 
     @Override
-    public void onLoginConfirmed() {
+    public void onLoginConfirmed(User user) {
+        Prefs.with((SplashActivity) splashView).writeBoolean(PreferencesUtils.PREFERENCES_LOGGED_IN, true);
+        PreferencesUtils.storeLoggedUser((SplashActivity) splashView, user);
         splashView.loginConfirmed();
     }
 
