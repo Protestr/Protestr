@@ -125,7 +125,7 @@ public class MainActivity extends BaseActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_logout:
-                Prefs.with(this).writeBoolean(PreferencesUtils.PREFERENCES_LOGGED_IN, false);
+                Prefs.with(this).clear();
                 startActivity(new Intent(this, LoginActivity.class));
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
                 finish();
