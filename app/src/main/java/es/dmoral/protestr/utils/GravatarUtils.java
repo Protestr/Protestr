@@ -11,9 +11,9 @@ import java.util.Locale;
  * Created by grender on 3/07/17.
  */
 
-public class IdenticonUtils {
+public class GravatarUtils {
     private static final String GRAVATAR_URL =
-            "https://www.gravatar.com/avatar/%s?s=512&d=identicon";
+            "https://www.gravatar.com/avatar/%s?s=512&d=retro";
 
     @NonNull
     private static String hex(byte[] array) {

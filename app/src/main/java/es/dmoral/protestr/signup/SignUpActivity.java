@@ -1,23 +1,15 @@
 package es.dmoral.protestr.signup;
 
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.text.method.PasswordTransformationMethod;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,24 +24,20 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
-import es.dmoral.protestr.create_event.CreateEventActivity;
 import es.dmoral.protestr.custom.SimplifiedTextWatcher;
 import es.dmoral.protestr.main.MainActivity;
-import es.dmoral.protestr.splash.SplashActivity;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.FormatUtils;
-import es.dmoral.protestr.utils.IdenticonUtils;
+import es.dmoral.protestr.utils.GravatarUtils;
 import es.dmoral.protestr.utils.KeyboardUtils;
 import es.dmoral.protestr.utils.RotationUtils;
 import es.dmoral.protestr.utils.Sha256Utils;
-import es.dmoral.protestr.utils.TimeUtils;
 import es.dmoral.toasty.Toasty;
 import tyrantgit.explosionfield.ExplosionField;
 
@@ -101,7 +89,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
                     profileImage.setImageDrawable(null);
                 else
                     Glide.with(SignUpActivity.this)
-                            .load(IdenticonUtils.generateGravatarUrl(charSequence.toString()))
+                            .load(GravatarUtils.generateGravatarUrl(charSequence.toString()))
                             .into(profileImage);
             }
         });
@@ -144,7 +132,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
                                             etUsername.getText().toString().trim(),
                                             etEmail.getText().toString().trim(),
                                             Sha256Utils.digest(etPassword.getText().toString().trim()),
-                                            IdenticonUtils.generateGravatarUrl(etEmail.getText().toString().trim())
+                                            GravatarUtils.generateGravatarUrl(etEmail.getText().toString().trim())
                                     );
                                 }
                             });
