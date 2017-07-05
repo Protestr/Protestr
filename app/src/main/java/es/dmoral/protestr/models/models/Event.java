@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Event {
 
-    @SerializedName("eventId")
+    @SerializedName("event_id")
     private String eventId;
-    @SerializedName("userId")
+    @SerializedName("user_id")
     private String userId;
     private String title;
     private String description;
