@@ -189,7 +189,7 @@
                             android:id="@+id/tv_privacy_policy"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/privacy_policy"
+                            android:text="@string/terms_and_conditions"
                             android:padding="@dimen/activity_horizontal_margin"
                             android:background="?attr/selectableItemBackground"
                             android:textSize="18sp" />

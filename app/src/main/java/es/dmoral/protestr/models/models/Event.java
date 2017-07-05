@@ -1,53 +1,62 @@
 package es.dmoral.protestr.models.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by grender on 15/02/17.
  */
 
 public class Event {
 
-    private long event_id;
-    private long user_id;
+    @SerializedName("eventId")
+    private String eventId;
+    @SerializedName("userId")
+    private String userId;
     private String title;
     private String description;
-    private long from_date;
-    private long to_date;
+    @SerializedName("from_date")
+    private long fromDate;
+    @SerializedName("to_date")
+    private long toDate;
     private int participants;
-    private String location_name;
-    private String image_url;
+    @SerializedName("location_mame")
+    private String locationName;
+    @SerializedName("image_url")
+    private String imageUrl;
     private double latitude;
     private double longitude;
-    private String iso3_country;
+    @SerializedName("iso3_country")
+    private String iso3Country;
 
-    public Event(long event_id, long user_id, String title, String description, long from_date, long to_date, int participants, String location_name, String image_url, double latitude, double longitude, String iso3_country) {
-        this.event_id = event_id;
-        this.user_id = user_id;
+    public Event(String eventId, String userId, String title, String description, long fromDate, long toDate, int participants, String locationName, String imageUrl, double latitude, double longitude, String iso3Country) {
+        this.eventId = eventId;
+        this.userId = userId;
         this.title = title;
         this.description = description;
-        this.from_date = from_date;
-        this.to_date = to_date;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
         this.participants = participants;
-        this.location_name = location_name;
-        this.image_url = image_url;
+        this.locationName = locationName;
+        this.imageUrl = imageUrl;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.iso3_country = iso3_country;
+        this.iso3Country = iso3Country;
     }
 
-    public long getEvent_id() {
-        return event_id;
+    public String getEventId() {
+        return eventId;
     }
 
-    public void setEvent_id(long event_id) {
-        this.event_id = event_id;
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -66,20 +75,20 @@ public class Event {
         this.description = description;
     }
 
-    public long getFrom_date() {
-        return from_date;
+    public long getFromDate() {
+        return fromDate;
     }
 
-    public void setFrom_date(long from_date) {
-        this.from_date = from_date;
+    public void setFromDate(long fromDate) {
+        this.fromDate = fromDate;
     }
 
-    public long getTo_date() {
-        return to_date;
+    public long getToDate() {
+        return toDate;
     }
 
-    public void setTo_date(long to_date) {
-        this.to_date = to_date;
+    public void setToDate(long toDate) {
+        this.toDate = toDate;
     }
 
     public int getParticipants() {
@@ -90,20 +99,20 @@ public class Event {
         this.participants = participants;
     }
 
-    public String getLocation_name() {
-        return location_name;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setLocation_name(String location_name) {
-        this.location_name = location_name;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public double getLatitude() {
@@ -122,11 +131,11 @@ public class Event {
         this.longitude = longitude;
     }
 
-    public String getIso3_country() {
-        return iso3_country;
+    public String getIso3Country() {
+        return iso3Country;
     }
 
-    public void setIso3_country(String iso3_country) {
-        this.iso3_country = iso3_country;
+    public void setIso3Country(String iso3Country) {
+        this.iso3Country = iso3Country;
     }
 }

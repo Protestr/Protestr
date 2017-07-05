@@ -51,12 +51,12 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (holder instanceof EventViewHolder) {
             final Event event = events.get(position);
             Glide.with(context)
-                    .load(event.getImage_url())
+                    .load(event.getImageUrl())
                     .into(((EventViewHolder) holder).imgEventImage);
             ((EventViewHolder) holder).tvEventTitle.setText(event.getTitle());
-            ((EventViewHolder) holder).tvEventFrom.setText(FormatUtils.formatDateByDefaultLocale(event.getFrom_date()));
+            ((EventViewHolder) holder).tvEventFrom.setText(FormatUtils.formatDateByDefaultLocale(event.getFromDate()));
             ((EventViewHolder) holder).tvEventParticipants.setText(String.valueOf(event.getParticipants()));
-            ((EventViewHolder) holder).tvEventLocation.setText(event.getLocation_name());
+            ((EventViewHolder) holder).tvEventLocation.setText(event.getLocationName());
         } else if (holder instanceof LoadingViewHolder) {
             ((LoadingViewHolder) holder).progressBar.setIndeterminate(true);
         }

@@ -93,5 +93,5 @@
     <string name="email_login_hint">Email</string>
     <string name="repeat_password_hint">Repetir contraseña</string>
     <string name="image_generation_notice">La imagen de perfil se genera automáticamente a partir del correo introducido usando el servicio de Gravatar.</string>
-    <string name="privacy_policy">Política de privacidad</string>
+    <string name="terms_and_conditions">Términos y condiciones</string>
 </resources>
