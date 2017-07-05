@@ -19,7 +19,7 @@ public class Event {
     @SerializedName("to_date")
     private long toDate;
     private int participants;
-    @SerializedName("location_mame")
+    @SerializedName("location_name")
     private String locationName;
     @SerializedName("image_url")
     private String imageUrl;
