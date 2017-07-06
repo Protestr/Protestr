@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context="es.dmoral.protestr.login.LoginActivity">
+    tools:context=".ui.activities.login.LoginActivity">
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:layout_width="match_parent"

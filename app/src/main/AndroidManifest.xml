@@ -24,7 +24,7 @@
             android:value="@string/geo_api_key"/>
 
         <service
-            android:name=".fcm.ProtestrMessagingService"
+            android:name=".data.fcm.ProtestrMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -32,16 +32,16 @@
             </intent-filter>
         </service>
         <service
-            android:name=".detention_alert.services.ShakeToAlertService"
+            android:name=".ui.activities.detention_alert.services.ShakeToAlertService"
             android:enabled="true"
             android:exported="false"/>
 
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".ui.activities.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBarLogin"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".splash.SplashActivity"
+            android:name=".ui.activities.splash.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -51,25 +51,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main.MainActivity"
+            android:name=".ui.activities.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".settings.SettingsActivity"
+            android:name=".ui.activities.settings.SettingsActivity"
             android:label="@string/title_activity_settings"/>
         <activity
-            android:name=".create_event.CreateEventActivity"
+            android:name=".ui.activities.create_event.CreateEventActivity"
             android:label="@string/create_event"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".detention_alert.DetentionAlertActivity"
+            android:name=".ui.activities.detention_alert.DetentionAlertActivity"
             android:label="@string/title_activity_detention_alert"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".detention_alert.detention_alert_config.DetentionAlertConfigActivity"
+            android:name=".ui.activities.detention_alert.detention_alert_config.DetentionAlertConfigActivity"
             android:label="@string/configure_sensor"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".signup.SignUpActivity"
+            android:name=".ui.activities.signup.SignUpActivity"
             android:label="@string/register"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
