@@ -78,6 +78,10 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getWindow().getDecorView().requestFocus();
         explosionField = ExplosionField.attach2Window(this);
+        etEmail.setError(null);
+        etUsername.setError(null);
+        etPassword.setError(null);
+        etRepeatPassword.setError(null);
     }
 
     @Override
@@ -91,6 +95,13 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
                     Glide.with(SignUpActivity.this)
                             .load(GravatarUtils.generateGravatarUrl(charSequence.toString()))
                             .into(profileImage);
+            }
+        });
+        etUsername.addTextChangedListener(new SimplifiedTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (etUsername.getError() != null)
+                    etUsername.setError(null);
             }
         });
         etPassword.addTextChangedListener(new SimplifiedTextWatcher() {

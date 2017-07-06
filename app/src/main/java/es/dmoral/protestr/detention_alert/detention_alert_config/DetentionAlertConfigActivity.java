@@ -119,7 +119,7 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
         seekbarTimeUntilRestart.setKeyProgressIncrement(1);
 
         seekbarShakeNumber.setProgress(shakeNumber - 3);
-        seekbarSensitivity.setProgress(sensorSensitivity - 10);
+        seekbarSensitivity.setProgress(sensorSensitivity - 7);
         seekbarTimeUntilRestart.setProgress((timeUntilRestart - 250 ) / 250);
 
         tvShakeNumber.setText(String.valueOf(shakeNumber));
@@ -137,7 +137,7 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
             }
         });
         seekbarSensitivity.setOnSeekBarChangeListener(new UpdatingOnSeekBarChangeListener(
-                tvSensitivity, 10) {
+                tvSensitivity, 7) {
             @Override
             public void onValueChanged(int newValue) {
                 sensorSensitivity = newValue;

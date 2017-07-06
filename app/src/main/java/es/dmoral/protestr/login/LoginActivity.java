@@ -4,10 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -15,13 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.base.BaseActivity;
+import es.dmoral.protestr.custom.SimplifiedTextWatcher;
 import es.dmoral.protestr.main.MainActivity;
 import es.dmoral.protestr.signup.SignUpActivity;
 import es.dmoral.protestr.utils.Sha256Utils;
@@ -29,7 +27,7 @@ import es.dmoral.toasty.Toasty;
 
 public class LoginActivity extends BaseActivity implements LoginView {
 
-    @BindView(R.id.input_layout_username) TextInputLayout txInUsername;
+    @BindView(R.id.input_layout_email) TextInputLayout txInEmail;
     @BindView(R.id.et_email) EditText etEmail;
     @BindView(R.id.input_layout_password) TextInputLayout txInPassword;
     @BindView(R.id.et_password) EditText etPassword;
@@ -57,19 +55,9 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     protected void setListeners() {
-        etPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+        etPassword.addTextChangedListener(new SimplifiedTextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
                 if (etPassword.getError() != null)
                     txInPassword.setPasswordVisibilityToggleEnabled(true);
             }

@@ -122,7 +122,7 @@
                         android:id="@+id/seekbar_sensitivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:max="10" />
+                        android:max="13" />
 
                 </LinearLayout>
 
