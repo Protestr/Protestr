@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
-import es.dmoral.protestr.data.models.models.Event;
+import es.dmoral.protestr.data.models.Event;
 import es.dmoral.protestr.utils.LocaleUtils;
 import es.dmoral.protestr.utils.PreferencesUtils;
 

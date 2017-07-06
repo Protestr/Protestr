@@ -32,7 +32,7 @@ import es.dmoral.protestr.data.fcm.FCMHelper;
 import es.dmoral.protestr.ui.fragments.events.EventsFragment;
 import es.dmoral.protestr.ui.fragments.subscribed_events.SubscribedEventsFragment;
 import es.dmoral.protestr.ui.activities.login.LoginActivity;
-import es.dmoral.protestr.data.models.models.User;
+import es.dmoral.protestr.data.models.User;
 import es.dmoral.protestr.ui.activities.settings.SettingsActivity;
 import es.dmoral.protestr.utils.PreferencesUtils;
 

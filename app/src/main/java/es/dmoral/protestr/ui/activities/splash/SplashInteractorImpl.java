@@ -1,7 +1,7 @@
 package es.dmoral.protestr.ui.activities.splash;
 
 import es.dmoral.protestr.data.api.WebService;
-import es.dmoral.protestr.data.models.models.User;
+import es.dmoral.protestr.data.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

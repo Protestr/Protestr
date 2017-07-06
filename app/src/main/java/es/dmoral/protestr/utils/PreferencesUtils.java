@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import es.dmoral.prefs.Prefs;
-import es.dmoral.protestr.data.models.models.User;
+import es.dmoral.protestr.data.models.User;
 
 /**
  * Created by grender on 5/07/17.

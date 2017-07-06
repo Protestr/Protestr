@@ -2,7 +2,7 @@ package es.dmoral.protestr.ui.activities.signup;
 
 import android.support.annotation.NonNull;
 
-import es.dmoral.protestr.data.models.models.User;
+import es.dmoral.protestr.data.models.User;
 
 /**
  * Created by grender on 1/07/17.

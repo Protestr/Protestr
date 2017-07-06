@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
 import es.dmoral.protestr.R;
-import es.dmoral.protestr.data.models.models.User;
+import es.dmoral.protestr.data.models.User;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.ImageUtils;
 import es.dmoral.protestr.utils.PreferencesUtils;
