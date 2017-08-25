@@ -1,5 +1,6 @@
 package es.dmoral.protestr.ui.activities.detention_alert.services;
 
+import android.Manifest;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
@@ -13,6 +14,7 @@ import com.squareup.seismic.ShakeDetector;
 
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.utils.Constants;
+import es.dmoral.protestr.utils.PermissionUtils;
 import es.dmoral.protestr.utils.PreferencesUtils;
 import es.dmoral.protestr.utils.SmsUtils;
 import im.delight.android.location.SimpleLocation;
@@ -107,7 +109,8 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
 
     private void requestSmsSend() {
         final SimpleLocation simpleLocation = new SimpleLocation(getApplicationContext());
-        simpleLocation.beginUpdates();
+        if (PermissionUtils.isPermissionGranted(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION))
+            simpleLocation.beginUpdates();
         if (Prefs.with(getApplicationContext()).readBoolean(PreferencesUtils.PREFERENCES_ALERT_ENABLED)) {
             final String phoneNumber = Prefs.with(getApplicationContext())
                     .read(PreferencesUtils.PREFERENCES_SELECTED_CONTACT_NUMBER);

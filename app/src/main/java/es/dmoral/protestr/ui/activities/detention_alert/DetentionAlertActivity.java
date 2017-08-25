@@ -22,6 +22,12 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,7 +52,6 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
 
     private static final int PICK_CONTACT = 0x0001;
     public static final int ALERT_NOTIFICATION_ID = 0x1000;
-    private static final int LOCATION_PERMISSION = 0x2000;
 
     private boolean alertEnabled;
     private DetentionAlertPresenter detentionAlertPresenter;
@@ -59,9 +64,6 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
         super.onCreate(savedInstanceState, R.layout.activity_detention_alert);
         detentionAlertPresenter = new DetentionAlertPresenterImpl(this);
         alertEnabled = Prefs.with(this).readBoolean(PreferencesUtils.PREFERENCES_ALERT_ENABLED);
-
-        requestLocationPermissions();
-        showLocationRequestDialog();
 
         registerReceiver();
         setNotificationState();
@@ -131,11 +133,28 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == PICK_CONTACT) {
-                detentionAlertPresenter.requestContactInfo(data.getData());
+                Dexter.withActivity(this)
+                        .withPermission(Manifest.permission.READ_CONTACTS)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse response) {
+                                detentionAlertPresenter.requestContactInfo(data.getData());
+                            }
+
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse response) {
+                                // ignored
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                                token.continuePermissionRequest();
+                            }
+                        }).check();
             }
         }
     }
@@ -208,25 +227,6 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
             tvContactName.setText(displayName);
     }
 
-    @Override
-    public void showLocationRequestDialog() {
-        final SimpleLocation simpleLocation = new SimpleLocation(DetentionAlertActivity.this);
-        if (!simpleLocation.hasLocationEnabled()) {
-            new MaterialDialog.Builder(this)
-                    .title(R.string.location_dialog_title)
-                    .content(R.string.location_dialog_msg)
-                    .positiveText(android.R.string.ok)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            SimpleLocation.openSettings(DetentionAlertActivity.this);
-                        }
-                    })
-                    .negativeText(android.R.string.cancel)
-                    .show();
-        }
-    }
-
     @OnClick(R.id.select_contact_bt)
     @Override
     public void selectContactAction() {
@@ -244,18 +244,6 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
         setNotificationState();
         setButtonState();
         setServiceState();
-    }
-
-    private boolean requestLocationPermissions() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    LOCATION_PERMISSION);
-            return false;
-        }
-        return true;
     }
 
     @Override

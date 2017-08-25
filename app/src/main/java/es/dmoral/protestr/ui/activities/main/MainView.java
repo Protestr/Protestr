@@ -13,4 +13,5 @@ interface MainView {
     void showFab();
     void hideFab();
     void createEventAction();
+    void enableLocation();
 }

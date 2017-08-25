@@ -51,7 +51,7 @@
     </string-array>
 
     <string name="detention_alert_text_hint">SMS a enviar</string>
-    <string name="detention_alert_explanation">Cuando tengas activado el aviso de detención tu móvil deberá ser agitado, en ese instante se enviará el texto indicado arriba junto con tu localización por SMS al contacto que hayas elegido.</string>
+    <string name="detention_alert_explanation">Cuando tengas activado el aviso de detención tu móvil deberá ser agitado, en ese instante se enviará el texto indicado arriba junto con tu localización (recuerda tenerla activada) por SMS al contacto que hayas elegido.</string>
     <string name="no_selected_contact">Ningún contacto seleccionado</string>
     <string name="enable_alert">Activar alerta</string>
     <string name="disable_alert">Desactivar alerta</string>
@@ -62,8 +62,6 @@
     <string name="select_contact">Seleccionar contacto</string>
     <string name="create_event">Crear evento</string>
     <string name="choose_image">Elige una imagen</string>
-    <string name="location_dialog_msg">Para enviar la localización al contacto que hayas elegido necesitas activar la localización en tu dispositivo.</string>
-    <string name="location_dialog_title">Activar localización</string>
     <string name="event_name">Nombre del evento</string>
     <string name="date">Fecha de comienzo: %s</string>
     <string name="time">Hora de comienzo: %1$s:%2$s</string>
@@ -95,4 +93,5 @@
     <string name="image_generation_notice">La imagen de perfil se genera automáticamente a partir del correo introducido usando el servicio de Gravatar.</string>
     <string name="terms_and_conditions">Términos y condiciones</string>
     <string name="order_by_distance_asc">Ordenar por más cercanos</string>
+    <string name="location_permission_canceled_warning">Algunas funcionalidades podrían no funcionar correctamente.</string>
 </resources>

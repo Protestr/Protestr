@@ -1,6 +1,7 @@
 package es.dmoral.protestr.ui.fragments.events;
 
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.pwittchen.infinitescroll.library.InfiniteScrollListener;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
 
 import java.util.ArrayList;
 

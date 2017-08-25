@@ -2,11 +2,14 @@ package es.dmoral.protestr.ui.fragments.events;
 
 import java.util.ArrayList;
 
+import android.Manifest;
+
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.data.models.Event;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.LocaleUtils;
+import es.dmoral.protestr.utils.PermissionUtils;
 import es.dmoral.protestr.utils.PreferencesUtils;
 import im.delight.android.location.SimpleLocation;
 
@@ -30,7 +33,8 @@ public class EventsPresenterImpl implements EventsPresenter, EventsInteractor.On
         double lat = -1;
         double lng = -1;
 
-        if (order.equals(Constants.ORDER_DISTANCE_ASC)) {
+        if (order.equals(Constants.ORDER_DISTANCE_ASC) && PermissionUtils.isPermissionGranted(
+                ((EventsFragment) eventsFragmentView).getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
             final SimpleLocation simpleLocation = new SimpleLocation(((EventsFragment) eventsFragmentView).getContext());
             simpleLocation.beginUpdates();
             lat = simpleLocation.getLatitude();

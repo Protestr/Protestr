@@ -13,7 +13,6 @@ interface DetentionAlertView {
     void setButtonState();
     void setMessage();
     void setContactName();
-    void showLocationRequestDialog();
     void selectContactAction();
     void enableAlertAction();
 }
