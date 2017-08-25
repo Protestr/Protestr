@@ -11,14 +11,17 @@
             <group android:id="@+id/sort_group"
                    android:checkableBehavior="single">
                 <item
-                    android:id="@+id/sort_by_participants"
-                    android:title="@string/order_by_numerous"/>
-                <item
                     android:id="@+id/sort_by_newest"
                     android:title="@string/order_by_newest"/>
                 <item
                     android:id="@+id/sort_by_oldest"
                     android:title="@string/order_by_oldest"/>
+                <item
+                    android:id="@+id/sort_by_distance_asc"
+                    android:title="@string/order_by_distance_asc"/>
+                <item
+                    android:id="@+id/sort_by_participants"
+                    android:title="@string/order_by_numerous"/>
             </group>
         </menu>
 

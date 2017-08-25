@@ -110,6 +110,9 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
             case Constants.ORDER_CREATION_DATE_DESC:
                 menu.findItem(R.id.sort_by_newest).setChecked(true);
                 break;
+            case Constants.ORDER_DISTANCE_ASC:
+                menu.findItem(R.id.sort_by_distance_asc).setChecked(true);
+                break;
             case Constants.ORDER_FROM_PARTICIPANTS_DESC:
                 menu.findItem(R.id.sort_by_participants).setChecked(true);
                 break;
@@ -127,14 +130,17 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
     public boolean onOptionsItemSelected(MenuItem item) {
         String order;
         switch (item.getItemId()) {
-            case R.id.sort_by_participants:
-                order = Constants.ORDER_FROM_PARTICIPANTS_DESC;
-                break;
             case R.id.sort_by_newest:
                 order = Constants.ORDER_CREATION_DATE_DESC;
                 break;
             case R.id.sort_by_oldest:
                 order = Constants.ORDER_CREATION_DATE_ASC;
+                break;
+            case R.id.sort_by_distance_asc:
+                order = Constants.ORDER_DISTANCE_ASC;
+                break;
+            case R.id.sort_by_participants:
+                order = Constants.ORDER_FROM_PARTICIPANTS_DESC;
                 break;
             default:
                 return false;

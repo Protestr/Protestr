@@ -25,6 +25,7 @@ public class Constants {
     public static final String ORDER_CREATION_DATE_ASC = "creation_date_asc";
     public static final String ORDER_CREATION_DATE_DESC = "creation_date_desc";
     public static final String ORDER_FROM_PARTICIPANTS_DESC = "participants_desc";
+    public static final String ORDER_DISTANCE_ASC = "distance_asc";
 
     public static final String BROADCAST_SMS_SENT = "broadcast_sms_sent";
     public static final String BROADCAST_SHAKE_DETECTED = "broadcast_shake_detected";
