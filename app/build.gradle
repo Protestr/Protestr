@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "es.dmoral.protestr"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,7 +21,7 @@ android {
 }
 
 ext {
-    supportLibVersion = '25.3.1'
+    supportLibVersion = '26.0.0'
     playServicesVersion = '11.0.4'
     butterknifeVersion = '8.5.1'
 }
@@ -35,6 +35,7 @@ dependencies {
     compile "com.android.support:support-v4:$supportLibVersion"
     compile "com.android.support:support-vector-drawable:$supportLibVersion"
     compile "com.android.support:customtabs:$supportLibVersion"
+    compile "com.android.support:palette-v7:$supportLibVersion"
     compile "com.google.android.gms:play-services-maps:$playServicesVersion"
     compile "com.google.android.gms:play-services-location:$playServicesVersion"
     compile "com.google.firebase:firebase-messaging:$playServicesVersion"

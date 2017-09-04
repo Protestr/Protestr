@@ -1,12 +1,15 @@
 package es.dmoral.protestr.data.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by grender on 15/02/17.
  */
 
-public class Event {
+public class Event implements Parcelable {
 
     @SerializedName("event_id")
     private String eventId;
@@ -28,7 +31,9 @@ public class Event {
     @SerializedName("iso3_country")
     private String iso3Country;
 
-    public Event(String eventId, String userId, String title, String description, long fromDate, long toDate, int participants, String locationName, String imageUrl, double latitude, double longitude, String iso3Country) {
+    public Event(String eventId, String userId, String title, String description, long fromDate,
+                 long toDate, int participants, String locationName, String imageUrl, double latitude,
+                 double longitude, String iso3Country) {
         this.eventId = eventId;
         this.userId = userId;
         this.title = title;
@@ -42,6 +47,33 @@ public class Event {
         this.longitude = longitude;
         this.iso3Country = iso3Country;
     }
+
+    private Event(Parcel in) {
+        eventId = in.readString();
+        userId = in.readString();
+        title = in.readString();
+        description = in.readString();
+        fromDate = in.readLong();
+        toDate = in.readLong();
+        participants = in.readInt();
+        locationName = in.readString();
+        imageUrl = in.readString();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        iso3Country = in.readString();
+    }
+
+    public static final Creator<Event> CREATOR = new Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 
     public String getEventId() {
         return eventId;
@@ -137,5 +169,26 @@ public class Event {
 
     public void setIso3Country(String iso3Country) {
         this.iso3Country = iso3Country;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(eventId);
+        parcel.writeString(userId);
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeLong(fromDate);
+        parcel.writeLong(toDate);
+        parcel.writeInt(participants);
+        parcel.writeString(locationName);
+        parcel.writeString(imageUrl);
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
+        parcel.writeString(iso3Country);
     }
 }

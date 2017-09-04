@@ -32,6 +32,8 @@ public class Constants {
     public static final String BROADCAST_SHAKE_COMPLETED = "broadcast_shake_completed";
     public static final String BROADCAST_SHAKE_RESTARTED = "broadcast_shake_restarted";
 
+    public static final String EVENT_INFO_EXTRA = "event_info_extra";
+
     public static String getImgurAuthHeader(Context context) {
         return "Client-ID " + context.getString(R.string.imgur_client_id);
     }

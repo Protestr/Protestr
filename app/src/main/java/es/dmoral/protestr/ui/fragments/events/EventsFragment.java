@@ -1,6 +1,7 @@
 package es.dmoral.protestr.ui.fragments.events;
 
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
+import es.dmoral.protestr.ui.activities.event_info.EventInfoActivity;
 import es.dmoral.protestr.ui.adapters.EventAdapter;
 import es.dmoral.protestr.data.models.Event;
 import es.dmoral.protestr.ui.fragments.BaseFragment;
@@ -31,7 +33,7 @@ import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.PreferencesUtils;
 import es.dmoral.toasty.Toasty;
 
-public class EventsFragment extends BaseFragment implements EventsFragmentView {
+public class EventsFragment extends BaseFragment implements EventsFragmentView, EventAdapter.OnEventClickedListener {
 
     @BindView(R.id.events_recyclerview) RecyclerView eventsRecyclerView;
     @BindView(R.id.swipe_container) SwipeRefreshLayout swipeRefreshLayout;
@@ -56,7 +58,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
     protected void setupViews() {
         setHasOptionsMenu(true);
         eventsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        eventsRecyclerView.setAdapter(new EventAdapter(new ArrayList<Event>()));
+        eventsRecyclerView.setAdapter(new EventAdapter(new ArrayList<Event>(), this));
         swipeRefreshLayout.setRefreshing(true);
         eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL,
                 Prefs.with(getActivity()).read(PreferencesUtils.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
@@ -165,5 +167,13 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView {
         super.onDestroy();
         if (eventsPresenter != null)
             eventsPresenter.onDestroy();
+    }
+
+    @Override
+    public void onEventClicked(Event event) {
+        final Intent eventInfoIntent = new Intent(getActivity(), EventInfoActivity.class);
+        eventInfoIntent.putExtra(Constants.EVENT_INFO_EXTRA, event);
+        startActivity(eventInfoIntent);
+        getActivity().overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }
 }

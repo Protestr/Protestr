@@ -32,8 +32,15 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_EVENT = 1;
 
-    public EventAdapter(ArrayList<Event> events) {
+    private OnEventClickedListener onEventClickedListener;
+
+    public interface OnEventClickedListener {
+        void onEventClicked(Event event);
+    }
+
+    public EventAdapter(ArrayList<Event> events, OnEventClickedListener onEventClickedListener) {
         this.events = events;
+        this.onEventClickedListener = onEventClickedListener;
     }
 
     @Override
@@ -109,7 +116,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    static class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.event_image) ImageView imgEventImage;
         @BindView(R.id.event_from) TextView tvEventFrom;
         @BindView(R.id.event_title) TextView tvEventTitle;
@@ -119,15 +126,16 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         EventViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-
+            onEventClickedListener.onEventClicked(events.get(getAdapterPosition()));
         }
     }
 
-    static class LoadingViewHolder extends RecyclerView.ViewHolder {
+    class LoadingViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.progress_bar) MaterialProgressBar progressBar;
 
         LoadingViewHolder(View itemView) {
