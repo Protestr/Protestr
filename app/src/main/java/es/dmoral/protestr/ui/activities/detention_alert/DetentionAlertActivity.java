@@ -237,13 +237,17 @@ public class DetentionAlertActivity extends BaseActivity implements DetentionAle
     @OnClick(R.id.enable_alert_button)
     @Override
     public void enableAlertAction() {
-        alertEnabled = !alertEnabled;
-        Prefs.with(DetentionAlertActivity.this)
-                .writeBoolean(PreferencesUtils.PREFERENCES_ALERT_ENABLED, alertEnabled);
+        if (Prefs.with(this).read(PreferencesUtils.PREFERENCES_SELECTED_CONTACT_NUMBER).isEmpty()) {
+            Toasty.info(this, getString(R.string.empty_contact)).show();
+        } else {
+            alertEnabled = !alertEnabled;
+            Prefs.with(DetentionAlertActivity.this)
+                    .writeBoolean(PreferencesUtils.PREFERENCES_ALERT_ENABLED, alertEnabled);
 
-        setNotificationState();
-        setButtonState();
-        setServiceState();
+            setNotificationState();
+            setButtonState();
+            setServiceState();
+        }
     }
 
     @Override

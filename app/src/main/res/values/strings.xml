@@ -93,5 +93,6 @@
     <string name="image_generation_notice">La imagen de perfil se genera automáticamente a partir del correo introducido usando el servicio de Gravatar.</string>
     <string name="terms_and_conditions">Términos y condiciones</string>
     <string name="order_by_distance_asc">Ordenar por más cercanos</string>
-    <string name="location_permission_canceled_warning">Algunas funcionalidades podrían no funcionar correctamente.</string>
+    <string name="location_permission_canceled_warning">Algunas funcionalidades podrían no funcionar correctamente</string>
+    <string name="empty_contact">Debes seleccionar un contacto primero</string>
 </resources>
