@@ -48,9 +48,9 @@ public class ShakeToAlertService extends Service implements ShakeDetector.Listen
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent.hasExtra(SHAKE_COUNT_THRESHOLD_EXTRA) &&
+        if (intent != null && (intent.hasExtra(SHAKE_COUNT_THRESHOLD_EXTRA) &&
                 intent.hasExtra(SHAKE_RESET_THRESHOLD_EXTRA) &&
-                intent.hasExtra(SENSOR_SENSITIVITY_EXTRA)) {
+                intent.hasExtra(SENSOR_SENSITIVITY_EXTRA))) {
             shakeCountThreshold = intent.getExtras().getInt(SHAKE_COUNT_THRESHOLD_EXTRA);
             sensorSensitivity = intent.getExtras().getInt(SENSOR_SENSITIVITY_EXTRA);
             shakeResetThreshold = intent.getExtras().getInt(SHAKE_RESET_THRESHOLD_EXTRA);
