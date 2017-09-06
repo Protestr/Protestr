@@ -277,7 +277,6 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
             imagePlaceholder.setVisibility(View.GONE);
             Glide.with(this)
                     .load(ImageUtils.bitmapToByteArray(eventBitmap))
-                    .asBitmap()
                     .into(eventImage);
         }
     }

@@ -5,4 +5,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="AppTheme.NoActionBarEventInfo">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 </resources>

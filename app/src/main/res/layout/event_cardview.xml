@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/event_cardview"
     android:layout_marginLeft="@dimen/half_activity_default_margin"
     android:layout_marginRight="@dimen/half_activity_default_margin"
@@ -24,7 +25,8 @@
                 android:id="@+id/event_image"
                 android:layout_width="match_parent"
                 android:layout_height="196dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription" />
 
             <View
                 android:layout_width="match_parent"
