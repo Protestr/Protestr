@@ -371,7 +371,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.create_event, menu);
+        getMenuInflater().inflate(R.menu.menu_create_event, menu);
         return true;
     }
 
@@ -395,8 +395,15 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         }
     }
 
+    // As seen in http://stackoverflow.com/a/39525123/4208583
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        //This MUST be done before saving any of your own or your base class's variables
+        final Bundle mapViewSaveState = new Bundle(outState);
+        if (mapView != null)
+            mapView.onSaveInstanceState(mapViewSaveState);
+        outState.putBundle(MAP_VIEW_SAVED_STATE, mapViewSaveState);
+
         super.onSaveInstanceState(outState);
         outState.putParcelable(EVENT_BITMAP_SAVED_STATE, eventBitmap);
         outState.putInt(YEAR_SAVED_STATE, year);
@@ -427,7 +434,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     public void onLowMemory() {
         super.onLowMemory();
         if (mapView != null)
-            this.mapView.onLowMemory();
+            mapView.onLowMemory();
     }
 
     @Override

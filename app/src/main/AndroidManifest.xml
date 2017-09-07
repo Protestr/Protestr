@@ -75,6 +75,9 @@
         <activity
             android:name=".ui.activities.event_info.EventInfoActivity"
             android:theme="@style/AppTheme.NoActionBarEventInfo" />
+        <activity android:name=".ui.activities.event_info.image_viewer.ImageViewerActivity"
+            android:label=""
+            android:theme="@style/AppTheme.Viewer"/>
     </application>
 
 </manifest>

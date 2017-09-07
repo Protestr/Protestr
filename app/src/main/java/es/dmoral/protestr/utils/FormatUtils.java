@@ -3,6 +3,7 @@ package es.dmoral.protestr.utils;
 import android.text.TextUtils;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
@@ -16,6 +17,11 @@ public class FormatUtils {
 
     public static String formatDateByDefaultLocale(long timeInMilliseconds) {
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.getDefault());
+        return dateFormat.format(timeInMilliseconds);
+    }
+
+    public static String formatHours(long timeInMilliseconds) {
+        DateFormat dateFormat = new SimpleDateFormat("hh:'00' a", Locale.getDefault());
         return dateFormat.format(timeInMilliseconds);
     }
 

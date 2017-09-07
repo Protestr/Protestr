@@ -7,6 +7,16 @@
     </style>
 
     <style name="AppTheme.NoActionBarEventInfo">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Viewer" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@color/viewer_bg_color</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 </resources>

@@ -18,6 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorAccent"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
             app:expandedTitleTextAppearance="@style/CollapsingToolbarTitle"
             app:expandedTitleMarginBottom="36dp"
             app:statusBarScrim="@android:color/transparent"

@@ -61,7 +61,8 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     .load(event.getImageUrl())
                     .into(((EventViewHolder) holder).imgEventImage);
             ((EventViewHolder) holder).tvEventTitle.setText(event.getTitle());
-            ((EventViewHolder) holder).tvEventFrom.setText(FormatUtils.formatDateByDefaultLocale(event.getFromDate()));
+            ((EventViewHolder) holder).tvEventFrom.setText(FormatUtils.formatDateByDefaultLocale(event.getFromDate()) + " - " +
+                    FormatUtils.formatHours(event.getFromDate()));
             ((EventViewHolder) holder).tvEventParticipants.setText(String.valueOf(event.getParticipants()));
             ((EventViewHolder) holder).tvEventLocation.setText(event.getLocationName());
         } else if (holder instanceof LoadingViewHolder) {

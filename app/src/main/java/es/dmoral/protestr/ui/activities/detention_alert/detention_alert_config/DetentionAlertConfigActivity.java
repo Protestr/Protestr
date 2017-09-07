@@ -185,7 +185,7 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.configure_sensor, menu);
+        getMenuInflater().inflate(R.menu.menu_configure_sensor, menu);
         return true;
     }
 

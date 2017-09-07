@@ -22,6 +22,15 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <color name="viewer_bg_color">#303030</color>
+    <style name="AppTheme.Viewer" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@color/viewer_bg_color</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppTheme.SignUpButton" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@android:color/white</item>
         <item name="colorButtonNormal">@color/colorAccent</item>

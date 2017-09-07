@@ -55,7 +55,9 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'tyrantgit:explosionfield:1.0.1'
     compile 'com.karumi:dexter:4.1.0'
+    compile 'com.github.chrisbanes:PhotoView:2.1.3'
 }
+
 
 
 
