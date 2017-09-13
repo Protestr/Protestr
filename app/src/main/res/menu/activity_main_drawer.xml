@@ -15,9 +15,14 @@
     <item android:title="@string/utilities">
         <menu>
             <item
-                android:id="@+id/nav_detention_alert"
+                android:id="@+id/nav_panic_alert"
                 android:icon="@drawable/ic_notifications_active_black_48dp"
-                android:title="@string/detention_alert" />
+                android:title="@string/panic_alert" />
+
+            <item
+                android:id="@+id/nav_qr_scan"
+                android:icon="@drawable/ic_qr_code"
+                android:title="@string/scan_event_qr" />
         </menu>
     </item>
 

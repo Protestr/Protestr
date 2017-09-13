@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Protestr</string>
-    <string name="title_activity_detention_alert">Aviso de detención</string>
 
     <string name="navigation_drawer_open">Abrir menú lateral</string>
     <string name="navigation_drawer_close">Cerrar menú lateral</string>
@@ -23,7 +22,7 @@
     <string name="connection_error">Ha ocurrido un error de conexión</string>
     <string name="password_doesnt_match">Las contraseñas no coinciden</string>
     <string name="utilities">Utilidades</string>
-    <string name="detention_alert">Aviso de detención</string>
+    <string name="panic_alert">Aviso de pánico</string>
     <string name="subscribed_events">Eventos suscritos</string>
     <string name="new_events">Nuevos eventos</string>
     <string name="register">Registro</string>
@@ -50,12 +49,12 @@
         <item>only_selected_country</item>
     </string-array>
 
-    <string name="detention_alert_text_hint">SMS a enviar</string>
-    <string name="detention_alert_explanation">Cuando tengas activado el aviso de detención tu móvil deberá ser agitado, en ese instante se enviará el texto indicado arriba junto con tu localización (recuerda tenerla activada) por SMS al contacto que hayas elegido.</string>
+    <string name="panic_alert_text_hint">SMS a enviar</string>
+    <string name="panic_alert_explanation">Cuando tengas activado el aviso de pánico tu móvil deberá ser agitado, en ese instante se enviará el texto indicado arriba junto con tu localización (recuerda tenerla activada) por SMS al contacto que hayas elegido.</string>
     <string name="no_selected_contact">Ningún contacto seleccionado</string>
     <string name="enable_alert">Activar alerta</string>
     <string name="disable_alert">Desactivar alerta</string>
-    <string name="alert_notification_title">Alerta de detención activada</string>
+    <string name="alert_notification_title">Alerta de pánico activada</string>
     <string name="alert_notification_body">Desactívala en su lugar correspondiente.</string>
     <string name="contact_selected">Contacto seleccionado</string>
     <string name="error_selecting_contact">Error seleccionando contacto</string>
@@ -74,10 +73,10 @@
     <string name="error_creating_event">Error creando evento</string>
     <string name="event_created">Evento creado</string>
     <string name="finish_event_info">Cuando termine el evento recuerda darlo como finalizado en su pantalla correspondiente.</string>
-    <string name="configure_detection_alert">Configurar alerta de detención</string>
+    <string name="configure_panic_alert">Configurar alerta de pánico</string>
     <string name="configure_sensor">Configurar sensor</string>
     <string name="shake_number">Número de agitaciones</string>
-    <string name="shake_number_explanation">Número de agitaciones necesarias para activar la alerta de detención.</string>
+    <string name="shake_number_explanation">Número de agitaciones necesarias para activar la alerta de pánico.</string>
     <string name="sensor_sensitivity">Sensibilidad del sensor</string>
     <string name="sensor_sensitivity_explanation">Cuanto más alta sea la sensibilidad, más fuerte tendrás que agitar tu móvil.</string>
     <string name="time_until_restart">Tiempo para reiniciar</string>
@@ -101,4 +100,8 @@
     <string name="image_saved">Imagen guardada en la carpeta de descargas</string>
     <string name="view">VER</string>
     <string name="download_image">Descargar imagen</string>
+    <string name="join_event">Unirse al evento</string>
+    <string name="generate_qr_code">Generar código QR</string>
+    <string name="mute_notifications">Silenciar notificaciones</string>
+    <string name="scan_event_qr">Escanear QR de evento</string>
 </resources>

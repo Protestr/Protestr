@@ -30,6 +30,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.maps.MapView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -98,6 +99,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void setupViews() {
+        preLoadGoogleMaps();
         setSupportActionBar(toolbar);
         final ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
@@ -193,7 +195,7 @@ public class MainActivity extends BaseActivity
                 fab.hide();
                 isFragment = true;
                 break;
-            case R.id.nav_detention_alert:
+            case R.id.nav_panic_alert:
                 pendingIntent = new Intent(this, DetentionAlertActivity.class);
                 isFragment = false;
                 break;
@@ -280,5 +282,23 @@ public class MainActivity extends BaseActivity
                 }
             }
         });
+    }
+
+    // As seen in http://stackoverflow.com/a/29246677
+    @Override
+    public void preLoadGoogleMaps() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    MapView mv = new MapView(getApplicationContext());
+                    mv.onCreate(null);
+                    mv.onPause();
+                    mv.onDestroy();
+                } catch (Exception ignored) {
+                    // ignored
+                }
+            }
+        }).start();
     }
 }

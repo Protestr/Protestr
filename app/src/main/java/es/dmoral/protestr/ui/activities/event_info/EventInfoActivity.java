@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -41,6 +42,7 @@ import es.dmoral.protestr.ui.activities.BaseActivity;
 import es.dmoral.protestr.ui.activities.event_info.image_viewer.ImageViewerActivity;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.FormatUtils;
+import es.dmoral.protestr.utils.ImageUtils;
 
 public class EventInfoActivity extends BaseActivity implements EventInfoView, OnMapReadyCallback {
 
@@ -55,6 +57,7 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
     @BindView(R.id.tv_participants) TextView eventParticipants;
     @BindView(R.id.tv_event_location) TextView eventLocation;
     @BindView(R.id.map_view) MapView mapView;
+    @BindView(R.id.subscribe_layout) LinearLayout subscribeLayout;
 
     private static final String MAP_VIEW_SAVED_STATE = "MAP_VIEW_STATE";
 
@@ -222,5 +225,22 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
         viewerIntent.putExtra(Constants.IMAGE_VIEWER_EXTRA, byteArrayOutputStream.toByteArray());
         startActivity(viewerIntent);
         overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+    }
+
+    @OnClick(R.id.subscribe_layout)
+    @Override
+    public void subscribe() {
+
+    }
+
+    @OnClick(R.id.qr_code_layout)
+    @Override
+    public void generateQr() {
+        ImageUtils.generateQr(new ImageUtils.OnQrGeneratedListener() {
+            @Override
+            public void onQrGenerated(Bitmap bitmap) {
+                openImageViewer(bitmap);
+            }
+        }, event.getEventId());
     }
 }

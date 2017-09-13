@@ -62,7 +62,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activities.detention_alert.DetentionAlertActivity"
-            android:label="@string/title_activity_detention_alert"
+            android:label="@string/panic_alert"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activities.detention_alert.detention_alert_config.DetentionAlertConfigActivity"

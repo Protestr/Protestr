@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_configure_detection_alert"
-        android:title="@string/configure_detection_alert"
+        android:title="@string/configure_panic_alert"
         android:icon="@drawable/ic_settings_white_24dp"
         app:showAsAction="always" />
 </menu>

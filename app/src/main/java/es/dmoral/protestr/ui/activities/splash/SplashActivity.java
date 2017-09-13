@@ -9,6 +9,7 @@ import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.ui.activities.login.LoginActivity;
 import es.dmoral.protestr.ui.activities.main.MainActivity;
 import es.dmoral.protestr.utils.PreferencesUtils;
+import es.dmoral.protestr.utils.RotationUtils;
 
 public class SplashActivity extends AppCompatActivity implements SplashView {
 
@@ -17,6 +18,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RotationUtils.lockOrientation(this);
         this.splashPresenter = new SplashPresenterImpl(this);
         if (Prefs.with(this).readBoolean(PreferencesUtils.PREFERENCES_LOGGED_IN, false)) {
             splashPresenter.confirmLoginAttempt(Prefs.with(this).read(PreferencesUtils.PREFERENCES_EMAIL), Prefs.with(this).read(PreferencesUtils.PREFERENCES_PASSWORD));

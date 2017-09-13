@@ -14,4 +14,5 @@ interface MainView {
     void hideFab();
     void createEventAction();
     void enableLocation();
+    void preLoadGoogleMaps();
 }

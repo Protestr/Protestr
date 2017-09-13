@@ -11,4 +11,6 @@ public interface EventInfoView {
     void moveCameraBackToLocation(boolean animate);
     void imageClicked();
     void openImageViewer(Bitmap bitmap);
+    void subscribe();
+    void generateQr();
 }
