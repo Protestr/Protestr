@@ -2,6 +2,7 @@ package es.dmoral.protestr.ui.activities.main;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -61,8 +62,11 @@ public class MainActivity extends BaseActivity
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.nav_view) NavigationView navigationView;
     @BindView(R.id.fab) FloatingActionButton fab;
-
     private LinearLayout headerView;
+
+    private static final int LOCATION_REQUEST_CODE = 226;
+    private static final String LOCATION_DIALOG_SHOWING = "LOCATION_DIALOG_SHOWING";
+    private boolean isLocationSettingRequestDialogShowing;
 
     private int lastSelectedMenuItemId;
 
@@ -71,6 +75,8 @@ public class MainActivity extends BaseActivity
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null && savedInstanceState.containsKey(LOCATION_DIALOG_SHOWING))
+            isLocationSettingRequestDialogShowing = savedInstanceState.getBoolean(LOCATION_DIALOG_SHOWING);
         super.onCreate(savedInstanceState, R.layout.activity_main);
         FCMHelper.subscribeToFCMTopic(this, FCMHelper.ENTIRE_APP_TOPIC);
         requestLocationPermissions();
@@ -270,9 +276,12 @@ public class MainActivity extends BaseActivity
                         break;
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                         try {
-                            status.startResolutionForResult(MainActivity.this, 226);
+                            if (!isLocationSettingRequestDialogShowing) {
+                                status.startResolutionForResult(MainActivity.this, LOCATION_REQUEST_CODE);
+                                isLocationSettingRequestDialogShowing = true;
+                            }
                         } catch (Exception ignored) {
-                            // ignored
+                            isLocationSettingRequestDialogShowing = false;
                         }
                         break;
                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
@@ -300,5 +309,11 @@ public class MainActivity extends BaseActivity
                 }
             }
         }).start();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(LOCATION_DIALOG_SHOWING, isLocationSettingRequestDialogShowing);
     }
 }
