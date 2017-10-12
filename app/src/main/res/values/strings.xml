@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Open side menu</string>
     <string name="navigation_drawer_close">Close side menu</string>
 
-    <string name="action_settings">Settigns</string>
+    <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
 
     <string name="username_login_hint">User</string>
