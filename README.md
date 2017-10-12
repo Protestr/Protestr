@@ -19,6 +19,10 @@ App for organizing demonstrations.
 - [ ] Real time chat / feed (Twitter-style) for every subscribed event (split into Admin Messages and All).
 - [ ] **Everything that will eventually come to my mind.**
 
+## Translation
+
+Wanna help translating this app? [Come here](https://www.transifex.com/protestr/protestr-android-app/)!
+
 ## Screenshots of the current available work.
 
 ![Screenshots](https://raw.githubusercontent.com/GrenderG/Protestr/master/art/all_images.jpg)
