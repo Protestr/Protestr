@@ -1,0 +1,99 @@
+<resources>
+    <string name="navigation_drawer_open">Otwórz menu</string>
+    <string name="navigation_drawer_close">Zamknij menu</string>
+
+    <string name="action_settings">Ustawienia</string>
+    <string name="action_logout">Wyloguj</string>
+
+    <string name="username_login_hint">Użytkownik</string>
+    <string name="password_login_hint">Hasło</string>
+    <string name="btn_sign_up_text">Rejestracja</string>
+    <string name="btn_login_text">Zaloguj się</string>
+    <string name="password_empty_error">Hasło nie może być puste</string>
+    <string name="email_not_valid_error">Niepoprawny email</string>
+    <string name="empty_field">To pole nie może być puste</string>
+    <string name="processing_text">Przetwarzanie…</string>
+    <string name="invalid_credentials">Niepoprawne dane</string>
+    <string name="existing_user">Użytkownik już istnieje</string>
+    <string name="dialog_create_new_account">Stwórz nowe konto</string>
+    <string name="dialog_create_new_account_message">Tworzysz konto użytkownika z adresem email %1$s.\n\nMożesz zmienić nazwę użytkownika później.\n\nWprowadź hasło jeszcze raz:</string>
+    <string name="connection_error">Błąd połączenia</string>
+    <string name="password_doesnt_match">Hasła są różne</string>
+    <string name="utilities">Narzędzia</string>
+    <string name="panic_alert">Ostrzeżenie</string>
+    <string name="subscribed_events">Subskrybowane wydarzenia</string>
+    <string name="new_events">Nowe wydarzenia</string>
+    <string name="register">Zarejestruj</string>
+    <string name="nav_header_subtitle">Zorganizuj się!</string>
+
+    <string name="settings_event_filter">Filtr wydarzeń</string>
+
+    <string name="title_activity_settings">Ustawienia</string>
+    <string name="event_location_title">Miejsce wydarzenia</string>
+    <string name="no_more_events_toast">Nie ma więcej wydarzeń</string>
+    <string name="sort_events">Sortuj wydarzenia</string>
+    <string name="order_by_numerous">Sortuj po liczniejszych</string>
+    <string name="order_by_newest">Sortuj po najnowszych</string>
+    <string name="order_by_oldest">Sortuj po najstarszych</string>
+    <string name="order_by_distance_asc">Sortuj po najbliższych</string>
+
+    <string-array name="filter_location_events">
+        <item>Pokaż wydarzenia z całego świata</item>
+        <item>Pokaż wydarzenia z wybranego kraju</item>
+    </string-array>
+
+    <string name="panic_alert_text_hint">SMS do wysłania</string>
+    <string name="panic_alert_explanation">Gdy włączyłeś panic alert gdy twoje urządzenie zostanie potrząśnięte tekst powyżej i twoja lokalizacja zostaną wysłane SMSem do wybranego kontaktu.</string>
+    <string name="no_selected_contact">Brak wybranego kontaktu</string>
+    <string name="enable_alert">Włącz ostrzeżenia</string>
+    <string name="disable_alert">Wyłącz ostrzeżenia</string>
+    <string name="alert_notification_title">Panic alert włączony</string>
+    <string name="alert_notification_body">Wyłącz w odpowiednim miejscu.</string>
+    <string name="contact_selected">Kontakt wybrany</string>
+    <string name="error_selecting_contact">Błąd podczas wybierania kontaktu</string>
+    <string name="select_contact">Wybierz kontakt</string>
+    <string name="create_event">Stwórz wydarzenie</string>
+    <string name="choose_image">Wybierz obrazek</string>
+    <string name="event_name">Nazwa wydarzenia</string>
+    <string name="date">Data: %s</string>
+    <string name="time">Godzina: %1$s:%2$s</string>
+    <string name="hour_not_valid">Niepoprawna godzina</string>
+    <string name="event_description">Opis wydarzenia</string>
+    <string name="event_location">Miejsce wydarzenia</string>
+    <string name="fill_all_fields_error">Musisz wypełnić wszystkie pola</string>
+    <string name="creating_event">Tworzenie wydarzenia…</string>
+    <string name="error_uploading_image">Błąd podczas ładowania obrazka</string>
+    <string name="error_creating_event">Błąd podczas tworzenia wydarzenia</string>
+    <string name="event_created">Wydarzenie stworzone</string>
+    <string name="finish_event_info">Pamiętaj żeby oznaczyć wydarzenie jako zakończone na jego ekranie gdy dobiegnie końca.</string>
+    <string name="configure_panic_alert">Skonfiguruj panic alert</string>
+    <string name="configure_sensor">Skonfiguruj sensor</string>
+    <string name="shake_number">Liczba potrząśnięć</string>
+    <string name="shake_number_explanation">Liczba potrząśnięć wymagana do aktywacji panic alertu</string>
+    <string name="sensor_sensitivity">Wrażliwość sensora</string>
+    <string name="sensor_sensitivity_explanation">Im większa wrażliwość, tym mocniej będziesz musiał potrząsnąć swoim urządzeniem.</string>
+    <string name="time_until_restart">Czas do zresetowania</string>
+    <string name="time_until_restart_explanation">Maksymalny czas (w milisekundach) pomiędzy potrząśnięciami</string>
+    <string name="save_sensor_config">Zapisz konfiguracje sensora</string>
+    <string name="test_sensor">Wypróbuj sensor</string>
+    <string name="stop_testing_sensor">Skończ próbę sensora</string>
+    <string name="shake_completed">[%s] SHAKE COMPLETED\n</string>
+    <string name="shake_detected">[%1$s] Shake detected (%2$d)\n</string>
+    <string name="shake_restarted">[%s] SHAKE RESET\n</string>
+    <string name="email_login_hint">Email</string>
+    <string name="repeat_password_hint">Powtórz hasło</string>
+    <string name="image_generation_notice">Zdjęcie profilowe jest generowane automatycznie przez usługę Gravatar.</string>
+    <string name="terms_and_conditions">Warunki użytkowania</string>
+    <string name="location_permission_canceled_warning">Niektóre funkcjonalność mogą nie działać poprawnie</string>
+    <string name="empty_contact">Musisz najpierw wybrać kontakt</string>
+    <string name="action_save_image">Zapisz obrazek</string>
+    <string name="write_external_storage_cancelled_warning">Wymagane jest pozwolenie do zapisu na urządzeniu</string>
+    <string name="error_ocurred_saving_image">Wystąpił błąd podczas zapisywania obrazka</string>
+    <string name="image_saved">Obrazek zapisany w pobranych</string>
+    <string name="view">Zobacz</string>
+    <string name="download_image">Pobierz obrazek</string>
+    <string name="join_event">Dołącz do wydarzenia</string>
+    <string name="generate_qr_code">Wygeneruj kod QR</string>
+    <string name="mute_notifications">Wycisz powiadomienia</string>
+    <string name="scan_event_qr">Zeskanuj kod QR wydarzenia</string>
+</resources>
