@@ -15,6 +15,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -58,6 +59,8 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
     @BindView(R.id.tv_event_location) TextView eventLocation;
     @BindView(R.id.map_view) MapView mapView;
     @BindView(R.id.subscribe_layout) LinearLayout subscribeLayout;
+    @BindView(R.id.qr_icon) ImageView qrIcon;
+    @BindView(R.id.qr_progress) ProgressBar qrProgress;
 
     private static final String MAP_VIEW_SAVED_STATE = "MAP_VIEW_STATE";
 
@@ -236,9 +239,18 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
     @OnClick(R.id.qr_code_layout)
     @Override
     public void generateQr() {
+        qrIcon.setVisibility(View.GONE);
+        qrProgress.setVisibility(View.VISIBLE);
         ImageUtils.generateQr(new ImageUtils.OnQrGeneratedListener() {
             @Override
             public void onQrGenerated(Bitmap bitmap) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        qrIcon.setVisibility(View.VISIBLE);
+                        qrProgress.setVisibility(View.GONE);
+                    }
+                });
                 openImageViewer(bitmap);
             }
         }, event.getEventId());

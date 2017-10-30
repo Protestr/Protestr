@@ -32,7 +32,7 @@ public class EventsInteractorImpl implements EventsInteractor {
                 }
             });
         else
-            WebService.getInstance().getApiInterface().getNewEvents(iso3Code, offset, limit, order).enqueue(new Callback<ArrayList<Event>>() {
+            WebService.getInstance().getApiInterface().getNewEventsByIso3(iso3Code, offset, limit, order).enqueue(new Callback<ArrayList<Event>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Event>> call, Response<ArrayList<Event>> response) {
                     onGetNewEventsListener.onNewEventsReceived(response.body());

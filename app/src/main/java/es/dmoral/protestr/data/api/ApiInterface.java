@@ -49,6 +49,6 @@ public interface ApiInterface {
                                            @Query("order") String order, @Query("lat") double lat,
                                            @Query("lng") double lng);
 
-    @GET(Constants.EVENTS_ENDPOINT + "/{iso3}" + "?")
-    Call<ArrayList<Event>> getNewEvents(@Path("iso3") String iso3Code, @Query("offset") int offset, @Query("limit") int limit, @Query("order") String order);
+    @GET(Constants.EVENTS_ENDPOINT + "?")
+    Call<ArrayList<Event>> getNewEventsByIso3(@Query("iso3") String iso3Code, @Query("offset") int offset, @Query("limit") int limit, @Query("order") String order);
 }
