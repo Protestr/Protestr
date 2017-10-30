@@ -88,7 +88,7 @@
     <string name="empty_contact">Musisz najpierw wybrać kontakt</string>
     <string name="action_save_image">Zapisz obrazek</string>
     <string name="write_external_storage_cancelled_warning">Wymagane jest pozwolenie do zapisu na urządzeniu</string>
-    <string name="error_ocurred_saving_image">Wystąpił błąd podczas zapisywania obrazka</string>
+    <string name="error_occurred_saving_image">Wystąpił błąd podczas zapisywania obrazka</string>
     <string name="image_saved">Obrazek zapisany w pobranych</string>
     <string name="view">Zobacz</string>
     <string name="download_image">Pobierz obrazek</string>

@@ -7,25 +7,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
-import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -34,16 +24,10 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import butterknife.BindView;
 import butterknife.OnLongClick;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.ui.activities.BaseActivity;
-import es.dmoral.protestr.ui.activities.main.MainActivity;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.toasty.Toasty;
 
@@ -133,7 +117,7 @@ public class ImageViewerActivity extends BaseActivity implements ImageViewerView
 
     @Override
     public void imageError() {
-        Toasty.error(ImageViewerActivity.this, getString(R.string.error_ocurred_saving_image)).show();
+        Toasty.error(ImageViewerActivity.this, getString(R.string.error_occurred_saving_image)).show();
     }
 
     @OnLongClick(R.id.photo_view)

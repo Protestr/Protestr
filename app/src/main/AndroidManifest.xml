@@ -75,9 +75,14 @@
         <activity
             android:name=".ui.activities.event_info.EventInfoActivity"
             android:theme="@style/AppTheme.NoActionBarEventInfo" />
-        <activity android:name=".ui.activities.event_info.image_viewer.ImageViewerActivity"
+        <activity
+            android:name=".ui.activities.event_info.image_viewer.ImageViewerActivity"
             android:label=""
-            android:theme="@style/AppTheme.Viewer"/>
+            android:theme="@style/AppTheme.Viewer" />
+        <activity
+            android:name=".ui.activities.scan_event_qr.ScanEventQrActivity"
+            android:label="@string/scan_event_qr"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

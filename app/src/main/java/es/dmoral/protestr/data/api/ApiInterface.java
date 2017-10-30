@@ -51,4 +51,7 @@ public interface ApiInterface {
 
     @GET(Constants.EVENTS_ENDPOINT + "?")
     Call<ArrayList<Event>> getNewEventsByIso3(@Query("iso3") String iso3Code, @Query("offset") int offset, @Query("limit") int limit, @Query("order") String order);
+
+    @GET(Constants.EVENTS_ENDPOINT + "/{event_id}")
+    Call<Event> getEventById(@Path("event_id") String eventId);
 }

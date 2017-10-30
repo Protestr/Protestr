@@ -96,7 +96,7 @@
     <string name="empty_contact">You must select a contact first</string>
     <string name="action_save_image">Save image</string>
     <string name="write_external_storage_cancelled_warning">Permissions are required to write to the device</string>
-    <string name="error_ocurred_saving_image">An error occurred while saving the image</string>
+    <string name="error_occurred_saving_image">An error occurred while saving the image</string>
     <string name="image_saved">Image saved in the downloads folder</string>
     <string name="view">View</string>
     <string name="download_image">Download image</string>
@@ -104,4 +104,7 @@
     <string name="generate_qr_code">Generate QR code</string>
     <string name="mute_notifications">Mute notifications</string>
     <string name="scan_event_qr">Scan event QR</string>
+    <string name="camera_needed">Camera is needed to scan a QR code</string>
+    <string name="invalid_qr_event">Invalid event QR</string>
+    <string name="loading_event">Loading event…</string>
 </resources>

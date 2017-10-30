@@ -47,6 +47,7 @@ import es.dmoral.protestr.ui.activities.BaseActivity;
 import es.dmoral.protestr.ui.activities.create_event.CreateEventActivity;
 import es.dmoral.protestr.ui.activities.detention_alert.DetentionAlertActivity;
 import es.dmoral.protestr.data.fcm.FCMHelper;
+import es.dmoral.protestr.ui.activities.scan_event_qr.ScanEventQrActivity;
 import es.dmoral.protestr.ui.fragments.events.EventsFragment;
 import es.dmoral.protestr.ui.fragments.subscribed_events.SubscribedEventsFragment;
 import es.dmoral.protestr.ui.activities.login.LoginActivity;
@@ -203,6 +204,10 @@ public class MainActivity extends BaseActivity
                 break;
             case R.id.nav_panic_alert:
                 pendingIntent = new Intent(this, DetentionAlertActivity.class);
+                isFragment = false;
+                break;
+            case R.id.nav_qr_scan:
+                pendingIntent = new Intent(this, ScanEventQrActivity.class);
                 isFragment = false;
                 break;
             default:
