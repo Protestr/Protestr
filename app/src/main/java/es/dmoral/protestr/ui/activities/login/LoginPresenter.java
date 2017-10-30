@@ -8,5 +8,6 @@ import android.support.annotation.NonNull;
 
 public interface LoginPresenter {
     void attemptLogin(@NonNull final String email, @NonNull final String password);
+
     void onDestroy();
 }

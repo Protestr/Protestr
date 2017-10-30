@@ -14,6 +14,7 @@ public interface EventsInteractor {
 
     interface OnGetNewEventsListener {
         void onNewEventsReceived(ArrayList<Event> newEvents);
+
         void onNewEventsError();
     }
 

@@ -8,5 +8,6 @@ import android.support.annotation.NonNull;
 
 public interface SignUpPresenter {
     void attemptSignUp(@NonNull String username, @NonNull final String email, @NonNull final String password, @NonNull final String profilePicUrl);
+
     void onDestroy();
 }

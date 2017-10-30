@@ -8,10 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -51,16 +51,26 @@ import es.dmoral.toasty.Toasty;
 public class CreateEventActivity extends BaseActivity implements CreateEventView,
         OnMapReadyCallback {
 
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.image_placeholder) ImageView imagePlaceholder;
-    @BindView(R.id.event_image) ImageView eventImage;
-    @BindView(R.id.image_cardview) CardView imageCardView;
-    @BindView(R.id.et_event_name) EditText etEventName;
-    @BindView(R.id.et_event_description) EditText etEventDescription;
-    @BindView(R.id.et_event_location) EditText etEventLocation;
-    @BindView(R.id.tv_date) TextView tvDate;
-    @BindView(R.id.tv_time) TextView tvTime;
-    @BindView(R.id.map_view) ScrollFriendlyMapView mapView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.image_placeholder)
+    ImageView imagePlaceholder;
+    @BindView(R.id.event_image)
+    ImageView eventImage;
+    @BindView(R.id.image_cardview)
+    CardView imageCardView;
+    @BindView(R.id.et_event_name)
+    EditText etEventName;
+    @BindView(R.id.et_event_description)
+    EditText etEventDescription;
+    @BindView(R.id.et_event_location)
+    EditText etEventLocation;
+    @BindView(R.id.tv_date)
+    TextView tvDate;
+    @BindView(R.id.tv_time)
+    TextView tvTime;
+    @BindView(R.id.map_view)
+    ScrollFriendlyMapView mapView;
 
     private MaterialDialog progressDialog;
 
@@ -172,25 +182,25 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
             public void onClick(View view) {
                 final DatePickerDialog datePickerDialog =
                         new DatePickerDialog(CreateEventActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                        final long timeInMillis = TimeUtils.getTimeInMillis(year, month, dayOfMonth);
-                        CreateEventActivity.this.year = year;
-                        CreateEventActivity.this.month = month;
-                        CreateEventActivity.this.dayOfMonth = dayOfMonth;
-                        setDate(timeInMillis);
-                        final int minHour = TimeUtils.getHourOfDayFromMillis(System.currentTimeMillis());
-                        final int minMinutes = TimeUtils.getMinuteFromMillis(System.currentTimeMillis());
-                        if (timeInMillis == calendar.getTimeInMillis()
-                                || (hour < minHour || hour < minHour && minutes < minMinutes)) {
-                            hour = TimeUtils.getHourOfDayFromMillis(TimeUtils
-                                    .getCurrentTimeInMillisStartingFromMinutes());
-                            minutes = TimeUtils.getMinuteFromMillis(TimeUtils
-                                    .getCurrentTimeInMillisStartingFromMinutes());
-                            setTime();
-                        }
-                    }
-                }, year, month, dayOfMonth);
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                                final long timeInMillis = TimeUtils.getTimeInMillis(year, month, dayOfMonth);
+                                CreateEventActivity.this.year = year;
+                                CreateEventActivity.this.month = month;
+                                CreateEventActivity.this.dayOfMonth = dayOfMonth;
+                                setDate(timeInMillis);
+                                final int minHour = TimeUtils.getHourOfDayFromMillis(System.currentTimeMillis());
+                                final int minMinutes = TimeUtils.getMinuteFromMillis(System.currentTimeMillis());
+                                if (timeInMillis == calendar.getTimeInMillis()
+                                        || (hour < minHour || hour < minHour && minutes < minMinutes)) {
+                                    hour = TimeUtils.getHourOfDayFromMillis(TimeUtils
+                                            .getCurrentTimeInMillisStartingFromMinutes());
+                                    minutes = TimeUtils.getMinuteFromMillis(TimeUtils
+                                            .getCurrentTimeInMillisStartingFromMinutes());
+                                    setTime();
+                                }
+                            }
+                        }, year, month, dayOfMonth);
                 datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
                 datePickerDialog.show();
             }
@@ -200,21 +210,21 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
             public void onClick(View view) {
                 final TimePickerDialog rangeTimePickerDialog =
                         new TimePickerDialog(CreateEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
-                        final int minHour = calendar.get(Calendar.HOUR_OF_DAY);
-                        final int minMinutes = calendar.get(Calendar.MINUTE);
-                        final long timeInMillis = TimeUtils.getTimeInMillis(year, month, dayOfMonth);
-                        if (timeInMillis > calendar.getTimeInMillis()
-                                || (hour >= minHour || hour >= minHour && minutes >= minMinutes)) {
-                            CreateEventActivity.this.hour = hour;
-                            CreateEventActivity.this.minutes = minutes;
-                            setTime();
-                        } else {
-                            Toasty.error(CreateEventActivity.this, getString(R.string.hour_not_valid)).show();
-                        }
-                    }
-                }, hour, minutes, true);
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
+                                final int minHour = calendar.get(Calendar.HOUR_OF_DAY);
+                                final int minMinutes = calendar.get(Calendar.MINUTE);
+                                final long timeInMillis = TimeUtils.getTimeInMillis(year, month, dayOfMonth);
+                                if (timeInMillis > calendar.getTimeInMillis()
+                                        || (hour >= minHour || hour >= minHour && minutes >= minMinutes)) {
+                                    CreateEventActivity.this.hour = hour;
+                                    CreateEventActivity.this.minutes = minutes;
+                                    setTime();
+                                } else {
+                                    Toasty.error(CreateEventActivity.this, getString(R.string.hour_not_valid)).show();
+                                }
+                            }
+                        }, hour, minutes, true);
                 rangeTimePickerDialog.show();
             }
         });

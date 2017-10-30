@@ -8,9 +8,14 @@ import android.graphics.Bitmap;
 
 public interface EventInfoView {
     void moveCameraBackToLocation();
+
     void moveCameraBackToLocation(boolean animate);
+
     void imageClicked();
+
     void openImageViewer(Bitmap bitmap);
+
     void subscribe();
+
     void generateQr();
 }

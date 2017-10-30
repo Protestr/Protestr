@@ -10,9 +10,14 @@ import android.support.v4.app.Fragment;
 interface MainView {
 
     void addFragment(@NonNull Fragment newFragment);
+
     void showFab();
+
     void hideFab();
+
     void createEventAction();
+
     void enableLocation();
+
     void preLoadGoogleMaps();
 }

@@ -11,6 +11,7 @@ import java.io.File;
 public interface ImageViewerInteractor {
     interface OnImageSavedListener {
         void onImageSaved(String filePath);
+
         void onImageError();
     }
 

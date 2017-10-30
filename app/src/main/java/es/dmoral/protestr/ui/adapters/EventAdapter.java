@@ -73,7 +73,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        return events.get(position) != null ?  VIEW_TYPE_EVENT : VIEW_TYPE_LOADING;
+        return events.get(position) != null ? VIEW_TYPE_EVENT : VIEW_TYPE_LOADING;
     }
 
     @Override
@@ -89,7 +89,8 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             public void run() {
                 try {
                     notifyItemInserted(getItemCount() - 1);
-                } catch (java.lang.IndexOutOfBoundsException ignored) {}
+                } catch (java.lang.IndexOutOfBoundsException ignored) {
+                }
             }
         };
         handler.post(runnable);
@@ -109,7 +110,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void addNewItems(ArrayList<Event> newEvents) {
         int countBeforeAdding = events.size();
         events.addAll(newEvents);
-            notifyItemRangeInserted(countBeforeAdding, newEvents.size());
+        notifyItemRangeInserted(countBeforeAdding, newEvents.size());
     }
 
     public void clearAll() {
@@ -118,11 +119,16 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.event_image) ImageView imgEventImage;
-        @BindView(R.id.event_from) TextView tvEventFrom;
-        @BindView(R.id.event_title) TextView tvEventTitle;
-        @BindView(R.id.event_participants) TextView tvEventParticipants;
-        @BindView(R.id.event_location) TextView tvEventLocation;
+        @BindView(R.id.event_image)
+        ImageView imgEventImage;
+        @BindView(R.id.event_from)
+        TextView tvEventFrom;
+        @BindView(R.id.event_title)
+        TextView tvEventTitle;
+        @BindView(R.id.event_participants)
+        TextView tvEventParticipants;
+        @BindView(R.id.event_location)
+        TextView tvEventLocation;
 
         EventViewHolder(View itemView) {
             super(itemView);
@@ -137,7 +143,8 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     class LoadingViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.progress_bar) MaterialProgressBar progressBar;
+        @BindView(R.id.progress_bar)
+        MaterialProgressBar progressBar;
 
         LoadingViewHolder(View itemView) {
             super(itemView);

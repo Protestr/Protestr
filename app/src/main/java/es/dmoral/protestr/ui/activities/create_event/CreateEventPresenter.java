@@ -9,5 +9,6 @@ import android.graphics.Bitmap;
 interface CreateEventPresenter {
     void createEvent(Bitmap bitmap, String eventName, String eventDescription, long eventTime,
                      String locationName, double latitude, double longitude, String iso3);
+
     void onDestroy();
 }

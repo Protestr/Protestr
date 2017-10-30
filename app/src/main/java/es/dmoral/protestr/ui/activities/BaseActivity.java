@@ -45,5 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract void setupViews();
+
     protected abstract void setListeners();
 }

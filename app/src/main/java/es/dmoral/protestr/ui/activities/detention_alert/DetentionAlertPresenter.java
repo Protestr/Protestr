@@ -8,5 +8,6 @@ import android.net.Uri;
 
 interface DetentionAlertPresenter {
     void requestContactInfo(Uri contactData);
+
     void onDestroy();
 }

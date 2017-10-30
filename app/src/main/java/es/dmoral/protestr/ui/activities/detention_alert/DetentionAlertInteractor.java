@@ -11,6 +11,7 @@ import android.net.Uri;
 interface DetentionAlertInteractor {
     interface OnContactRetrievedListener {
         void onContactRetrieved(Cursor contactInfoCursor);
+
         void onContactError();
     }
 

@@ -6,10 +6,16 @@ package es.dmoral.protestr.ui.activities.signup;
 
 public interface SignUpView {
     void signUpError(final String message);
+
     void startAnimation();
+
     void restorePreAnimationState();
+
     void endLoadingAnimation();
+
     void connectionError();
+
     boolean checkParametersErrors();
+
     void openTermsAndConditions();
 }

@@ -40,5 +40,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected abstract void setupViews();
+
     protected abstract void setListeners();
 }

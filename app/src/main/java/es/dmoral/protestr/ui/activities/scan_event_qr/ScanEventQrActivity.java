@@ -3,9 +3,8 @@ package es.dmoral.protestr.ui.activities.scan_event_qr;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Vibrator;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 
@@ -23,8 +22,6 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import es.dmoral.protestr.Manifest;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.data.models.Event;
 import es.dmoral.protestr.ui.activities.BaseActivity;
@@ -33,9 +30,12 @@ import es.dmoral.protestr.utils.Constants;
 import es.dmoral.toasty.Toasty;
 
 public class ScanEventQrActivity extends BaseActivity implements ScanEventQrView {
-    @BindView(R.id.capture_view) DecoratedBarcodeView captureView;
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    boolean retrieving;
+    @BindView(R.id.capture_view)
+    DecoratedBarcodeView captureView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    private boolean retrieving;
     private Vibrator vibrator;
     private ScanEventQrPresenter scanEventQrPresenter;
 
@@ -48,22 +48,23 @@ public class ScanEventQrActivity extends BaseActivity implements ScanEventQrView
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         Dexter.withActivity(this)
-                .withPermission(android.Manifest.permission.CAMERA).withListener(new PermissionListener() {
-            @Override
-            public void onPermissionGranted(PermissionGrantedResponse response) {
-                prepareScanner();
-            }
+                .withPermission(android.Manifest.permission.CAMERA)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        prepareScanner();
+                    }
 
-            @Override
-            public void onPermissionDenied(PermissionDeniedResponse response) {
-                Toasty.warning(ScanEventQrActivity.this, getString(R.string.camera_needed)).show();
-            }
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        Toasty.warning(ScanEventQrActivity.this, getString(R.string.camera_needed)).show();
+                    }
 
-            @Override
-            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                token.continuePermissionRequest();
-            }
-        }).check();
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
     }
 
     @Override

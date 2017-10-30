@@ -2,7 +2,6 @@ package es.dmoral.protestr.ui.fragments.events;
 
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,19 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.pwittchen.infinitescroll.library.InfiniteScrollListener;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
+import es.dmoral.protestr.data.models.Event;
 import es.dmoral.protestr.ui.activities.event_info.EventInfoActivity;
 import es.dmoral.protestr.ui.adapters.EventAdapter;
-import es.dmoral.protestr.data.models.Event;
 import es.dmoral.protestr.ui.fragments.BaseFragment;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.PreferencesUtils;
@@ -35,8 +30,10 @@ import es.dmoral.toasty.Toasty;
 
 public class EventsFragment extends BaseFragment implements EventsFragmentView, EventAdapter.OnEventClickedListener {
 
-    @BindView(R.id.events_recyclerview) RecyclerView eventsRecyclerView;
-    @BindView(R.id.swipe_container) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.events_recyclerview)
+    RecyclerView eventsRecyclerView;
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private EventsPresenter eventsPresenter;
     private int scrollPage = 1;
@@ -83,7 +80,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView, 
                     loading = true;
                     ((EventAdapter) eventsRecyclerView.getAdapter()).showProgress();
                     int offset = scrollPage++ * Constants.EVENT_LIMIT_CALL;
-                        eventsPresenter.getNewEvents(offset, Constants.EVENT_LIMIT_CALL,
+                    eventsPresenter.getNewEvents(offset, Constants.EVENT_LIMIT_CALL,
                             Prefs.with(getActivity()).read(PreferencesUtils.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
                 }
             }

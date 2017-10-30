@@ -10,6 +10,7 @@ public interface SplashInteractor {
 
     interface OnConfirmLoginListener {
         void onLoginConfirmed(User user);
+
         void onLoginUnconfirmed();
     }
 

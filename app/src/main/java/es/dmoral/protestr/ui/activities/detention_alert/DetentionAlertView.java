@@ -6,13 +6,22 @@ package es.dmoral.protestr.ui.activities.detention_alert;
 
 interface DetentionAlertView {
     void contactSelected(String displayName);
+
     void contactError();
+
     void showOngoingNotification();
+
     void clearNotification();
+
     void setNotificationState();
+
     void setButtonState();
+
     void setMessage();
+
     void setContactName();
+
     void selectContactAction();
+
     void enableAlertAction();
 }

@@ -31,7 +31,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST(Constants.SIGN_UP_ENDPOINT)
     Call<User> attemptSignup(@Field("user_email") String email, @Field("username") String username,
-                                       @Field("password") String password, @Field("profile_pic_url") String profilePicUrl);
+                             @Field("password") String password, @Field("profile_pic_url") String profilePicUrl);
 
     @POST(Constants.UPLOAD_IMAGE_URL)
     Call<ImgurStatus> uploadImage(@Header("Authorization") String clientId, @Body RequestBody imageBody);

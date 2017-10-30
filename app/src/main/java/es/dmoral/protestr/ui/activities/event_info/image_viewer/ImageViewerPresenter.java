@@ -8,5 +8,6 @@ import android.graphics.Bitmap;
 
 public interface ImageViewerPresenter {
     void storeImageOnDevice(Bitmap bitmap);
+
     void onDestroy();
 }

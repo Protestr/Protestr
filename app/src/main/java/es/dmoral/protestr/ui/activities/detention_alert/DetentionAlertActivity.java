@@ -38,11 +38,16 @@ import es.dmoral.toasty.Toasty;
 
 public class DetentionAlertActivity extends BaseActivity implements DetentionAlertView {
 
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.enable_alert_button) Button enableAlertButton;
-    @BindView(R.id.select_contact_bt) Button selectContactButton;
-    @BindView(R.id.contact_name) TextView tvContactName;
-    @BindView(R.id.detention_alert_message) EditText detentionAlertMessage;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.enable_alert_button)
+    Button enableAlertButton;
+    @BindView(R.id.select_contact_bt)
+    Button selectContactButton;
+    @BindView(R.id.contact_name)
+    TextView tvContactName;
+    @BindView(R.id.detention_alert_message)
+    EditText detentionAlertMessage;
 
     private static final int PICK_CONTACT = 0x0001;
     public static final int ALERT_NOTIFICATION_ID = 0x1000;

@@ -7,9 +7,7 @@ import android.support.annotation.NonNull;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by grender on 17/06/17.
@@ -21,7 +19,7 @@ public class LocationUtils {
     }
 
     public static void getLocationFromAddress(@NonNull final Context context, @NonNull final String address,
-                                                @NonNull final OnAddressDecodedListener onAddressDecodedListener) {
+                                              @NonNull final OnAddressDecodedListener onAddressDecodedListener) {
         new Thread(new Runnable() {
             @Override
             public void run() {

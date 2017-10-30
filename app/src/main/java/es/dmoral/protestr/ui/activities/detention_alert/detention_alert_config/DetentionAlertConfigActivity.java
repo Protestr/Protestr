@@ -25,23 +25,33 @@ import butterknife.OnClick;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.ui.activities.BaseActivity;
-import es.dmoral.protestr.ui.custom.ScrollFriendlyScrollView;
 import es.dmoral.protestr.ui.activities.detention_alert.detention_alert_config.listeners.UpdatingOnSeekBarChangeListener;
 import es.dmoral.protestr.ui.activities.detention_alert.services.ShakeToAlertService;
+import es.dmoral.protestr.ui.custom.ScrollFriendlyScrollView;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.PreferencesUtils;
 
 public class DetentionAlertConfigActivity extends BaseActivity implements DetentionAlertConfigView {
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.tv_shake_number) TextView tvShakeNumber;
-    @BindView(R.id.seekbar_shake_number) SeekBar seekbarShakeNumber;
-    @BindView(R.id.tv_sensitivity) TextView tvSensitivity;
-    @BindView(R.id.seekbar_sensitivity) SeekBar seekbarSensitivity;
-    @BindView(R.id.tv_time_until_restart) TextView tvTimeUntilRestart;
-    @BindView(R.id.seekbar_time_until_restart) SeekBar seekbarTimeUntilRestart;
-    @BindView(R.id.tv_sensor_log) TextView tvSensorLog;
-    @BindView(R.id.enable_test_sensor_button) Button btEnableTestSensor;
-    @BindView(R.id.log_scroll_view) ScrollFriendlyScrollView logScrollView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tv_shake_number)
+    TextView tvShakeNumber;
+    @BindView(R.id.seekbar_shake_number)
+    SeekBar seekbarShakeNumber;
+    @BindView(R.id.tv_sensitivity)
+    TextView tvSensitivity;
+    @BindView(R.id.seekbar_sensitivity)
+    SeekBar seekbarSensitivity;
+    @BindView(R.id.tv_time_until_restart)
+    TextView tvTimeUntilRestart;
+    @BindView(R.id.seekbar_time_until_restart)
+    SeekBar seekbarTimeUntilRestart;
+    @BindView(R.id.tv_sensor_log)
+    TextView tvSensorLog;
+    @BindView(R.id.enable_test_sensor_button)
+    Button btEnableTestSensor;
+    @BindView(R.id.log_scroll_view)
+    ScrollFriendlyScrollView logScrollView;
 
     private int shakeNumber;
     private int sensorSensitivity;
@@ -115,7 +125,7 @@ public class DetentionAlertConfigActivity extends BaseActivity implements Detent
 
         seekbarShakeNumber.setProgress(shakeNumber - 3);
         seekbarSensitivity.setProgress(sensorSensitivity - 7);
-        seekbarTimeUntilRestart.setProgress((timeUntilRestart - 250 ) / 250);
+        seekbarTimeUntilRestart.setProgress((timeUntilRestart - 250) / 250);
 
         tvShakeNumber.setText(String.valueOf(shakeNumber));
         tvSensitivity.setText(String.valueOf(sensorSensitivity));

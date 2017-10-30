@@ -15,7 +15,7 @@ public class SplashPresenterImpl implements SplashPresenter, SplashInteractor.On
     private SplashView splashView;
     private SplashInteractor splashInteractor;
 
-    SplashPresenterImpl (@NonNull SplashView splashView) {
+    SplashPresenterImpl(@NonNull SplashView splashView) {
         this.splashView = splashView;
         this.splashInteractor = new SplashInteractorImpl();
     }

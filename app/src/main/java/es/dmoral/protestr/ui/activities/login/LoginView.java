@@ -6,10 +6,16 @@ package es.dmoral.protestr.ui.activities.login;
 
 public interface LoginView {
     void showProgress();
+
     void hideProgress();
+
     void loginError(final String message);
+
     void loginSuccess();
+
     void connectionError();
+
     void loginAction();
+
     void signUpAction();
 }

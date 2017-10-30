@@ -12,6 +12,7 @@ interface LoginInteractor {
 
     interface OnAttemptLoginListener {
         void onLoginSuccess(User user);
+
         void onLoginError(boolean isFailure);
     }
 

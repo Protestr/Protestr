@@ -1,7 +1,6 @@
 package es.dmoral.protestr.utils;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

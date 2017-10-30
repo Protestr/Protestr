@@ -20,7 +20,7 @@ public class SignUpInteractorImpl implements SignUpInteractor {
         WebService.getInstance().getApiInterface().attemptSignup(email, username, password, profilePicUrl).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.code() == 200 )
+                if (response.code() == 200)
                     onAttemptSignUpListener.onSignUpSuccess(response.body());
                 else
                     onAttemptSignUpListener.onSignUpError(false);

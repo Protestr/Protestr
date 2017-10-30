@@ -13,5 +13,6 @@ import es.dmoral.protestr.data.models.Event;
 public interface EventsFragmentView {
 
     void populateNewEventList(ArrayList<Event> newEvents);
+
     void setFirstMenuItemChecked(Menu menu);
 }

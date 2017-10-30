@@ -4,10 +4,10 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.TextInputLayout;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -30,8 +30,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.ui.activities.BaseActivity;
-import es.dmoral.protestr.ui.custom.SimplifiedTextWatcher;
 import es.dmoral.protestr.ui.activities.main.MainActivity;
+import es.dmoral.protestr.ui.custom.SimplifiedTextWatcher;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.FormatUtils;
 import es.dmoral.protestr.utils.GravatarUtils;
@@ -43,19 +43,32 @@ import tyrantgit.explosionfield.ExplosionField;
 
 public class SignUpActivity extends BaseActivity implements SignUpView {
 
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.profile_image) ImageView profileImage;
-    @BindView(R.id.et_email) EditText etEmail;
-    @BindView(R.id.et_username) EditText etUsername;
-    @BindView(R.id.password_input_layout) TextInputLayout passwordInputLayout;
-    @BindView(R.id.repeat_password_input_layout) TextInputLayout repeatPasswordInputLayout;
-    @BindView(R.id.et_password) EditText etPassword;
-    @BindView(R.id.et_repeat_password) EditText etRepeatPassword;
-    @BindView(R.id.full_view) View fullView;
-    @BindView(R.id.content_scroll_view) ScrollView contentScrollView;
-    @BindView(R.id.profile_image_container) LinearLayout profileImageContainer;
-    @BindView(R.id.logo_image) ImageView logoImage;
-    @BindView(R.id.tv_terms_and_conditions) TextView tvTermsAndConditions;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.profile_image)
+    ImageView profileImage;
+    @BindView(R.id.et_email)
+    EditText etEmail;
+    @BindView(R.id.et_username)
+    EditText etUsername;
+    @BindView(R.id.password_input_layout)
+    TextInputLayout passwordInputLayout;
+    @BindView(R.id.repeat_password_input_layout)
+    TextInputLayout repeatPasswordInputLayout;
+    @BindView(R.id.et_password)
+    EditText etPassword;
+    @BindView(R.id.et_repeat_password)
+    EditText etRepeatPassword;
+    @BindView(R.id.full_view)
+    View fullView;
+    @BindView(R.id.content_scroll_view)
+    ScrollView contentScrollView;
+    @BindView(R.id.profile_image_container)
+    LinearLayout profileImageContainer;
+    @BindView(R.id.logo_image)
+    ImageView logoImage;
+    @BindView(R.id.tv_terms_and_conditions)
+    TextView tvTermsAndConditions;
 
     private ExplosionField explosionField;
 

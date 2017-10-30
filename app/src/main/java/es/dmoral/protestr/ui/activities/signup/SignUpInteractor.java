@@ -11,6 +11,7 @@ import es.dmoral.protestr.data.models.User;
 public interface SignUpInteractor {
     interface OnAttemptSignUpListener {
         void onSignUpSuccess(User user);
+
         void onSignUpError(boolean isFailure);
     }
 

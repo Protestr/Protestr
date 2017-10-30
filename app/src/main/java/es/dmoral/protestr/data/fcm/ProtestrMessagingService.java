@@ -46,7 +46,7 @@ public class ProtestrMessagingService extends FirebaseMessagingService {
     private void sendNotification(Notification notification) {
         Intent intent = new Intent(this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
-        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 

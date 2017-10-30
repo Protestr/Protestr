@@ -6,9 +6,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import es.dmoral.protestr.R;
-import es.dmoral.toasty.Toasty;
-
 /**
  * Created by grender on 7/09/17.
  */

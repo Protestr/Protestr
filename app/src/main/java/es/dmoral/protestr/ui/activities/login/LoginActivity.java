@@ -6,12 +6,10 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -19,21 +17,28 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.ui.activities.BaseActivity;
-import es.dmoral.protestr.ui.custom.SimplifiedTextWatcher;
 import es.dmoral.protestr.ui.activities.main.MainActivity;
 import es.dmoral.protestr.ui.activities.signup.SignUpActivity;
+import es.dmoral.protestr.ui.custom.SimplifiedTextWatcher;
 import es.dmoral.protestr.utils.Sha256Utils;
 import es.dmoral.toasty.Toasty;
 
 public class LoginActivity extends BaseActivity implements LoginView {
 
-    @BindView(R.id.input_layout_email) TextInputLayout txInEmail;
-    @BindView(R.id.et_email) EditText etEmail;
-    @BindView(R.id.input_layout_password) TextInputLayout txInPassword;
-    @BindView(R.id.et_password) EditText etPassword;
-    @BindView(R.id.button_login) Button btnLogin;
-    @BindView(R.id.button_sign_up) Button btnSignUp;
-    @BindView(R.id.login_logo) TextView txLoginLogo;
+    @BindView(R.id.input_layout_email)
+    TextInputLayout txInEmail;
+    @BindView(R.id.et_email)
+    EditText etEmail;
+    @BindView(R.id.input_layout_password)
+    TextInputLayout txInPassword;
+    @BindView(R.id.et_password)
+    EditText etPassword;
+    @BindView(R.id.button_login)
+    Button btnLogin;
+    @BindView(R.id.button_sign_up)
+    Button btnSignUp;
+    @BindView(R.id.login_logo)
+    TextView txLoginLogo;
 
     private LoginPresenter loginPresenter;
 

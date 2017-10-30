@@ -8,6 +8,8 @@ import es.dmoral.protestr.data.models.Event;
 
 public interface ScanEventQrView {
     void onEventReceived(Event event);
+
     void onEventError();
+
     void prepareScanner();
 }

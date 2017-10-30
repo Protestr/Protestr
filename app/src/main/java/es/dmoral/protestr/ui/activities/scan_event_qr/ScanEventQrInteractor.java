@@ -9,6 +9,7 @@ import es.dmoral.protestr.data.models.Event;
 public interface ScanEventQrInteractor {
     interface OnGetEventListener {
         void eventReceived(Event event);
+
         void eventReceivedError();
     }
 

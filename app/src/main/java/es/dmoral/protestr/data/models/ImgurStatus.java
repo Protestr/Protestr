@@ -23,14 +23,12 @@ public class ImgurStatus {
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public ImgurStatus() {
         // empty
     }
 
     /**
-     *
      * @param status
      * @param data
      * @param success
@@ -147,14 +145,12 @@ public class ImgurStatus {
 
         /**
          * No args constructor for use in serialization
-         *
          */
         public ImgurImage() {
             // empty
         }
 
         /**
-         *
          * @param animated
          * @param accountId
          * @param isAd

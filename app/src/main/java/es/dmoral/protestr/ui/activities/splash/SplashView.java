@@ -5,5 +5,6 @@ package es.dmoral.protestr.ui.activities.splash;
  */
 public interface SplashView {
     void loginConfirmed();
+
     void loginUnconfirmed();
 }

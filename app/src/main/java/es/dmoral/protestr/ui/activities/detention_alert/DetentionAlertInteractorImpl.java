@@ -34,7 +34,7 @@ class DetentionAlertInteractorImpl implements DetentionAlertInteractor {
             } else {
                 onContactRetrievedListener.onContactError();
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             onContactRetrievedListener.onContactError();
         } finally {

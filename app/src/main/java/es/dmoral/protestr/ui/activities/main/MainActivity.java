@@ -2,7 +2,6 @@ package es.dmoral.protestr.ui.activities.main;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -43,26 +42,30 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
+import es.dmoral.protestr.data.fcm.FCMHelper;
+import es.dmoral.protestr.data.models.User;
 import es.dmoral.protestr.ui.activities.BaseActivity;
 import es.dmoral.protestr.ui.activities.create_event.CreateEventActivity;
 import es.dmoral.protestr.ui.activities.detention_alert.DetentionAlertActivity;
-import es.dmoral.protestr.data.fcm.FCMHelper;
+import es.dmoral.protestr.ui.activities.login.LoginActivity;
 import es.dmoral.protestr.ui.activities.scan_event_qr.ScanEventQrActivity;
+import es.dmoral.protestr.ui.activities.settings.SettingsActivity;
 import es.dmoral.protestr.ui.fragments.events.EventsFragment;
 import es.dmoral.protestr.ui.fragments.subscribed_events.SubscribedEventsFragment;
-import es.dmoral.protestr.ui.activities.login.LoginActivity;
-import es.dmoral.protestr.data.models.User;
-import es.dmoral.protestr.ui.activities.settings.SettingsActivity;
 import es.dmoral.protestr.utils.PreferencesUtils;
 import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainView {
 
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
-    @BindView(R.id.nav_view) NavigationView navigationView;
-    @BindView(R.id.fab) FloatingActionButton fab;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
     private LinearLayout headerView;
 
     private static final int LOCATION_REQUEST_CODE = 226;
@@ -182,7 +185,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if (lastSelectedMenuItemId == item.getItemId()){
+        if (lastSelectedMenuItemId == item.getItemId()) {
             drawerLayout.closeDrawer(GravityCompat.START);
             return false;
         }

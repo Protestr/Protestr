@@ -39,11 +39,11 @@ public class PreferencesUtils {
 
     public static User getLoggedUser(@NonNull Context context) {
         return new User(
-            Prefs.with(context).read(PREFERENCES_USER_ID),
-            Prefs.with(context).read(PREFERENCES_EMAIL),
-            Prefs.with(context).read(PREFERENCES_USER_NAME),
-            Prefs.with(context).read(PREFERENCES_PASSWORD),
-            Prefs.with(context).read(PREFERENCES_PROFILE_PIC_URL)
+                Prefs.with(context).read(PREFERENCES_USER_ID),
+                Prefs.with(context).read(PREFERENCES_EMAIL),
+                Prefs.with(context).read(PREFERENCES_USER_NAME),
+                Prefs.with(context).read(PREFERENCES_PASSWORD),
+                Prefs.with(context).read(PREFERENCES_PROFILE_PIC_URL)
         );
     }
 }

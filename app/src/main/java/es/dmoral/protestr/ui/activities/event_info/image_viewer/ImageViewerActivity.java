@@ -7,11 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,8 +33,10 @@ import es.dmoral.toasty.Toasty;
 
 public class ImageViewerActivity extends BaseActivity implements ImageViewerView {
 
-    @BindView(R.id.coordinator_layout) CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.photo_view) PhotoView photoView;
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.photo_view)
+    PhotoView photoView;
 
     private Bitmap currentBitmap;
     private ImageViewerPresenter imageViewerPresenter = new ImageViewerPresenterImpl(this);

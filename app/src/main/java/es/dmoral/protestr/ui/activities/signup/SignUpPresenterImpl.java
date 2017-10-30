@@ -17,7 +17,7 @@ public class SignUpPresenterImpl implements SignUpPresenter, SignUpInteractor.On
     private SignUpView signUpView;
     private SignUpInteractor signUpInteractor;
 
-    public SignUpPresenterImpl (@NonNull SignUpView signUpView) {
+    public SignUpPresenterImpl(@NonNull SignUpView signUpView) {
         this.signUpView = signUpView;
         signUpInteractor = new SignUpInteractorImpl();
     }

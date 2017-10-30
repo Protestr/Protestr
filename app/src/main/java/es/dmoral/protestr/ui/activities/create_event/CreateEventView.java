@@ -12,14 +12,24 @@ import com.google.android.gms.maps.model.LatLng;
 
 interface CreateEventView {
     void restoreStates(@Nullable Bundle savedInstanceState);
+
     void updateEventImage(@Nullable Bitmap bitmap);
+
     void updateTimeIfNeeded();
+
     boolean checkIfCanSubmit();
+
     void moveMapCamera(LatLng latLng);
+
     void setDate(long timeInMillis);
+
     void setTime();
+
     void onEventCreated();
+
     void showProgress();
+
     void hideProgress();
+
     void showError(String message);
 }

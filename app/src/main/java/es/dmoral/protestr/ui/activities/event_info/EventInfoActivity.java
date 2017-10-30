@@ -32,7 +32,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
 import java.io.ByteArrayOutputStream;
 
 import butterknife.BindView;
@@ -47,20 +46,34 @@ import es.dmoral.protestr.utils.ImageUtils;
 
 public class EventInfoActivity extends BaseActivity implements EventInfoView, OnMapReadyCallback {
 
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.fab) FloatingActionButton fab;
-    @BindView(R.id.toolbar_layout) CollapsingToolbarLayout collapsingToolbarLayout;
-    @BindView(R.id.event_image_container) RelativeLayout eventImageContainer;
-    @BindView(R.id.event_image) ImageView eventImage;
-    @BindView(R.id.tv_event_name) TextView eventName;
-    @BindView(R.id.tv_event_description) TextView eventDescription;
-    @BindView(R.id.tv_date) TextView eventDate;
-    @BindView(R.id.tv_participants) TextView eventParticipants;
-    @BindView(R.id.tv_event_location) TextView eventLocation;
-    @BindView(R.id.map_view) MapView mapView;
-    @BindView(R.id.subscribe_layout) LinearLayout subscribeLayout;
-    @BindView(R.id.qr_icon) ImageView qrIcon;
-    @BindView(R.id.qr_progress) ProgressBar qrProgress;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.toolbar_layout)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    @BindView(R.id.event_image_container)
+    RelativeLayout eventImageContainer;
+    @BindView(R.id.event_image)
+    ImageView eventImage;
+    @BindView(R.id.tv_event_name)
+    TextView eventName;
+    @BindView(R.id.tv_event_description)
+    TextView eventDescription;
+    @BindView(R.id.tv_date)
+    TextView eventDate;
+    @BindView(R.id.tv_participants)
+    TextView eventParticipants;
+    @BindView(R.id.tv_event_location)
+    TextView eventLocation;
+    @BindView(R.id.map_view)
+    MapView mapView;
+    @BindView(R.id.subscribe_layout)
+    LinearLayout subscribeLayout;
+    @BindView(R.id.qr_icon)
+    ImageView qrIcon;
+    @BindView(R.id.qr_progress)
+    ProgressBar qrProgress;
 
     private static final String MAP_VIEW_SAVED_STATE = "MAP_VIEW_STATE";
 
@@ -92,7 +105,7 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
                 .asBitmap()
                 .load(event.getImageUrl())
                 .apply(new RequestOptions()
-                    .skipMemoryCache(true)) // Prevent animation bug
+                        .skipMemoryCache(true)) // Prevent animation bug
                 .into(new ImageViewTarget<Bitmap>(eventImage) {
                     @Override
                     protected void setResource(@Nullable final Bitmap resource) {

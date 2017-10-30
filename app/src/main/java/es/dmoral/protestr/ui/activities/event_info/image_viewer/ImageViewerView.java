@@ -6,7 +6,10 @@ package es.dmoral.protestr.ui.activities.event_info.image_viewer;
 
 public interface ImageViewerView {
     void setImmersiveMode();
+
     void imageSaved(String filePath);
+
     void imageError();
+
     boolean openContextualMenu();
 }

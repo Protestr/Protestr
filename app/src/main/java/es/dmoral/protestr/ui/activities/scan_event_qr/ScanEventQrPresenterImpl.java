@@ -12,7 +12,7 @@ public class ScanEventQrPresenterImpl implements ScanEventQrPresenter, ScanEvent
     private ScanEventQrView scanEventQrView;
     private ScanEventQrInteractor scanEventQrInteractor;
 
-    public ScanEventQrPresenterImpl (@NonNull ScanEventQrView scanEventQrView) {
+    public ScanEventQrPresenterImpl(@NonNull ScanEventQrView scanEventQrView) {
         this.scanEventQrView = scanEventQrView;
         scanEventQrInteractor = new ScanEventQrInteractorImpl();
     }

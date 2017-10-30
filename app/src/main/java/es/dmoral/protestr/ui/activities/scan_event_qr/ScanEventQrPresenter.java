@@ -6,5 +6,6 @@ package es.dmoral.protestr.ui.activities.scan_event_qr;
 
 public interface ScanEventQrPresenter {
     void getEventById(String eventId);
+
     void onDestroy();
 }

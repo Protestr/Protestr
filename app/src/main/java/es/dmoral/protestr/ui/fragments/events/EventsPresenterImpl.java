@@ -1,8 +1,8 @@
 package es.dmoral.protestr.ui.fragments.events;
 
-import java.util.ArrayList;
-
 import android.Manifest;
+
+import java.util.ArrayList;
 
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
