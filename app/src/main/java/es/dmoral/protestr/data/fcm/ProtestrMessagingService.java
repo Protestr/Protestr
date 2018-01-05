@@ -29,15 +29,6 @@ public class ProtestrMessagingService extends FirebaseMessagingService {
     public static HashMap<String, Integer> notificationCount = new HashMap<>();
 
     @Override
-    public void handleIntent(Intent intent) {
-        try {
-            super.handleIntent(intent);
-        } catch (AbstractMethodError ignored) {
-            // ignored
-        }
-    }
-
-    @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         sendNotification(new Notification(remoteMessage.getData()));

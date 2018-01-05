@@ -70,6 +70,8 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
     MapView mapView;
     @BindView(R.id.subscribe_layout)
     LinearLayout subscribeLayout;
+    @BindView(R.id.qr_code_layout)
+    LinearLayout qrCodeLayout;
     @BindView(R.id.qr_icon)
     ImageView qrIcon;
     @BindView(R.id.qr_progress)
@@ -252,6 +254,7 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
     @OnClick(R.id.qr_code_layout)
     @Override
     public void generateQr() {
+        qrCodeLayout.setClickable(false);
         qrIcon.setVisibility(View.GONE);
         qrProgress.setVisibility(View.VISIBLE);
         ImageUtils.generateQr(new ImageUtils.OnQrGeneratedListener() {
@@ -260,6 +263,7 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        qrCodeLayout.setClickable(true);
                         qrIcon.setVisibility(View.VISIBLE);
                         qrProgress.setVisibility(View.GONE);
                     }
