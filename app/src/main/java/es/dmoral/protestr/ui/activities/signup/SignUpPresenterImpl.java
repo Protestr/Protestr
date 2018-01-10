@@ -44,7 +44,7 @@ public class SignUpPresenterImpl implements SignUpPresenter, SignUpInteractor.On
             signUpView.connectionError();
         } else {
             signUpView.restorePreAnimationState();
-            signUpView.signUpError(((SignUpActivity) signUpView).getString(R.string.email_not_valid_error));
+            signUpView.signUpError(((SignUpActivity) signUpView).getString(R.string.user_already_exists));
         }
     }
 

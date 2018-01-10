@@ -107,4 +107,5 @@
     <string name="camera_needed">Camera is needed to scan a QR code</string>
     <string name="invalid_qr_event">Invalid event QR</string>
     <string name="loading_event">Loading event…</string>
+    <string name="user_already_exists">User already exists</string>
 </resources>
