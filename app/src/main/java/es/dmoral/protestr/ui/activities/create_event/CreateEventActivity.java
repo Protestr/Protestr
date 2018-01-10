@@ -16,6 +16,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ import android.widget.TimePicker;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -74,7 +76,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
 
     private MaterialDialog progressDialog;
 
-    private Bitmap eventBitmap;
+    private Intent eventBitmapIntent;
     private Calendar calendar = Calendar.getInstance();
     private GoogleMap googleMap;
     private CreateEventPresenter createEventPresenter;
@@ -174,7 +176,11 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         imageCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImagePicker.pickImage(CreateEventActivity.this, getString(R.string.choose_image));
+                try {
+                    ImagePicker.pickImage(CreateEventActivity.this, getString(R.string.choose_image));
+                } catch (NullPointerException npe) {
+                    Log.e(CreateEventActivity.this.toString(), "No suitable app found to choose an image.");
+                }
             }
         });
         tvDate.setOnClickListener(new View.OnClickListener() {
@@ -258,6 +264,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        eventBitmapIntent = data;
         updateEventImage(ImagePicker.getImageFromResult(this, requestCode, resultCode, data));
     }
 
@@ -265,7 +272,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     public void restoreStates(@Nullable Bundle savedInstanceState) {
         Bundle mapViewSavedInstanceState = null;
         if (savedInstanceState != null) {
-            updateEventImage((Bitmap) savedInstanceState.getParcelable(EVENT_BITMAP_SAVED_STATE));
+            eventBitmapIntent = savedInstanceState.getParcelable(EVENT_BITMAP_SAVED_STATE);
+            updateEventImage(ImagePicker.getImageFromResult(this,  ImagePicker.PICK_IMAGE_REQUEST_CODE, -1, eventBitmapIntent));
             year = savedInstanceState.getInt(YEAR_SAVED_STATE);
             month = savedInstanceState.getInt(MONTH_SAVED_SAVED_STATE);
             dayOfMonth = savedInstanceState.getInt(DAY_OF_MONTH_SAVED_STATE);
@@ -283,11 +291,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     @Override
     public void updateEventImage(@Nullable Bitmap bitmap) {
         if (bitmap != null) {
-            eventBitmap = bitmap;
             imagePlaceholder.setVisibility(View.GONE);
-            Glide.with(this)
-                    .load(ImageUtils.bitmapToByteArray(eventBitmap))
-                    .into(eventImage);
+            eventImage.setImageBitmap(bitmap);
         }
     }
 
@@ -310,7 +315,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     @Override
     public boolean checkIfCanSubmit() {
         return latitude != 0 && longitude != 0 && !etEventName.getText().toString().trim().isEmpty()
-                && !etEventDescription.getText().toString().isEmpty() && eventBitmap != null;
+                && !etEventDescription.getText().toString().isEmpty() && eventBitmapIntent != null;
     }
 
     @Override
@@ -392,10 +397,11 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                 KeyboardUtils.closeKeyboard(getCurrentFocus());
                 if (checkIfCanSubmit()) {
                     showProgress();
-                    createEventPresenter.createEvent(eventBitmap, etEventName.getText().toString().trim(),
-                            etEventDescription.getText().toString().trim(), TimeUtils.getTimeInMillis(year,
-                                    month, dayOfMonth, hour, minutes), etEventLocation.getText().toString().trim(),
-                            latitude, longitude, iso3);
+                    createEventPresenter.createEvent(ImagePicker.getImageFromResult(this,
+                            ImagePicker.PICK_IMAGE_REQUEST_CODE, -1, eventBitmapIntent),
+                            etEventName.getText().toString().trim(), etEventDescription.getText().toString().trim(),
+                            TimeUtils.getTimeInMillis(year, month, dayOfMonth, hour, minutes),
+                            etEventLocation.getText().toString().trim(), latitude, longitude, iso3);
                 } else {
                     Toasty.error(CreateEventActivity.this, getString(R.string.fill_all_fields_error)).show();
                 }
@@ -415,7 +421,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         outState.putBundle(MAP_VIEW_SAVED_STATE, mapViewSaveState);
 
         super.onSaveInstanceState(outState);
-        outState.putParcelable(EVENT_BITMAP_SAVED_STATE, eventBitmap);
+        outState.putParcelable(EVENT_BITMAP_SAVED_STATE, eventBitmapIntent);
         outState.putInt(YEAR_SAVED_STATE, year);
         outState.putInt(MONTH_SAVED_SAVED_STATE, month);
         outState.putInt(DAY_OF_MONTH_SAVED_STATE, dayOfMonth);
@@ -451,7 +457,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(minuteReceiver);
-        eventBitmap = null;
+        eventBitmapIntent = null;
         if (mapView != null)
             mapView.onDestroy();
 
