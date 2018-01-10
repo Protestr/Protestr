@@ -9,8 +9,6 @@ import com.google.gson.annotations.SerializedName;
 public class User {
     @SerializedName("user_id")
     private String id;
-    @SerializedName("last_ip")
-    private String lastIp;
     @SerializedName("user_email")
     private String email;
     private String username;
@@ -38,14 +36,6 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getLastIp() {
-        return lastIp;
-    }
-
-    public void setLastIp(String lastIp) {
-        this.lastIp = lastIp;
     }
 
     public String getEmail() {
