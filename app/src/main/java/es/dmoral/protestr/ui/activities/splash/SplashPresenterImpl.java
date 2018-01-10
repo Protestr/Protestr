@@ -21,20 +21,25 @@ public class SplashPresenterImpl implements SplashPresenter, SplashInteractor.On
     }
 
     @Override
-    public void confirmLoginAttempt(final String username, final String password) {
-        splashInteractor.confirmLogin(this, username, password);
+    public void confirmLoginAttempt(final String email, final String password) {
+        splashInteractor.confirmLogin(this, email, password);
     }
 
     @Override
     public void onLoginConfirmed(User user) {
         Prefs.with((SplashActivity) splashView).writeBoolean(PreferencesUtils.PREFERENCES_LOGGED_IN, true);
         PreferencesUtils.storeLoggedUser((SplashActivity) splashView, user);
-        splashView.loginConfirmed();
+        if (splashView != null) {
+            splashView.loginConfirmed();
+        } else {
+            confirmLoginAttempt(user.getEmail(), user.getPassword());
+        }
     }
 
     @Override
     public void onLoginUnconfirmed() {
-        splashView.loginUnconfirmed();
+        if (splashView != null)
+            splashView.loginUnconfirmed();
     }
 
     @Override

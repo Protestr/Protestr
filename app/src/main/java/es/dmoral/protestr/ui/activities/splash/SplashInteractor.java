@@ -14,5 +14,5 @@ public interface SplashInteractor {
         void onLoginUnconfirmed();
     }
 
-    void confirmLogin(final OnConfirmLoginListener onConfirmLoginListener, final String username, final String password);
+    void confirmLogin(final OnConfirmLoginListener onConfirmLoginListener, final String email, final String password);
 }
