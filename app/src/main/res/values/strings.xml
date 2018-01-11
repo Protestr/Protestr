@@ -108,4 +108,6 @@
     <string name="invalid_qr_event">Invalid event QR</string>
     <string name="loading_event">Loading event…</string>
     <string name="user_already_exists">User already exists</string>
+    <string name="add_admins">Add admins to this event</string>
+    <string name="admin_chip_hint">Enter names of admins</string>
 </resources>

@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
-import es.dmoral.protestr.data.models.User;
+import es.dmoral.protestr.data.models.dao.User;
 import es.dmoral.protestr.utils.InternetUtils;
 import es.dmoral.protestr.utils.PreferencesUtils;
 

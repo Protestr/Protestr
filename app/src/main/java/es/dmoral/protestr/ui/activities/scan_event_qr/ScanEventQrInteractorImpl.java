@@ -1,7 +1,7 @@
 package es.dmoral.protestr.ui.activities.scan_event_qr;
 
 import es.dmoral.protestr.data.api.WebService;
-import es.dmoral.protestr.data.models.Event;
+import es.dmoral.protestr.data.models.dao.Event;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -37,7 +37,7 @@ import java.io.ByteArrayOutputStream;
 import butterknife.BindView;
 import butterknife.OnClick;
 import es.dmoral.protestr.R;
-import es.dmoral.protestr.data.models.Event;
+import es.dmoral.protestr.data.models.dao.Event;
 import es.dmoral.protestr.ui.activities.BaseActivity;
 import es.dmoral.protestr.ui.activities.event_info.image_viewer.ImageViewerActivity;
 import es.dmoral.protestr.utils.Constants;

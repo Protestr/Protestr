@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.protestr.R;
-import es.dmoral.protestr.data.models.Event;
+import es.dmoral.protestr.data.models.dao.Event;
 import es.dmoral.protestr.utils.FormatUtils;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 

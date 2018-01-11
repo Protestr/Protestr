@@ -43,7 +43,7 @@ import butterknife.OnClick;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.data.fcm.FCMHelper;
-import es.dmoral.protestr.data.models.User;
+import es.dmoral.protestr.data.models.dao.User;
 import es.dmoral.protestr.ui.activities.BaseActivity;
 import es.dmoral.protestr.ui.activities.create_event.CreateEventActivity;
 import es.dmoral.protestr.ui.activities.detention_alert.DetentionAlertActivity;

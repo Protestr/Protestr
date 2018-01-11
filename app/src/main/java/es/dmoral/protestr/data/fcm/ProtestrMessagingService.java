@@ -17,7 +17,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.util.HashMap;
 
 import es.dmoral.protestr.R;
-import es.dmoral.protestr.data.models.Notification;
+import es.dmoral.protestr.data.models.dao.Notification;
 import es.dmoral.protestr.ui.activities.splash.SplashActivity;
 
 /**

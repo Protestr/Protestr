@@ -1,4 +1,4 @@
-package es.dmoral.protestr.data.models;
+package es.dmoral.protestr.data.models.dao;
 
 import android.os.Parcel;
 import android.os.Parcelable;

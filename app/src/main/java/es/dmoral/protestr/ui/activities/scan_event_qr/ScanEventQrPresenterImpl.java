@@ -2,7 +2,7 @@ package es.dmoral.protestr.ui.activities.scan_event_qr;
 
 import android.support.annotation.NonNull;
 
-import es.dmoral.protestr.data.models.Event;
+import es.dmoral.protestr.data.models.dao.Event;
 
 /**
  * Created by grender on 30/10/17.

@@ -1,4 +1,4 @@
-package es.dmoral.protestr.data.models;
+package es.dmoral.protestr.data.models.dao;
 
 /**
  * Created by grender on 13/02/17.

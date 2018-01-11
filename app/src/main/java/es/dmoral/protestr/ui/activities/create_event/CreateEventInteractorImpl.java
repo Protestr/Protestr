@@ -1,8 +1,8 @@
 package es.dmoral.protestr.ui.activities.create_event;
 
 import es.dmoral.protestr.data.api.WebService;
-import es.dmoral.protestr.data.models.ImgurStatus;
-import es.dmoral.protestr.data.models.ResponseStatus;
+import es.dmoral.protestr.data.models.dao.ImgurStatus;
+import es.dmoral.protestr.data.models.dao.ResponseStatus;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;

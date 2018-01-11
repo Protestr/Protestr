@@ -27,8 +27,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -42,9 +40,9 @@ import java.util.Calendar;
 import butterknife.BindView;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.ui.activities.BaseActivity;
+import es.dmoral.protestr.ui.activities.create_event.add_admins.AddAdminsActivity;
 import es.dmoral.protestr.ui.custom.ScrollFriendlyMapView;
 import es.dmoral.protestr.utils.FormatUtils;
-import es.dmoral.protestr.utils.ImageUtils;
 import es.dmoral.protestr.utils.KeyboardUtils;
 import es.dmoral.protestr.utils.LocationUtils;
 import es.dmoral.protestr.utils.TimeUtils;
@@ -65,6 +63,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     EditText etEventName;
     @BindView(R.id.et_event_description)
     EditText etEventDescription;
+    @BindView(R.id.tv_admins)
+    TextView tvAdmins;
     @BindView(R.id.et_event_location)
     EditText etEventLocation;
     @BindView(R.id.tv_date)
@@ -181,6 +181,13 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                 } catch (NullPointerException npe) {
                     Log.e(CreateEventActivity.this.toString(), "No suitable app found to choose an image.");
                 }
+            }
+        });
+        tvAdmins.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CreateEventActivity.this, AddAdminsActivity.class));
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
             }
         });
         tvDate.setOnClickListener(new View.OnClickListener() {
@@ -458,6 +465,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         super.onDestroy();
         unregisterReceiver(minuteReceiver);
         eventBitmapIntent = null;
+        createEventPresenter.onDestroy();
         if (mapView != null)
             mapView.onDestroy();
 

@@ -23,7 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import es.dmoral.protestr.R;
-import es.dmoral.protestr.data.models.Event;
+import es.dmoral.protestr.data.models.dao.Event;
 import es.dmoral.protestr.ui.activities.BaseActivity;
 import es.dmoral.protestr.ui.activities.event_info.EventInfoActivity;
 import es.dmoral.protestr.utils.Constants;

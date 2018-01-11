@@ -2,7 +2,7 @@ package es.dmoral.protestr.ui.activities.login;
 
 import android.support.annotation.NonNull;
 
-import es.dmoral.protestr.data.models.User;
+import es.dmoral.protestr.data.models.dao.User;
 
 /**
  * Created by grender on 13/02/17.

@@ -83,6 +83,10 @@
             android:name=".ui.activities.scan_event_qr.ScanEventQrActivity"
             android:label="@string/scan_event_qr"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activities.create_event.add_admins.AddAdminsActivity"
+            android:label="@string/add_admins"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

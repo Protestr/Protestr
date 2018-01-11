@@ -2,10 +2,10 @@ package es.dmoral.protestr.data.api;
 
 import java.util.ArrayList;
 
-import es.dmoral.protestr.data.models.Event;
-import es.dmoral.protestr.data.models.ImgurStatus;
-import es.dmoral.protestr.data.models.ResponseStatus;
-import es.dmoral.protestr.data.models.User;
+import es.dmoral.protestr.data.models.dao.Event;
+import es.dmoral.protestr.data.models.dao.ImgurStatus;
+import es.dmoral.protestr.data.models.dao.ResponseStatus;
+import es.dmoral.protestr.data.models.dao.User;
 import es.dmoral.protestr.utils.Constants;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -54,4 +54,7 @@ public interface ApiInterface {
 
     @GET(Constants.EVENTS_ENDPOINT + "/{event_id}")
     Call<Event> getEventById(@Path("event_id") String eventId);
+
+    @GET(Constants.FILTER_USERS_ENDPOINT + "?")
+    Call<ArrayList<User>> filterUsers(@Query("query") String query);
 }

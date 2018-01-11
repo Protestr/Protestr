@@ -4,7 +4,7 @@ import android.view.Menu;
 
 import java.util.ArrayList;
 
-import es.dmoral.protestr.data.models.Event;
+import es.dmoral.protestr.data.models.dao.Event;
 
 /**
  * Created by grender on 16/02/17.
