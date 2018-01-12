@@ -35,6 +35,7 @@ public class Constants {
 
     public static final String EVENT_INFO_EXTRA = "event_info_extra";
     public static final String IMAGE_VIEWER_EXTRA = "image_viewer_extra";
+    public static final String ADDED_ADMINS_EXTRA = "added_admins_extra";
 
     public static String getImgurAuthHeader(Context context) {
         return "Client-ID " + context.getString(R.string.imgur_client_id);

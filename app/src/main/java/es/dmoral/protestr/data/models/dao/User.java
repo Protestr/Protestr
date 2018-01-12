@@ -1,12 +1,15 @@
 package es.dmoral.protestr.data.models.dao;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by grender on 5/07/17.
  */
 
-public class User {
+public class User implements Parcelable {
     @SerializedName("user_id")
     private String id;
     @SerializedName("user_email")
@@ -29,6 +32,27 @@ public class User {
         this.password = password;
         this.profilePicUrl = profilePicUrl;
     }
+
+    protected User(Parcel in) {
+        id = in.readString();
+        email = in.readString();
+        username = in.readString();
+        lastLogin = in.readLong();
+        password = in.readString();
+        profilePicUrl = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -81,5 +105,20 @@ public class User {
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof User && ((User) obj).getId().equals(id));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(email);
+        parcel.writeString(username);
+        parcel.writeLong(lastLogin);
+        parcel.writeString(password);
+        parcel.writeString(profilePicUrl);
     }
 }

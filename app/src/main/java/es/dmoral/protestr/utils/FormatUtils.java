@@ -21,7 +21,7 @@ public class FormatUtils {
     }
 
     public static String formatHours(long timeInMilliseconds) {
-        DateFormat dateFormat = new SimpleDateFormat("hh:'00' a", Locale.getDefault());
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm a", Locale.getDefault());
         return dateFormat.format(timeInMilliseconds);
     }
 

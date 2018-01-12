@@ -35,16 +35,20 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mvc.imagepicker.ImagePicker;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import es.dmoral.protestr.R;
+import es.dmoral.protestr.data.models.dao.User;
 import es.dmoral.protestr.ui.activities.BaseActivity;
 import es.dmoral.protestr.ui.activities.create_event.add_admins.AddAdminsActivity;
 import es.dmoral.protestr.ui.custom.ScrollFriendlyMapView;
+import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.FormatUtils;
 import es.dmoral.protestr.utils.KeyboardUtils;
 import es.dmoral.protestr.utils.LocationUtils;
+import es.dmoral.protestr.utils.PreferencesUtils;
 import es.dmoral.protestr.utils.TimeUtils;
 import es.dmoral.toasty.Toasty;
 
@@ -91,6 +95,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     private double longitude = 0;
     private String iso3 = "";
 
+    public static final int ADDED_ADMINS_CODE = 1;
+
     private static final String EVENT_BITMAP_SAVED_STATE = "EVENT_BITMAP_SAVED_STATE";
     private static final String YEAR_SAVED_STATE = "YEAR_SAVED_STATE";
     private static final String MONTH_SAVED_SAVED_STATE = "MONTH_SAVED_STATE";
@@ -100,10 +106,13 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     private static final String EVENT_LATITUDE_SAVED_STATE = "EVENT_LATITUDE_SAVED_STATE";
     private static final String EVENT_LONGITUDE_SAVED_STATE = "EVENT_LONGITUDE_SAVED_STATE";
     private static final String EVENT_ISO3_CODE_SAVED_STATE = "EVENT_ISO3_CODE_SAVED_STATE";
-    private static final String MAP_VIEW_SAVED_STATE = "MAP_VIEW_STATE";
+    private static final String MAP_VIEW_SAVED_STATE = "MAP_VIEW_SAVED_STATE";
+    private static final String ADDED_USERS_SAVED_STATE = "ADDED_USERS_SAVED_STATE";
 
-    private static final long TEXT_DELAY = 750;
+    private static final long TEXT_DELAY = 500;
     private static final long TEXT_DELAY_THRESHOLD = 250;
+
+    private ArrayList<User> addedUsers;
 
     private long lastTypeTimestamp = 0;
     private String lastTypedMessage = "";
@@ -133,7 +142,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     private BroadcastReceiver minuteReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
+            if (intent.getAction() != null && intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
                 updateTimeIfNeeded();
             }
         }
@@ -186,7 +195,9 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         tvAdmins.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CreateEventActivity.this, AddAdminsActivity.class));
+                final Intent toAddAdmins = new Intent(CreateEventActivity.this, AddAdminsActivity.class);
+                toAddAdmins.putParcelableArrayListExtra(Constants.ADDED_ADMINS_EXTRA, addedUsers);
+                startActivityForResult(toAddAdmins, ADDED_ADMINS_CODE);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
             }
         });
@@ -271,8 +282,15 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        eventBitmapIntent = data;
-        updateEventImage(ImagePicker.getImageFromResult(this, requestCode, resultCode, data));
+        if (resultCode == RESULT_OK) {
+            if (requestCode == ADDED_ADMINS_CODE) {
+                addedUsers = data.getParcelableArrayListExtra(Constants.ADDED_ADMINS_EXTRA);
+                tvAdmins.setText(getString(R.string.add_admins_with_number, addedUsers.size()));
+            } else if (requestCode == ImagePicker.PICK_IMAGE_REQUEST_CODE) {
+                eventBitmapIntent = data;
+                updateEventImage(ImagePicker.getImageFromResult(this, requestCode, resultCode, data));
+            }
+        }
     }
 
     @Override
@@ -280,7 +298,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         Bundle mapViewSavedInstanceState = null;
         if (savedInstanceState != null) {
             eventBitmapIntent = savedInstanceState.getParcelable(EVENT_BITMAP_SAVED_STATE);
-            updateEventImage(ImagePicker.getImageFromResult(this,  ImagePicker.PICK_IMAGE_REQUEST_CODE, -1, eventBitmapIntent));
+            updateEventImage(ImagePicker.getImageFromResult(this,  ImagePicker.PICK_IMAGE_REQUEST_CODE, RESULT_OK, eventBitmapIntent));
             year = savedInstanceState.getInt(YEAR_SAVED_STATE);
             month = savedInstanceState.getInt(MONTH_SAVED_SAVED_STATE);
             dayOfMonth = savedInstanceState.getInt(DAY_OF_MONTH_SAVED_STATE);
@@ -289,10 +307,17 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
             latitude = savedInstanceState.getDouble(EVENT_LATITUDE_SAVED_STATE);
             longitude = savedInstanceState.getDouble(EVENT_LONGITUDE_SAVED_STATE);
             iso3 = savedInstanceState.getString(EVENT_ISO3_CODE_SAVED_STATE);
+            addedUsers = savedInstanceState.getParcelableArrayList(ADDED_USERS_SAVED_STATE);
             mapViewSavedInstanceState = savedInstanceState.getBundle(MAP_VIEW_SAVED_STATE);
+        } else {
+            addedUsers = new ArrayList<>();
+            addedUsers.add(PreferencesUtils.getLoggedUser(this));
         }
+
         if (mapView != null)
             mapView.onCreate(mapViewSavedInstanceState);
+
+        tvAdmins.setText(getString(R.string.add_admins_with_number, addedUsers.size()));
     }
 
     @Override
@@ -404,11 +429,13 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                 KeyboardUtils.closeKeyboard(getCurrentFocus());
                 if (checkIfCanSubmit()) {
                     showProgress();
+                    long a = TimeUtils.getTimeInMillis(year, month, dayOfMonth, hour, minutes);
                     createEventPresenter.createEvent(ImagePicker.getImageFromResult(this,
-                            ImagePicker.PICK_IMAGE_REQUEST_CODE, -1, eventBitmapIntent),
+                            ImagePicker.PICK_IMAGE_REQUEST_CODE, RESULT_OK, eventBitmapIntent),
                             etEventName.getText().toString().trim(), etEventDescription.getText().toString().trim(),
                             TimeUtils.getTimeInMillis(year, month, dayOfMonth, hour, minutes),
-                            etEventLocation.getText().toString().trim(), latitude, longitude, iso3);
+                            etEventLocation.getText().toString().trim(), latitude, longitude, iso3,
+                            addedUsers);
                 } else {
                     Toasty.error(CreateEventActivity.this, getString(R.string.fill_all_fields_error)).show();
                 }
@@ -429,6 +456,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
 
         super.onSaveInstanceState(outState);
         outState.putParcelable(EVENT_BITMAP_SAVED_STATE, eventBitmapIntent);
+        outState.putParcelableArrayList(ADDED_USERS_SAVED_STATE, addedUsers);
         outState.putInt(YEAR_SAVED_STATE, year);
         outState.putInt(MONTH_SAVED_SAVED_STATE, month);
         outState.putInt(DAY_OF_MONTH_SAVED_STATE, dayOfMonth);

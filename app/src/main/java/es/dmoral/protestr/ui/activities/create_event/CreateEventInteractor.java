@@ -1,5 +1,7 @@
 package es.dmoral.protestr.ui.activities.create_event;
 
+import java.util.ArrayList;
+
 import okhttp3.RequestBody;
 
 /**
@@ -23,5 +25,6 @@ interface CreateEventInteractor {
 
     void createEvent(final OnEventCreatedListener onEventCreatedListener, String userId, String password,
                      String imageUrl, String eventName, String eventDescription, String eventTime,
-                     String locationName, String latitude, String longitude, String iso3);
+                     String locationName, String latitude, String longitude, String iso3, int participants,
+                     ArrayList<String> eventAdmins);
 }

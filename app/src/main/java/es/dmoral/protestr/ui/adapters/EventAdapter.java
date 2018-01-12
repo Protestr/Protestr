@@ -1,6 +1,5 @@
 package es.dmoral.protestr.ui.adapters;
 
-import android.content.Context;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

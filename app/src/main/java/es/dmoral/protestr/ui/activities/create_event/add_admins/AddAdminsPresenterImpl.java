@@ -1,12 +1,10 @@
 package es.dmoral.protestr.ui.activities.create_event.add_admins;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
 import es.dmoral.protestr.data.models.dao.User;
-import es.dmoral.protestr.utils.PreferencesUtils;
 
 /**
  * Created by grender on 11/01/18.
@@ -32,7 +30,11 @@ public class AddAdminsPresenterImpl implements AddAdminsPresenter, AddAdminsInte
 
     @Override
     public void onUsersFiltered(ArrayList<User> filteredUsers) {
-        filteredUsers.removeAll(addAdminsView.getAddedAdmins());
-        addAdminsView.addFilteredUsers(filteredUsers);
+        if (addAdminsView != null) {
+            if (filteredUsers == null)
+                filteredUsers = new ArrayList<>();
+            filteredUsers.removeAll(addAdminsView.getAddedAdmins());
+            addAdminsView.addFilteredUsers(filteredUsers);
+        }
     }
 }

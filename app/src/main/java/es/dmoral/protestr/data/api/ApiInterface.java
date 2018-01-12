@@ -42,7 +42,9 @@ public interface ApiInterface {
                                         @Field("title") String title, @Field("image_url") String imageUrl,
                                         @Field("description") String description, @Field("from") String from,
                                         @Field("location_name") String locationName, @Field("latitude") String latitude,
-                                        @Field("longitude") String longitude, @Field("iso3_country") String iso3Code);
+                                        @Field("longitude") String longitude, @Field("iso3_country") String iso3Code,
+                                        @Field("participants") int participants,
+                                        @Field("event_admins[]") ArrayList<String> eventAdmins);
 
     @GET(Constants.EVENTS_ENDPOINT + "?")
     Call<ArrayList<Event>> getAllNewEvents(@Query("offset") int offset, @Query("limit") int limit,

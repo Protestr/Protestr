@@ -13,7 +13,9 @@ public class KeyboardUtils {
         if (currentFocus != null) {
             final InputMethodManager inputMethodManager =
                     (InputMethodManager) currentFocus.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+            if (inputMethodManager != null) {
+                inputMethodManager.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+            }
         }
     }
 }

@@ -131,9 +131,11 @@
                         android:id="@+id/tv_admins"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/add_admins"
+                        android:text="@string/add_admins_with_number"
                         android:padding="@dimen/activity_horizontal_margin"
                         android:maxLines="1"
+                        android:singleLine="true"
+                        android:ellipsize="end"
                         android:background="?attr/selectableItemBackground"
                         android:textSize="18sp" />
 

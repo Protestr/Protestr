@@ -32,9 +32,8 @@ public class AddedAdminAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         void onAddedUserAdded(int pos);
     }
 
-    public AddedAdminAdapter(User eventCreator, OnAddedUserHandlerListener onAddedUserHandlerListener) {
-        addedUsers = new ArrayList<>();
-        addedUsers.add(eventCreator);
+    public AddedAdminAdapter(ArrayList<User> addedUsers, User eventCreator, OnAddedUserHandlerListener onAddedUserHandlerListener) {
+        this.addedUsers = addedUsers;
         this.eventCreator = eventCreator;
         this.onAddedUserHandlerListener = onAddedUserHandlerListener;
     }

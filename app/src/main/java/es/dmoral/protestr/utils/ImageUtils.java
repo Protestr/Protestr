@@ -2,6 +2,7 @@ package es.dmoral.protestr.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -15,7 +16,7 @@ import java.io.ByteArrayOutputStream;
  */
 
 public class ImageUtils {
-    public static byte[] bitmapToByteArray(Bitmap bitmap) {
+    public static byte[] bitmapToByteArray(@NonNull Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
         return stream.toByteArray();

@@ -1,5 +1,7 @@
 package es.dmoral.protestr.ui.activities.create_event;
 
+import java.util.ArrayList;
+
 import es.dmoral.protestr.data.api.WebService;
 import es.dmoral.protestr.data.models.dao.ImgurStatus;
 import es.dmoral.protestr.data.models.dao.ResponseStatus;
@@ -33,13 +35,17 @@ class CreateEventInteractorImpl implements CreateEventInteractor {
     public void createEvent(final OnEventCreatedListener onEventCreatedListener,
                             String userId, String password, String imageUrl, String eventName,
                             String eventDescription, String eventTime,
-                            String locationName, String latitude, String longitude, String iso3) {
+                            String locationName, String latitude, String longitude, String iso3,
+                            int participants, ArrayList<String> eventAdmins) {
         WebService.getInstance().getApiInterface().createNewEvent(userId, password, eventName,
                 imageUrl, eventDescription, eventTime, locationName, latitude, longitude,
-                iso3).enqueue(new Callback<ResponseStatus>() {
+                iso3, participants, eventAdmins).enqueue(new Callback<ResponseStatus>() {
             @Override
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
-                onEventCreatedListener.onEventCreated();
+                if (response.isSuccessful())
+                    onEventCreatedListener.onEventCreated();
+                else
+                    onEventCreatedListener.onEventError();
             }
 
             @Override
