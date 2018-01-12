@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingLeft="@dimen/activity_default_margin"
+    android:paddingRight="@dimen/activity_default_margin"
+    android:paddingTop="@dimen/half_activity_default_margin"
+    android:paddingBottom="@dimen/half_activity_default_margin"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="horizontal">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_filtered_admin"
+        android:layout_width="56dp"
+        android:layout_height="56dp" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_filtered_admin_name"
+        android:layout_marginLeft="@dimen/activity_default_margin"
+        android:layout_marginStart="@dimen/activity_default_margin"
+        android:layout_marginRight="@dimen/activity_default_margin"
+        android:layout_marginEnd="@dimen/activity_default_margin"
+        android:textSize="18sp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

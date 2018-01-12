@@ -10,6 +10,6 @@ import es.dmoral.protestr.data.models.dao.User;
 
 public interface AddAdminsView {
     void addFilteredUsers(ArrayList<User> filteredUsers);
-    void addUser();
-    void removeUser();
+    ArrayList<User> getAddedAdmins();
+    void backToEventCreation();
 }

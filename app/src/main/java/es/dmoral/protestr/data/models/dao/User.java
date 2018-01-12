@@ -77,4 +77,9 @@ public class User {
     public void setProfilePicUrl(String profilePicUrl) {
         this.profilePicUrl = profilePicUrl;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof User && ((User) obj).getId().equals(id));
+    }
 }

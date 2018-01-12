@@ -8,6 +8,7 @@
     android:layout_marginTop="@dimen/quarter_activity_default_margin"
     android:layout_marginBottom="@dimen/quarter_activity_default_margin"
     android:clickable="true"
+    android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">

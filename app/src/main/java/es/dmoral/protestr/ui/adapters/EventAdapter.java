@@ -27,7 +27,6 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final ArrayList<Event> events;
-    private Context context;
 
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_EVENT = 1;
@@ -45,11 +44,10 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        this.context = parent.getContext();
         if (viewType == VIEW_TYPE_EVENT)
-            return new EventViewHolder(LayoutInflater.from(context).inflate(R.layout.event_cardview, parent, false));
+            return new EventViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.event_cardview, parent, false));
         else if (viewType == VIEW_TYPE_LOADING)
-            return new LoadingViewHolder(LayoutInflater.from(context).inflate(R.layout.loading_item, parent, false));
+            return new LoadingViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.loading_item, parent, false));
         return null;
     }
 
@@ -57,7 +55,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EventViewHolder) {
             final Event event = events.get(position);
-            Glide.with(context)
+            Glide.with(((EventViewHolder) holder).imgEventImage)
                     .load(event.getImageUrl())
                     .into(((EventViewHolder) holder).imgEventImage);
             ((EventViewHolder) holder).tvEventTitle.setText(event.getTitle());
@@ -90,6 +88,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 try {
                     notifyItemInserted(getItemCount() - 1);
                 } catch (java.lang.IndexOutOfBoundsException ignored) {
+                    // ignored
                 }
             }
         };
