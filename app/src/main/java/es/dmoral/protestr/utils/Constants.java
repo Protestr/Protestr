@@ -10,8 +10,8 @@ import es.dmoral.protestr.R;
 
 public class Constants {
 
-    public static final String BASE_URL = "http://protestr.tk/";
-    //public static final String BASE_URL = "http://192.168.1.128:5000/";
+    //public static final String BASE_URL = "http://protestr.tk/";
+    public static final String BASE_URL = "http://192.168.1.128:5000/";
     public static final String API_URL = BASE_URL + "api/v1/";
     public static final String USERS_ENDPOINT = "users";
     public static final String LOGIN_ENDPOINT = USERS_ENDPOINT + "/login";

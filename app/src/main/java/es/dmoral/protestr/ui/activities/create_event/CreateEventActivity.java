@@ -81,6 +81,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     private MaterialDialog progressDialog;
 
     private Intent eventBitmapIntent;
+    private boolean isImageSelected;
     private Calendar calendar = Calendar.getInstance();
     private GoogleMap googleMap;
     private CreateEventPresenter createEventPresenter;
@@ -323,8 +324,11 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     @Override
     public void updateEventImage(@Nullable Bitmap bitmap) {
         if (bitmap != null) {
+            isImageSelected = true;
             imagePlaceholder.setVisibility(View.GONE);
             eventImage.setImageBitmap(bitmap);
+        } else {
+            isImageSelected = false;
         }
     }
 
@@ -347,7 +351,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
     @Override
     public boolean checkIfCanSubmit() {
         return latitude != 0 && longitude != 0 && !etEventName.getText().toString().trim().isEmpty()
-                && !etEventDescription.getText().toString().isEmpty() && eventBitmapIntent != null;
+                && !etEventDescription.getText().toString().isEmpty() && isImageSelected;
     }
 
     @Override
