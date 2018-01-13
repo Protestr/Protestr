@@ -238,7 +238,7 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
     @Override
     public void openImageViewer(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
         Intent viewerIntent = new Intent(this, ImageViewerActivity.class);
         viewerIntent.putExtra(Constants.IMAGE_VIEWER_EXTRA, byteArrayOutputStream.toByteArray());
         startActivity(viewerIntent);
