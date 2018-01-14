@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.data.models.dao.Event;
+import es.dmoral.protestr.data.models.dao.User;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.LocaleUtils;
 import es.dmoral.protestr.utils.PermissionUtils;
@@ -32,7 +33,7 @@ public class EventsPresenterImpl implements EventsPresenter, EventsInteractor.On
         String iso3 = null;
         double lat = -1;
         double lng = -1;
-
+        String userId = PreferencesUtils.getLoggedUser(((EventsFragment) eventsFragmentView).getContext()).getId();
         if (order.equals(Constants.ORDER_DISTANCE_ASC) && PermissionUtils.isPermissionGranted(
                 ((EventsFragment) eventsFragmentView).getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
             final SimpleLocation simpleLocation = new SimpleLocation(((EventsFragment) eventsFragmentView).getContext());
@@ -50,7 +51,7 @@ public class EventsPresenterImpl implements EventsPresenter, EventsInteractor.On
                     .read(PreferencesUtils.PREFERENCES_SELECTED_COUNTRY, LocaleUtils.getDeviceLocale(((EventsFragment) eventsFragmentView).getContext()));
         }
 
-        eventsInteractor.getNewEvents(this, iso3, offset, limit, order, lat, lng);
+        eventsInteractor.getNewEvents(this, iso3, offset, limit, order, lat, lng, userId);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class EventsPresenterImpl implements EventsPresenter, EventsInteractor.On
 
     @Override
     public void onNewEventsError() {
-
+        eventsFragmentView.showError();
     }
 
     @Override

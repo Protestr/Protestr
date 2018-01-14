@@ -30,10 +30,14 @@ public class Event implements Parcelable {
     private double longitude;
     @SerializedName("iso3_country")
     private String iso3Country;
+    @SerializedName("is_admin")
+    private boolean isAdmin;
+    @SerializedName("is_subscribed")
+    private boolean isSubscribed;
 
     public Event(String eventId, String userId, String title, String description, long fromDate,
                  long toDate, int participants, String locationName, String imageUrl, double latitude,
-                 double longitude, String iso3Country) {
+                 double longitude, String iso3Country, boolean isAdmin, boolean isSubscribed) {
         this.eventId = eventId;
         this.userId = userId;
         this.title = title;
@@ -46,9 +50,11 @@ public class Event implements Parcelable {
         this.latitude = latitude;
         this.longitude = longitude;
         this.iso3Country = iso3Country;
+        this.isAdmin = isAdmin;
+        this.isSubscribed = isSubscribed;
     }
 
-    private Event(Parcel in) {
+    protected Event(Parcel in) {
         eventId = in.readString();
         userId = in.readString();
         title = in.readString();
@@ -61,6 +67,8 @@ public class Event implements Parcelable {
         latitude = in.readDouble();
         longitude = in.readDouble();
         iso3Country = in.readString();
+        isAdmin = in.readByte() != 0;
+        isSubscribed = in.readByte() != 0;
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {
@@ -171,6 +179,22 @@ public class Event implements Parcelable {
         this.iso3Country = iso3Country;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public boolean isSubscribed() {
+        return isSubscribed;
+    }
+
+    public void setSubscribed(boolean subscribed) {
+        isSubscribed = subscribed;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -190,5 +214,7 @@ public class Event implements Parcelable {
         parcel.writeDouble(latitude);
         parcel.writeDouble(longitude);
         parcel.writeString(iso3Country);
+        parcel.writeByte((byte) (isAdmin ? 1 : 0));
+        parcel.writeByte((byte) (isSubscribed ? 1 : 0));
     }
 }

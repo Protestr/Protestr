@@ -13,5 +13,5 @@ public interface ScanEventQrInteractor {
         void eventReceivedError();
     }
 
-    void getEventById(OnGetEventListener onGetEventListener, String eventId);
+    void getEventById(OnGetEventListener onGetEventListener, String eventId, String userId);
 }

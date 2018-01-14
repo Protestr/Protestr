@@ -12,8 +12,9 @@ import retrofit2.Response;
 
 public class ScanEventQrInteractorImpl implements ScanEventQrInteractor {
     @Override
-    public void getEventById(final OnGetEventListener onGetEventListener, final String eventId) {
-        WebService.getInstance().getApiInterface().getEventById(eventId).enqueue(new Callback<Event>() {
+    public void getEventById(final OnGetEventListener onGetEventListener, final String eventId,
+                             final String userId) {
+        WebService.getInstance().getApiInterface().getEventById(eventId, userId).enqueue(new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {
                 if (response.isSuccessful())

@@ -3,6 +3,7 @@ package es.dmoral.protestr.ui.fragments.events;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,7 +46,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView, 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         eventsPresenter = new EventsPresenterImpl(this);
         return super.onCreateView(inflater, R.layout.fragment_events, container, savedInstanceState);
@@ -99,8 +100,14 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView, 
                 allEventsLoaded = false;
         } else {
             allEventsLoaded = true;
-            Toasty.info(getActivity(), getString(R.string.no_more_events_toast)).show();
+            Toasty.info(getContext(), getString(R.string.no_more_events_toast)).show();
         }
+    }
+
+    @Override
+    public void showError() {
+        swipeRefreshLayout.setRefreshing(false);
+        Toasty.error(getContext(), getString(R.string.error_loading_events)).show();
     }
 
     @Override

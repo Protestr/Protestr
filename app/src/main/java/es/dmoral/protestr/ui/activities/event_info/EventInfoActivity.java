@@ -70,6 +70,8 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
     MapView mapView;
     @BindView(R.id.subscribe_layout)
     LinearLayout subscribeLayout;
+    @BindView(R.id.unsubscribe_layout)
+    LinearLayout unsubscribeLayout;
     @BindView(R.id.qr_code_layout)
     LinearLayout qrCodeLayout;
     @BindView(R.id.qr_icon)
@@ -147,6 +149,11 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
                 FormatUtils.formatHours(event.getFromDate()));
         eventParticipants.setText(String.valueOf(event.getParticipants()));
         eventLocation.setText(event.getLocationName());
+        if (event.isSubscribed()) {
+            unsubscribeLayout.setVisibility(View.VISIBLE);
+        } else {
+            subscribeLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

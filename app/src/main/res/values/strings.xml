@@ -111,4 +111,6 @@
     <string name="add_admins">Add administrators</string>
     <string name="add_admins_with_number">Add administrators (%d added)</string>
     <string name="filter_admin_hint">Enter a username</string>
+    <string name="leave_event">Leave event</string>
+    <string name="error_loading_events">Error loading events</string>
 </resources>

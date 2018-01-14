@@ -13,6 +13,6 @@ import es.dmoral.protestr.data.models.dao.Event;
 public interface EventsFragmentView {
 
     void populateNewEventList(ArrayList<Event> newEvents);
-
+    void showError();
     void setFirstMenuItemChecked(Menu menu);
 }

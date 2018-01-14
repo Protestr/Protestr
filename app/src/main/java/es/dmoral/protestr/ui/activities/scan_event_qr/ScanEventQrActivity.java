@@ -74,6 +74,7 @@ public class ScanEventQrActivity extends BaseActivity implements ScanEventQrView
         eventInfoIntent.putExtra(Constants.EVENT_INFO_EXTRA, event);
         startActivity(eventInfoIntent);
         overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+        finish();
     }
 
     @Override

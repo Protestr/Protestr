@@ -18,9 +18,9 @@ public class EventsInteractorImpl implements EventsInteractor {
 
     @Override
     public void getNewEvents(final OnGetNewEventsListener onGetNewEventsListener, @Nullable String iso3Code, int offset, int limit, String order,
-                             double lat, double lng) {
+                             double lat, double lng, String userId) {
         if (iso3Code == null)
-            WebService.getInstance().getApiInterface().getAllNewEvents(offset, limit, order, lat, lng).enqueue(new Callback<ArrayList<Event>>() {
+            WebService.getInstance().getApiInterface().getAllNewEvents(offset, limit, order, lat, lng, userId).enqueue(new Callback<ArrayList<Event>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Event>> call, Response<ArrayList<Event>> response) {
                     onGetNewEventsListener.onNewEventsReceived(response.body());
@@ -32,7 +32,7 @@ public class EventsInteractorImpl implements EventsInteractor {
                 }
             });
         else
-            WebService.getInstance().getApiInterface().getNewEventsByIso3(iso3Code, offset, limit, order).enqueue(new Callback<ArrayList<Event>>() {
+            WebService.getInstance().getApiInterface().getNewEventsByIso3(iso3Code, offset, limit, order, userId).enqueue(new Callback<ArrayList<Event>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Event>> call, Response<ArrayList<Event>> response) {
                     onGetNewEventsListener.onNewEventsReceived(response.body());
