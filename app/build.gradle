@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "es.dmoral.protestr"
         minSdkVersion 16
@@ -21,13 +21,12 @@ android {
 }
 
 ext {
-    supportLibVersion = '27.0.2'
-    playServicesVersion = '11.8.0'
+    supportLibVersion = '27.1.1'
+    playServicesVersion = '15.0.0'
     butterknifeVersion = '8.5.1'
 }
 
 dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
     implementation "com.android.support:support-v13:$supportLibVersion"
