@@ -52,7 +52,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activities.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/NoActionBarDrawable" />
         <activity
             android:name=".ui.activities.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />

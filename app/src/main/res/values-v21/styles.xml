@@ -1,8 +1,11 @@
 <resources>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionbar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="NoActionBarDrawable" parent="AppTheme.NoActionBar">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@color/colorAccent</item>
@@ -17,8 +20,6 @@
     <style name="AppTheme.NoActionBarLogin">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBarEventInfo" parent="AppTheme.NoActionBar">
