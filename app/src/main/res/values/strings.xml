@@ -113,4 +113,9 @@
     <string name="filter_admin_hint">Enter a username</string>
     <string name="leave_event">Leave event</string>
     <string name="error_loading_events">Error loading events</string>
+    <string name="delete_event">Delete event</string>
+    <string name="joining">Joining…</string>
+    <string name="leaving">Leaving…</string>
+    <string name="deleting">Deleting…</string>
+    <string name="delete_event_confirmation">Are you sure? Everything related to this event will be lost.</string>
 </resources>

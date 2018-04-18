@@ -46,6 +46,20 @@ public interface ApiInterface {
                                         @Field("participants") int participants,
                                         @Field("event_admins[]") ArrayList<String> eventAdmins);
 
+
+    @FormUrlEncoded
+    @POST(Constants.JOIN_EVENT_ENDPOINT)
+    Call<ResponseStatus> joinEvent(@Field("user_email") String email, @Field("password") String password,
+                                   @Field("event_id") String eventId);
+    @FormUrlEncoded
+    @POST(Constants.LEAVE_EVENT_ENDPOINT)
+    Call<ResponseStatus> leaveEvent(@Field("user_email") String email, @Field("password") String password,
+                                    @Field("event_id") String eventId, @Field("is_admin") boolean isAdmin);
+    @FormUrlEncoded
+    @POST(Constants.DELETE_EVENT_ENDPOINT)
+    Call<ResponseStatus> deleteEvent(@Field("user_email") String email, @Field("password") String password,
+                                     @Field("event_id") String eventId);
+
     @GET(Constants.EVENTS_ENDPOINT + "?")
     Call<ArrayList<Event>> getAllNewEvents(@Query("offset") int offset, @Query("limit") int limit,
                                            @Query("order") String order, @Query("lat") double lat,

@@ -19,6 +19,9 @@ public class Constants {
     public static final String FILTER_USERS_ENDPOINT = USERS_ENDPOINT + "/filter";
     public static final String EVENTS_ENDPOINT = "events";
     public static final String NEW_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/new";
+    public static final String JOIN_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/join";
+    public static final String LEAVE_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/leave";
+    public static final String DELETE_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/delete";
     public static final String UPLOAD_IMAGE_URL = "https://api.imgur.com/3/image";
     public static final String TERMS_URL = BASE_URL + "terms";
 
@@ -36,6 +39,8 @@ public class Constants {
     public static final String EVENT_INFO_EXTRA = "event_info_extra";
     public static final String IMAGE_VIEWER_EXTRA = "image_viewer_extra";
     public static final String ADDED_ADMINS_EXTRA = "added_admins_extra";
+
+    public static final int EVENT_REQUEST_CODE = 1;
 
     public static String getImgurAuthHeader(Context context) {
         return "Client-ID " + context.getString(R.string.imgur_client_id);

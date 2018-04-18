@@ -15,4 +15,5 @@ public interface EventsFragmentView {
     void populateNewEventList(ArrayList<Event> newEvents);
     void showError();
     void setFirstMenuItemChecked(Menu menu);
+    void loadItems(String order);
 }

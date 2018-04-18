@@ -100,6 +100,16 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyItemRemoved(position);
     }
 
+    public void removeItem(Event event) {
+        removeItem(events.indexOf(event));
+    }
+
+    public void updateItem(Event event) {
+        final int pos = events.indexOf(event);
+        events.set(pos, event);
+        notifyItemChanged(pos);
+    }
+
     public void removeProgress() {
         if (events != null && getItemCount() > 0 && events.get(events.size() - 1) == null)
             removeItem(events.size() - 1);

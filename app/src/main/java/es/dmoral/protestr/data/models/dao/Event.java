@@ -217,4 +217,9 @@ public class Event implements Parcelable {
         parcel.writeByte((byte) (isAdmin ? 1 : 0));
         parcel.writeByte((byte) (isSubscribed ? 1 : 0));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Event && ((Event) obj).getEventId().equals(getEventId());
+    }
 }

@@ -1,6 +1,7 @@
 package es.dmoral.protestr.ui.fragments.events;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import butterknife.BindView;
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.data.models.dao.Event;
+import es.dmoral.protestr.ui.UpdatePool;
 import es.dmoral.protestr.ui.activities.event_info.EventInfoActivity;
 import es.dmoral.protestr.ui.adapters.EventAdapter;
 import es.dmoral.protestr.ui.fragments.BaseFragment;
@@ -67,11 +69,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView, 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                scrollPage = 1;
-                loading = true;
-                ((EventAdapter) eventsRecyclerView.getAdapter()).clearAll();
-                eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL,
-                        Prefs.with(getActivity()).read(PreferencesUtils.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
+                loadItems(Prefs.with(getActivity()).read(PreferencesUtils.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
             }
         });
         eventsRecyclerView.addOnScrollListener(new InfiniteScrollListener(Constants.EVENT_LIMIT_CALL, (LinearLayoutManager) eventsRecyclerView.getLayoutManager()) {
@@ -131,6 +129,15 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView, 
     }
 
     @Override
+    public void loadItems(String order) {
+        scrollPage = 1;
+        loading = true;
+        swipeRefreshLayout.setRefreshing(true);
+        ((EventAdapter) eventsRecyclerView.getAdapter()).clearAll();
+        eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL, order);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_events, menu);
@@ -156,14 +163,34 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView, 
             default:
                 return false;
         }
-        scrollPage = 1;
-        loading = true;
-        swipeRefreshLayout.setRefreshing(true);
-        ((EventAdapter) eventsRecyclerView.getAdapter()).clearAll();
-        eventsPresenter.getNewEvents(0, Constants.EVENT_LIMIT_CALL, order);
+        loadItems(order);
         item.setChecked(true);
         Prefs.with(getActivity()).write(PreferencesUtils.PREFERENCES_ORDER_BY, order);
         return true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (UpdatePool.doINeedUpdates(getClass().toString())) {
+            loadItems(Prefs.with(getActivity()).read(PreferencesUtils.PREFERENCES_ORDER_BY, Constants.ORDER_CREATION_DATE_DESC));
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case Constants.EVENT_REQUEST_CODE:
+                    final Event event = data.getParcelableExtra(Constants.EVENT_INFO_EXTRA);
+                    if (event.getParticipants() == -1) {
+                        ((EventAdapter) eventsRecyclerView.getAdapter()).removeItem(event);
+                    } else {
+                        ((EventAdapter) eventsRecyclerView.getAdapter()).updateItem(event);
+                    }
+            }
+        }
     }
 
     @Override
@@ -177,7 +204,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView, 
     public void onEventClicked(Event event) {
         final Intent eventInfoIntent = new Intent(getActivity(), EventInfoActivity.class);
         eventInfoIntent.putExtra(Constants.EVENT_INFO_EXTRA, event);
-        startActivity(eventInfoIntent);
+        startActivityForResult(eventInfoIntent, Constants.EVENT_REQUEST_CODE);
         getActivity().overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }
 }

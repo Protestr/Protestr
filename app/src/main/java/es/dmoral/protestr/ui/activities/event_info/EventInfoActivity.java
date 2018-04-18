@@ -1,10 +1,13 @@
 package es.dmoral.protestr.ui.activities.event_info;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -19,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTarget;
@@ -38,11 +43,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.data.models.dao.Event;
+import es.dmoral.protestr.data.models.dao.User;
 import es.dmoral.protestr.ui.activities.BaseActivity;
 import es.dmoral.protestr.ui.activities.event_info.image_viewer.ImageViewerActivity;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.FormatUtils;
 import es.dmoral.protestr.utils.ImageUtils;
+import es.dmoral.protestr.utils.PreferencesUtils;
 
 public class EventInfoActivity extends BaseActivity implements EventInfoView, OnMapReadyCallback {
 
@@ -72,6 +79,8 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
     LinearLayout subscribeLayout;
     @BindView(R.id.unsubscribe_layout)
     LinearLayout unsubscribeLayout;
+    @BindView(R.id.delete_layout)
+    LinearLayout deleteLayout;
     @BindView(R.id.qr_code_layout)
     LinearLayout qrCodeLayout;
     @BindView(R.id.qr_icon)
@@ -83,12 +92,16 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
 
     private Event event;
     private GoogleMap googleMap;
+    private EventInfoPresenterImpl eventInfoPresenter;
+    private MaterialDialog progressDialog;
 
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         event = getIntent().getParcelableExtra(Constants.EVENT_INFO_EXTRA);
         super.onCreate(savedInstanceState, R.layout.activity_event_info);
+        eventInfoPresenter = new EventInfoPresenterImpl(this);
+
         Bundle mapViewSavedInstanceState = null;
         if (savedInstanceState != null)
             mapViewSavedInstanceState = savedInstanceState.getBundle(MAP_VIEW_SAVED_STATE);
@@ -149,7 +162,10 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
                 FormatUtils.formatHours(event.getFromDate()));
         eventParticipants.setText(String.valueOf(event.getParticipants()));
         eventLocation.setText(event.getLocationName());
-        if (event.isSubscribed()) {
+
+        if (PreferencesUtils.getLoggedUser(this).getId().equals(event.getUserId())) {
+            deleteLayout.setVisibility(View.VISIBLE);
+        } else if (event.isSubscribed()) {
             unsubscribeLayout.setVisibility(View.VISIBLE);
         } else {
             subscribeLayout.setVisibility(View.VISIBLE);
@@ -205,6 +221,7 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
         super.onDestroy();
         if (mapView != null)
             mapView.onDestroy();
+        eventInfoPresenter.onDestroy();
     }
 
     @OnClick(R.id.tv_event_location)
@@ -252,10 +269,81 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
         overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }
 
+    @Override
+    public void showProgress(@StringRes int message) {
+        progressDialog = new MaterialDialog.Builder(this)
+                .content(message)
+                .cancelable(false)
+                .progress(true, 0)
+                .show();
+    }
+
+    @Override
+    public void hideProgress() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+    }
+
     @OnClick(R.id.subscribe_layout)
     @Override
-    public void subscribe() {
+    public void join() {
+        showProgress(R.string.joining);
+        final User user = PreferencesUtils.getLoggedUser(this);
+        eventInfoPresenter.joinEvent(user.getEmail(), user.getPassword(), event.getEventId());
+    }
 
+    @Override
+    public void onEventJoined() {
+        event.setSubscribed(true);
+        event.setParticipants(event.getParticipants() + 1);
+        eventParticipants.setText(String.valueOf(event.getParticipants()));
+        subscribeLayout.setVisibility(View.GONE);
+        unsubscribeLayout.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.unsubscribe_layout)
+    @Override
+    public void leave() {
+        showProgress(R.string.leaving);
+        final User user = PreferencesUtils.getLoggedUser(this);
+        eventInfoPresenter.leaveEvent(user.getEmail(), user.getPassword(), event.getEventId(),
+                event.isAdmin());
+    }
+
+    @Override
+    public void onEventLeft() {
+        event.setSubscribed(false);
+        event.setParticipants(event.getParticipants() - 1);
+        eventParticipants.setText(String.valueOf(event.getParticipants()));
+        subscribeLayout.setVisibility(View.VISIBLE);
+        unsubscribeLayout.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.delete_layout)
+    @Override
+    public void delete() {
+        new MaterialDialog.Builder(this)
+                .title(R.string.delete_event)
+                .content(R.string.delete_event_confirmation)
+                .positiveText(android.R.string.yes)
+                .negativeText(android.R.string.cancel)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        showProgress(R.string.deleting);
+                        final User user = PreferencesUtils.getLoggedUser(EventInfoActivity.this);
+                        eventInfoPresenter.deleteEvent(user.getEmail(), user.getPassword(), event.getEventId());
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void onEventDeleted() {
+        event.setParticipants(-1);
+        onBackPressed();
     }
 
     @OnClick(R.id.qr_code_layout)
@@ -278,5 +366,13 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
                 openImageViewer(bitmap);
             }
         }, event.getEventId());
+    }
+
+    @Override
+    public void onBackPressed() {
+        final Intent returnIntent = new Intent();
+        returnIntent.putExtra(Constants.EVENT_INFO_EXTRA, event);
+        setResult(Activity.RESULT_OK, returnIntent);
+        super.onBackPressed();
     }
 }

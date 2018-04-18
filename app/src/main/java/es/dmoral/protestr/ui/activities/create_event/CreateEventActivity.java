@@ -41,9 +41,11 @@ import java.util.Calendar;
 import butterknife.BindView;
 import es.dmoral.protestr.R;
 import es.dmoral.protestr.data.models.dao.User;
+import es.dmoral.protestr.ui.UpdatePool;
 import es.dmoral.protestr.ui.activities.BaseActivity;
 import es.dmoral.protestr.ui.activities.create_event.add_admins.AddAdminsActivity;
 import es.dmoral.protestr.ui.custom.ScrollFriendlyMapView;
+import es.dmoral.protestr.ui.fragments.events.EventsFragment;
 import es.dmoral.protestr.utils.Constants;
 import es.dmoral.protestr.utils.FormatUtils;
 import es.dmoral.protestr.utils.KeyboardUtils;
@@ -128,6 +130,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                             @Override
                             public void onAddressDecoded(final LatLng latLng, String iso3) {
                                 CreateEventActivity.this.iso3 = iso3;
+                                latitude = latLng.latitude;
+                                longitude = latLng.longitude;
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -367,8 +371,6 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                     @Override
                     public void onFinish() {
                         googleMap.clear();
-                        latitude = latLng.latitude;
-                        longitude = latLng.longitude;
                         googleMap.addMarker(new MarkerOptions().position(latLng));
                     }
 
@@ -394,6 +396,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
 
     @Override
     public void onEventCreated() {
+        UpdatePool.needsUpdates(EventsFragment.class.toString());
         Toasty.success(this, getString(R.string.event_created)).show();
         onBackPressed();
     }
