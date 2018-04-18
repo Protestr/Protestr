@@ -13,7 +13,7 @@ public class UpdatePool {
     }
 
     public static boolean doINeedUpdates(@NonNull String className, boolean onlyCheck) {
-        final boolean doINeed =  updatePool.contains(className);
+        final boolean doINeed = updatePool.contains(className);
         if (!onlyCheck)
             updatePool.remove(className);
         return doINeed;

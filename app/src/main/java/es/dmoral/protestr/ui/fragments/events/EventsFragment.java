@@ -98,7 +98,8 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView, 
                 allEventsLoaded = false;
         } else {
             allEventsLoaded = true;
-            Toasty.info(getContext(), getString(R.string.no_more_events_toast)).show();
+            if (eventsRecyclerView.getAdapter().getItemCount() > 0)
+                Toasty.info(getContext(), getString(R.string.no_more_events_toast)).show();
         }
     }
 
