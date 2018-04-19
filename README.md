@@ -14,8 +14,8 @@ App for organizing demonstrations.
 - [x] Users can set up the detention alert. ~~(Maybe a redesign of this screen would be nice).~~ DONE.
 - [x] Users can edit detention alert sensitivity sensor parameters.
 - [x] Detailed register screen.
-- [ ] Users can view a detailed description of an event.
-- [ ] Users can view their subscribed events (including created by themselves or only subscribed ones).
+- [x] Users can view a detailed description of an event.
+- [x] Users can view their subscribed events.
 - [ ] Real time chat / feed (Twitter-style) for every subscribed event (split into Admin Messages and All).
 - [ ] **Everything that will eventually come to my mind.**
 
