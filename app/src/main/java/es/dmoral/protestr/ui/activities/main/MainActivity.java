@@ -50,6 +50,7 @@ import es.dmoral.protestr.ui.activities.detention_alert.DetentionAlertActivity;
 import es.dmoral.protestr.ui.activities.login.LoginActivity;
 import es.dmoral.protestr.ui.activities.scan_event_qr.ScanEventQrActivity;
 import es.dmoral.protestr.ui.activities.settings.SettingsActivity;
+import es.dmoral.protestr.ui.adapters.SubscribedEventAdapter;
 import es.dmoral.protestr.ui.fragments.events.EventsFragment;
 import es.dmoral.protestr.ui.fragments.subscribed_events.SubscribedEventsFragment;
 import es.dmoral.protestr.utils.PreferencesUtils;
@@ -70,6 +71,7 @@ public class MainActivity extends BaseActivity
 
     private static final int LOCATION_REQUEST_CODE = 226;
     private static final String LOCATION_DIALOG_SHOWING = "LOCATION_DIALOG_SHOWING";
+    private static final String CURRENT_LOADED_FRAGMENT = "CURRENT_LOADED_FRAGMENT";
     private boolean isLocationSettingRequestDialogShowing;
 
     private int lastSelectedMenuItemId;
@@ -79,8 +81,13 @@ public class MainActivity extends BaseActivity
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (savedInstanceState != null && savedInstanceState.containsKey(LOCATION_DIALOG_SHOWING))
-            isLocationSettingRequestDialogShowing = savedInstanceState.getBoolean(LOCATION_DIALOG_SHOWING);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(LOCATION_DIALOG_SHOWING))
+                isLocationSettingRequestDialogShowing = savedInstanceState.getBoolean(LOCATION_DIALOG_SHOWING);
+            if (savedInstanceState.containsKey(CURRENT_LOADED_FRAGMENT))
+                lastSelectedMenuItemId = savedInstanceState.getInt(CURRENT_LOADED_FRAGMENT);
+        }
+
         super.onCreate(savedInstanceState, R.layout.activity_main);
         FCMHelper.subscribeToFCMTopic(this, FCMHelper.ENTIRE_APP_TOPIC);
         requestLocationPermissions();
@@ -138,11 +145,23 @@ public class MainActivity extends BaseActivity
                 .into((ImageView) headerView.findViewById(R.id.nav_image));
         ((TextView) headerView.findViewById(R.id.nav_title)).setText(user.getUsername());
         ((TextView) headerView.findViewById(R.id.nav_subtitle)).setText(user.getEmail());
-        setTitle(navigationView.getMenu().findItem(R.id.nav_events).getTitle());
-        navigationView.getMenu().findItem(R.id.nav_events).setCheckable(true);
-        navigationView.getMenu().findItem(R.id.nav_events).setChecked(true);
-        lastSelectedMenuItemId = R.id.nav_events;
-        addFragment(EventsFragment.newInstance());
+
+        if (lastSelectedMenuItemId == 0)
+            lastSelectedMenuItemId = R.id.nav_events;
+        switch (lastSelectedMenuItemId) {
+            case R.id.nav_events:
+                setTitle(R.string.new_events);
+                navigationView.getMenu().findItem(R.id.nav_events).setChecked(true);
+                addFragment(EventsFragment.newInstance());
+                fab.show();
+                break;
+            case R.id.nav_subscribed_events:
+                setTitle(R.string.subscribed_events);
+                navigationView.getMenu().findItem(R.id.nav_subscribed_events).setChecked(true);
+                addFragment(SubscribedEventsFragment.newInstance());
+                fab.hide();
+                break;
+        }
     }
 
     @Override
@@ -323,5 +342,6 @@ public class MainActivity extends BaseActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(LOCATION_DIALOG_SHOWING, isLocationSettingRequestDialogShowing);
+        outState.putInt(CURRENT_LOADED_FRAGMENT, lastSelectedMenuItemId);
     }
 }
