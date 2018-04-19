@@ -125,6 +125,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
         @Override
         public void run() {
             if (System.currentTimeMillis() > lastTypeTimestamp + TEXT_DELAY_THRESHOLD) {
+                toolbar.getMenu().findItem(R.id.action_create_event).setEnabled(false);
+                toolbar.getMenu().findItem(R.id.action_create_event).getIcon().setAlpha(128);
                 LocationUtils.getLocationFromAddress(CreateEventActivity.this,
                         lastTypedMessage, new LocationUtils.OnAddressDecodedListener() {
                             @Override
@@ -135,6 +137,8 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        toolbar.getMenu().findItem(R.id.action_create_event).setCheckable(true);
+                                        toolbar.getMenu().findItem(R.id.action_create_event).getIcon().setAlpha(255);
                                         moveMapCamera(latLng);
                                     }
                                 });
