@@ -13,6 +13,8 @@ import android.view.MenuItem;
 
 import es.dmoral.prefs.Prefs;
 import es.dmoral.protestr.R;
+import es.dmoral.protestr.ui.UpdatePool;
+import es.dmoral.protestr.ui.fragments.events.EventsFragment;
 import es.dmoral.protestr.utils.LocaleUtils;
 import es.dmoral.protestr.utils.PreferencesUtils;
 
@@ -37,6 +39,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             final String stringValue = value.toString();
+
+            switch (preference.getKey()) {
+                case PreferencesUtils.PREFERENCES_FILTER_LOCATION_EVENTS:
+                case PreferencesUtils.PREFERENCES_SELECTED_COUNTRY:
+                    UpdatePool.needsUpdates(EventsFragment.class.toString());
+            }
 
             if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in

@@ -50,6 +50,7 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView, 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        UpdatePool.clearUpdatePool();
         eventsPresenter = new EventsPresenterImpl(this);
         return super.onCreateView(inflater, R.layout.fragment_events, container, savedInstanceState);
     }
