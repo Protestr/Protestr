@@ -1,0 +1,101 @@
+<resources>
+    <string name="navigation_drawer_open">Abra menu lateral</string>
+    <string name="navigation_drawer_close">Fechar menu lateral</string>
+
+    <string name="action_settings">Opções</string>
+    <string name="action_logout">Sair</string>
+
+    <string name="username_login_hint">Usuário</string>
+    <string name="password_login_hint">Senha</string>
+    <string name="btn_sign_up_text">Criar conta </string>
+    <string name="btn_login_text">Entrar</string>
+    <string name="password_empty_error">Preenchimento da senha requerida</string>
+    <string name="email_not_valid_error">Email inválido </string>
+    <string name="empty_field">Preenchimento requerido</string>
+    <string name="processing_text">Processando... </string>
+    <string name="invalid_credentials">Dados inválidos </string>
+    <string name="existing_user">Nome de usuário Indisponível</string>
+    <string name="dialog_create_new_account">Criar nova conta</string>
+    <string name="dialog_create_new_account_message">Você está prestes a criar uma conta com o email %1$s.\n\nVocê poderá mudar o nome de usuário caso necessário.\n\nRepita a sua senha:</string>
+    <string name="connection_error">Erro de conexão</string>
+    <string name="password_doesnt_match">Senhas não compatíveis</string>
+    <string name="utilities">Ultilidades</string>
+    <string name="panic_alert">Alerta de pânico</string>
+    <string name="subscribed_events">Eventos seguidos</string>
+    <string name="new_events">Novos eventos </string>
+    <string name="register">Registrar</string>
+    <string name="nav_header_subtitle">Organizar um evento </string>
+
+    <string name="settings_event_filter">Filtrar eventos</string>
+
+    <string name="title_activity_settings">Opções </string>
+    <string name="event_location_title">Local do evento </string>
+    <string name="no_more_events_toast">Sem mais eventos disponíveis </string>
+    <string name="sort_events">Ordenar eventos</string>
+    <string name="order_by_numerous">Ordenar por popularidade </string>
+    <string name="order_by_newest">Ordenar por eventos mais novos</string>
+    <string name="order_by_oldest">Ordenar por eventos mais velhos </string>
+    <string name="order_by_distance_asc">Ordenar por eventos mais próximos </string>
+
+    <string-array name="filter_location_events">
+        <item>Mostrar eventos em todo o mundo </item>
+        <item>Mostrar eventos apenas para o país selecionado </item>
+    </string-array>
+
+    <string name="panic_alert_text_hint">Mensagem à enviar </string>
+    <string name="panic_alert_explanation">Quando você ativar o alerta de pânico o seu dispositivo deverá ser balançado, assim o texto indicado acima e a sua localização serão enviados ao contato de sua escolha. </string>
+    <string name="no_selected_contact">Contato não selecionado </string>
+    <string name="enable_alert">Ligar o alerta </string>
+    <string name="disable_alert">Desligar o alerta</string>
+    <string name="alert_notification_title">Alerta de pânico ligado </string>
+    <string name="alert_notification_body">Desligue no seu local correspondente. </string>
+    <string name="contact_selected">Contato selecionado </string>
+    <string name="error_selecting_contact">Erro ao selecionar contato </string>
+    <string name="select_contact">Selecionar contato </string>
+    <string name="create_event">Criar evento</string>
+    <string name="choose_image">Escolher uma imagem </string>
+    <string name="event_name">Nome do evento </string>
+    <string name="date">Data de início: %s</string>
+    <string name="time">Horário de início: %1$s:%2$s</string>
+    <string name="hour_not_valid">Horário inválido </string>
+    <string name="event_description">Descrição do evento </string>
+    <string name="event_location">Local do evento</string>
+    <string name="fill_all_fields_error">É necessário preencher todos os dados </string>
+    <string name="creating_event">Criando evento... </string>
+    <string name="error_uploading_image">Erro ao fazer o upload da imagem </string>
+    <string name="error_creating_event">Erro ao criar o evento</string>
+    <string name="event_created">Evento criado </string>
+    <string name="finish_event_info">Quando o evento terminar, lembre-se de marcá-lo como terminado na sua página correspondente. </string>
+    <string name="configure_panic_alert">Configurar alerta de pânico </string>
+    <string name="configure_sensor">Configurar o sensor </string>
+    <string name="shake_number">Número de balançadas</string>
+    <string name="shake_number_explanation">Número de balançadas necessárias para ativar o modo pânico. </string>
+    <string name="sensor_sensitivity">Sensibilidade do sensor </string>
+    <string name="sensor_sensitivity_explanation">Com maior sensibilidade, maior a força que você necessitará balançar o seu dispositivo. </string>
+    <string name="time_until_restart">Tempo para resetar</string>
+    <string name="time_until_restart_explanation">O limite máximo em milissegundos que deve existir entre as balançadas para não resetar a contagem. </string>
+    <string name="save_sensor_config">Salvar a configuração do sensor </string>
+    <string name="test_sensor">Testar o sensor</string>
+    <string name="stop_testing_sensor">Parar o teste do sensor</string>
+    <string name="email_login_hint">Email </string>
+    <string name="repeat_password_hint">Repita a senha</string>
+    <string name="image_generation_notice">A imagem do perfil é gerada automaticamente a partir do email provido usando o serviço Gravatar.</string>
+    <string name="terms_and_conditions">Termos e condições </string>
+    <string name="location_permission_canceled_warning">Alguns recursos podem não funcionar corretamente</string>
+    <string name="empty_contact">É necessário selecionar um contato</string>
+    <string name="action_save_image">Salvar imagem</string>
+    <string name="write_external_storage_cancelled_warning">Essas permissões são requiridas para o funcionamento correto do aplicativo </string>
+    <string name="error_occurred_saving_image">Um erro ocorreu ao salvar a imagem </string>
+    <string name="image_saved">Imagem salva na pasta de downloads </string>
+    <string name="view">Abrir</string>
+    <string name="download_image">Baixar imagem </string>
+    <string name="join_event">Participar do evento </string>
+    <string name="mute_notifications">Silenciar notificações </string>
+    <string name="loading_event">Carregando evento </string>
+    <string name="user_already_exists">Usuário Indisponível </string>
+    <string name="add_admins">Adicionar administradores </string>
+    <string name="add_admins_with_number">Adicionar administradores (%d adicionado) </string>
+    <string name="filter_admin_hint">Entre um nome de usuário </string>
+    <string name="leave_event">Sair do evento </string>
+    <string name="error_loading_events">Erro ao carregar os eventos</string>
+    </resources>
