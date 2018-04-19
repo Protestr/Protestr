@@ -137,7 +137,7 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        toolbar.getMenu().findItem(R.id.action_create_event).setCheckable(true);
+                                        toolbar.getMenu().findItem(R.id.action_create_event).setEnabled(true);
                                         toolbar.getMenu().findItem(R.id.action_create_event).getIcon().setAlpha(255);
                                         moveMapCamera(latLng);
                                     }
