@@ -91,8 +91,8 @@ public class SubscribedEventsFragment extends BaseFragment implements Subscribed
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         subscribedEventsPresenter.onDestroy();
     }
 

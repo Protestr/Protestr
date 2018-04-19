@@ -196,10 +196,9 @@ public class EventsFragment extends BaseFragment implements EventsFragmentView, 
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (eventsPresenter != null)
-            eventsPresenter.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
+        eventsPresenter.onDestroy();
     }
 
     @Override
