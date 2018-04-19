@@ -23,6 +23,6 @@ App for organizing demonstrations.
 
 Wanna help translating this app? [Come here](https://www.transifex.com/protestr/protestr-android-app/)!
 
-## Screenshots of the current available work. (outdated screenshot).
+## Screenshots of the current available work. (outdated screenshots).
 
 ![Screenshots](https://raw.githubusercontent.com/GrenderG/Protestr/master/art/all_images.jpg)
