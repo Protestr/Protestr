@@ -18,6 +18,7 @@ public class Constants {
     public static final String SIGN_UP_ENDPOINT = USERS_ENDPOINT + "/signup";
     public static final String FILTER_USERS_ENDPOINT = USERS_ENDPOINT + "/filter";
     public static final String EVENTS_ENDPOINT = "events";
+    public static final String SUBSCRIBED_EVENTS_ENDPOINT = EVENTS_ENDPOINT + "/subscribed";
     public static final String NEW_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/new";
     public static final String JOIN_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/join";
     public static final String LEAVE_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/leave";

@@ -60,6 +60,10 @@ public interface ApiInterface {
     Call<ResponseStatus> deleteEvent(@Field("user_email") String email, @Field("password") String password,
                                      @Field("event_id") String eventId);
 
+    @FormUrlEncoded
+    @POST(Constants.SUBSCRIBED_EVENTS_ENDPOINT)
+    Call<ArrayList<Event>> getSubscribedEvents(@Field("user_email") String email, @Field("password") String password);
+
     @GET(Constants.EVENTS_ENDPOINT + "?")
     Call<ArrayList<Event>> getAllNewEvents(@Query("offset") int offset, @Query("limit") int limit,
                                            @Query("order") String order, @Query("lat") double lat,
@@ -69,7 +73,6 @@ public interface ApiInterface {
     Call<ArrayList<Event>> getNewEventsByIso3(@Query("iso3") String iso3Code, @Query("offset") int offset,
                                               @Query("limit") int limit, @Query("order") String order,
                                               @Query("user_id") String userId);
-
 
     @GET(Constants.EVENTS_ENDPOINT + "/{event_id}")
     Call<Event> getEventById(@Path("event_id") String eventId, @Query("user_id") String userId);
