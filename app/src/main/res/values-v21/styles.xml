@@ -5,10 +5,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="NoActionBarDrawable" parent="AppTheme.NoActionBar">
+    <style name="TintedNavNoActionBar" parent="AppTheme.NoActionBar">
+        <item name="android:navigationBarColor">@color/colorAccent</item>
+    </style>
+
+    <style name="NoActionBarDrawable" parent="TintedNavNoActionBar">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@color/colorAccent</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -22,7 +25,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBarEventInfo" parent="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBarEventInfo" parent="TintedNavNoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 

@@ -59,19 +59,19 @@
         <activity
             android:name=".ui.activities.create_event.CreateEventActivity"
             android:label="@string/create_event"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/TintedNavNoActionBar" />
         <activity
             android:name=".ui.activities.detention_alert.DetentionAlertActivity"
             android:label="@string/panic_alert"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/TintedNavNoActionBar" />
         <activity
             android:name=".ui.activities.detention_alert.detention_alert_config.DetentionAlertConfigActivity"
             android:label="@string/configure_sensor"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/TintedNavNoActionBar" />
         <activity
             android:name=".ui.activities.signup.SignUpActivity"
             android:label="@string/register"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/TintedNavNoActionBar" />
         <activity
             android:name=".ui.activities.event_info.EventInfoActivity"
             android:theme="@style/AppTheme.NoActionBarEventInfo" />
@@ -82,11 +82,11 @@
         <activity
             android:name=".ui.activities.scan_event_qr.ScanEventQrActivity"
             android:label="@string/scan_event_qr"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/TintedNavNoActionBar" />
         <activity
             android:name=".ui.activities.create_event.add_admins.AddAdminsActivity"
             android:label="@string/add_admins"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/TintedNavNoActionBar" />
     </application>
 
 </manifest>
