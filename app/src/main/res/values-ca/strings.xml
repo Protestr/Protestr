@@ -1,0 +1,114 @@
+<resources>
+    <string name="navigation_drawer_open">Obre menu lateral </string>
+    <string name="navigation_drawer_close">Tanca menu lateral</string>
+
+    <string name="action_settings">Configuració</string>
+    <string name="action_logout">Surt</string>
+
+    <string name="username_login_hint">Usuari</string>
+    <string name="password_login_hint">Contrassenya</string>
+    <string name="btn_sign_up_text">Crea un compte</string>
+    <string name="btn_login_text">Entra</string>
+    <string name="password_empty_error">La contrassenya no pot estar buida</string>
+    <string name="email_not_valid_error">E-mail invàlid</string>
+    <string name="empty_field">Aquest camp no pot estar buit</string>
+    <string name="processing_text">Processant</string>
+    <string name="invalid_credentials">Credencials invalides</string>
+    <string name="existing_user">Aquest usuari ja existeix</string>
+    <string name="dialog_create_new_account">Crea un compte nou</string>
+    <string name="dialog_create_new_account_message">Estàs a punt de crear un compte amb el correu electrònic %1$s.\n\nPodràs canviar el nom d\'usuari després.\n\nIntrodueix la contrassenya de nou:</string>
+    <string name="connection_error">Error de connexió</string>
+    <string name="password_doesnt_match">La contrassenya no coincideix</string>
+    <string name="utilities">Eines</string>
+    <string name="panic_alert">Alerta pànic</string>
+    <string name="subscribed_events">Esdeveniments que segueixes</string>
+    <string name="new_events">Nous esdeveniments</string>
+    <string name="register">Registrar</string>
+    <string name="nav_header_subtitle">Organitza\'t! </string>
+
+    <string name="settings_event_filter">Filtre d\'esdeveniments</string>
+
+    <string name="title_activity_settings">Configuració</string>
+    <string name="event_location_title">Localització de l\'esdeveniment</string>
+    <string name="no_more_events_toast">No hi ha més esdeveniments per mostrar</string>
+    <string name="sort_events">Ordena els esdeveniments</string>
+    <string name="order_by_numerous">Ordena per nombre</string>
+    <string name="order_by_newest">Ordena per més nou</string>
+    <string name="order_by_oldest">Ordena per més antic</string>
+    <string name="order_by_distance_asc">Ordena per més a prop</string>
+
+    <string-array name="filter_location_events">
+        <item>Mostra esdeveniments a tot el món</item>
+        <item>Mostra només esdeveniments del país seleccionat</item>
+    </string-array>
+
+    <string name="panic_alert_text_hint">SMS per enviar</string>
+    <string name="panic_alert_explanation">Quan engeguis l\'alerta de pànic has de sacsejar el mòbil, en aquest moment s\'enviarà un SMS amb el text définit més amunt i la teva localització al contacte que hagis definit. </string>
+    <string name="no_selected_contact">No s\'ha seleccionat cap contacte</string>
+    <string name="enable_alert">Activa l\'alerta</string>
+    <string name="disable_alert">Desactiva l\'alerta</string>
+    <string name="alert_notification_title">Alerta pànic activada</string>
+    <string name="alert_notification_body">Desactiva-ho al seu lloc. </string>
+    <string name="contact_selected">Contacte seleccionat</string>
+    <string name="error_selecting_contact">Error seleccionant contacte</string>
+    <string name="select_contact">Seleccionar contacte</string>
+    <string name="create_event">Crear esdeveniment</string>
+    <string name="choose_image">Selecciona una imatge</string>
+    <string name="event_name">Nom de l\'event</string>
+    <string name="date">Data d\'inici: %s</string>
+    <string name="time">Hora d\'inici: %1$s:%2$s</string>
+    <string name="hour_not_valid">Hora incorrecta</string>
+    <string name="event_description">Descripció de l\'esdeveniment</string>
+    <string name="event_location">Localització de l\'esdeveniment</string>
+    <string name="fill_all_fields_error">Has d\'omplir tots els camps</string>
+    <string name="creating_event">Creant esdeveniment</string>
+    <string name="error_uploading_image">Error pujant imatge</string>
+    <string name="error_creating_event">Error creant esdeveniment</string>
+    <string name="event_created">Esdeveniment creat</string>
+    <string name="finish_event_info">Quan l\'esdeveniment s\'acabi recorda de marcar-lo com a acabat. </string>
+    <string name="configure_panic_alert">Configurar alerta pànic</string>
+    <string name="configure_sensor">Configurar el sensor</string>
+    <string name="shake_number">Nombre de sacsejades</string>
+    <string name="shake_number_explanation">Nombre de sacsejades que calen per activar la alerta pànic</string>
+    <string name="sensor_sensitivity">Sensibilitat del sensor</string>
+    <string name="sensor_sensitivity_explanation">Quan més alta sigui la sensibilitat, més fort hauràs de sacsejar el mòbil. </string>
+    <string name="time_until_restart">Temps per reiniciar</string>
+    <string name="time_until_restart_explanation">Temps màxim, en milisegons, que ha d\'haver entre dos sacsejades per a no reiniciar el comptador</string>
+    <string name="save_sensor_config">Guardar configuració del sensor</string>
+    <string name="test_sensor">Provar el sensor</string>
+    <string name="stop_testing_sensor">Atura la prova del sensor</string>
+    <string name="shake_completed">[%s] SACSEJADA COMPLETA\n</string>
+    <string name="shake_detected">[%1$s] Sacsejada detectada (%2$d)\n</string>
+    <string name="shake_restarted">[%s] SACSEJADA REINICIADA\n</string>
+    <string name="email_login_hint">Email</string>
+    <string name="repeat_password_hint">Repeteix la contrassenya</string>
+    <string name="image_generation_notice">L\'imatge de perfil es genera automàticament del correu introduït fent server el servei Gravatar.</string>
+    <string name="terms_and_conditions">Termes i condicions</string>
+    <string name="location_permission_canceled_warning">Algunes característiques poden no funcionar correctament</string>
+    <string name="empty_contact">Primer has de seleccionar un contacte</string>
+    <string name="action_save_image">Guarda imatge</string>
+    <string name="write_external_storage_cancelled_warning">Es requereixen permisos per a escriure al dispositiu</string>
+    <string name="error_occurred_saving_image">Ha esdevingut un error mentre es desava l\'imatge</string>
+    <string name="image_saved">Imatge desada al directori de descàrregues</string>
+    <string name="view">Vista</string>
+    <string name="download_image">Descarrega imatge</string>
+    <string name="join_event">Inscriure\'t al event</string>
+    <string name="generate_qr_code">Genera code QR</string>
+    <string name="mute_notifications">Silencia notificacions</string>
+    <string name="scan_event_qr">Escaneja el QR de l\'event</string>
+    <string name="camera_needed">Cal la càmera per escanejar el codi QR</string>
+    <string name="invalid_qr_event">QR del event invàlid</string>
+    <string name="loading_event">Carregant event...</string>
+    <string name="user_already_exists">L\'usuari ja existeix</string>
+    <string name="add_admins">Afegeix administradors</string>
+    <string name="add_admins_with_number">Afegeix administradors (%d afegit)</string>
+    <string name="filter_admin_hint">Introdueix nom d\'usuari</string>
+    <string name="leave_event">Abandonar event</string>
+    <string name="error_loading_events">Error carregant events</string>
+    <string name="delete_event">Esborra event</string>
+    <string name="joining">Ingressant...</string>
+    <string name="leaving">Sortint...</string>
+    <string name="deleting">Esborrant...</string>
+    <string name="delete_event_confirmation">Estàs segur? Tot allò relacionat al event es perdrà.</string>
+    <string name="error_getting_subscribed_events">Error descarregant events subscrits</string>
+</resources>

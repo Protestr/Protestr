@@ -2,7 +2,7 @@
     <string name="navigation_drawer_open">Abrir menú lateral</string>
     <string name="navigation_drawer_close">Cerrar menú lateral</string>
 
-    <string name="action_settings">Ajustes</string>
+    <string name="action_settings">Settings</string>
     <string name="action_logout">Cerrar sesión</string>
 
     <string name="username_login_hint">Usuario</string>
@@ -88,7 +88,7 @@
     <string name="empty_contact">Debes seleccionar un contacto primero</string>
     <string name="action_save_image">Guardar imagen</string>
     <string name="write_external_storage_cancelled_warning">Se necesitan permisos para escribir en el dispositivo</string>
-    <string name="error_occurred_saving_image">Ha ocurrido un error guardando la imagen</string>
+    <string name="error_occurred_saving_image">Ha ocurrido un error mientras se guardaba la imagen</string>
     <string name="image_saved">Imagen guardada en la carpeta de descargas</string>
     <string name="view">Ver</string>
     <string name="download_image">Descargar imagen</string>
@@ -96,4 +96,19 @@
     <string name="generate_qr_code">Generar código QR</string>
     <string name="mute_notifications">Silenciar notificaciones</string>
     <string name="scan_event_qr">Escanear QR de evento</string>
+    <string name="camera_needed">Se necesita la cámara para escanear códigos QR</string>
+    <string name="invalid_qr_event">Código QR inválido</string>
+    <string name="loading_event">Cargando evento...</string>
+    <string name="user_already_exists">El usuario ya existe</string>
+    <string name="add_admins">Añadir administradores</string>
+    <string name="add_admins_with_number">Añadir administradores (%d añadido)</string>
+    <string name="filter_admin_hint">Introduce un usuario</string>
+    <string name="leave_event">Dejar evento</string>
+    <string name="error_loading_events">Error cargando eventos</string>
+    <string name="delete_event">Borrar evento</string>
+    <string name="joining">Uniéndose...</string>
+    <string name="leaving">Saliendo...</string>
+    <string name="deleting">Borrando...</string>
+    <string name="delete_event_confirmation">¿Estás seguro? Todo lo relativo a este evento se perderá.</string>
+    <string name="error_getting_subscribed_events">Error obteniendo eventos suscritos</string>
 </resources>

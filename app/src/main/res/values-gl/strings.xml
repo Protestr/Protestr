@@ -12,7 +12,7 @@
     <string name="password_empty_error">O contrasinal non pode estar baleiro</string>
     <string name="email_not_valid_error">Correo electrónico incorrecto</string>
     <string name="empty_field">Este campo non pode estar baleiro</string>
-    <string name="processing_text">Procesando...</string>
+    <string name="processing_text">Procesando…</string>
     <string name="invalid_credentials">Credenciais incorrectas</string>
     <string name="existing_user">O usuario xa existe</string>
     <string name="dialog_create_new_account">Crear unha conta nova</string>
@@ -61,7 +61,7 @@
     <string name="event_description">Descrición do evento</string>
     <string name="event_location">Localización do evento</string>
     <string name="fill_all_fields_error">Debes encher todos os campos</string>
-    <string name="creating_event">Creando evento...</string>
+    <string name="creating_event">Creando evento…</string>
     <string name="error_uploading_image">Produciuse un erro subindo a imaxe</string>
     <string name="error_creating_event">Produciuse un erro creando o evento</string>
     <string name="event_created">Evento creado</string>
@@ -98,7 +98,7 @@
     <string name="scan_event_qr">Escanear QR do evento</string>
     <string name="camera_needed">Precísase a cámara para escanear un código QR</string>
     <string name="invalid_qr_event">O QR do evento é incorrecto</string>
-    <string name="loading_event">Cargando evento...</string>
+    <string name="loading_event">Cargando evento…</string>
     <string name="user_already_exists">O usuario xa existe</string>
     <string name="add_admins">Engadir administradores</string>
     <string name="add_admins_with_number">Engadir administradores (%dengadidos)</string>
@@ -106,8 +106,9 @@
     <string name="leave_event">Abandonar evento</string>
     <string name="error_loading_events">Produciuse un erro cargando os eventos</string>
     <string name="delete_event">Eliminar evento</string>
-    <string name="joining">Uníndose...</string>
-    <string name="leaving">Abandonando...</string>
+    <string name="joining">Uníndose…</string>
+    <string name="leaving">Abandonando…</string>
     <string name="deleting">Eliminando...</string>
     <string name="delete_event_confirmation">Estás seguro? Perderase todo o relacionado con este evento.</string>
-    </resources>
+    <string name="error_getting_subscribed_events">Erro obtendo os eventos subscritos</string>
+</resources>

@@ -10,7 +10,7 @@
     <string name="btn_sign_up_text">S\'inscrire</string>
     <string name="btn_login_text">Se connecter</string>
     <string name="password_empty_error">Il faut renseigner un mot de passe</string>
-    <string name="email_not_valid_error">Email non conforme</string>
+    <string name="email_not_valid_error">Email non valide</string>
     <string name="empty_field">Ce champ ne peux pas être vide</string>
     <string name="processing_text">Veuillez patienter...</string>
     <string name="invalid_credentials">Pseudo ou mot de passe incorrects</string>
@@ -105,4 +105,10 @@
     <string name="filter_admin_hint">Renseignez un pseudo</string>
     <string name="leave_event">Quitter la manif</string>
     <string name="error_loading_events">Erreur lors du chargement de manifs</string>
-    </resources>
+    <string name="delete_event">Effacer l\'événement </string>
+    <string name="joining">Entrain de rejoindre...</string>
+    <string name="leaving">Entrain de quitter...</string>
+    <string name="deleting">Entrain d\'effacer...</string>
+    <string name="delete_event_confirmation">Êtes-vous sûr? Tout ce qui est lié à cet événement sera perdu.</string>
+    <string name="error_getting_subscribed_events">Erreur lors de l\'obtention d\'événements auxquels vous êtes abonné</string>
+</resources>
