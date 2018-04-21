@@ -1,0 +1,122 @@
+<resources>
+    <string name="app_name" translatable="false">Protestr</string>
+
+    <string name="navigation_drawer_open">Open side menu</string>
+    <string name="navigation_drawer_close">Close side menu</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
+
+    <string name="username_login_hint">User</string>
+    <string name="password_login_hint">Password</string>
+    <string name="btn_sign_up_text">Create account</string>
+    <string name="btn_login_text">Login</string>
+    <string name="password_empty_error">Password mustn\'t be empty</string>
+    <string name="email_not_valid_error">Invalid email</string>
+    <string name="empty_field">This field mustn\'t be empty</string>
+    <string name="processing_text">Processing…</string>
+    <string name="invalid_credentials">Invalid credentials</string>
+    <string name="existing_user">User already exists</string>
+    <string name="dialog_create_new_account">Create new account</string>
+    <string name="dialog_create_new_account_message">You are about to create an account with the email %1$s.\n\nYou will be able to change the username later.\n\nEnter your password again:</string>
+    <string name="connection_error">Connection error</string>
+    <string name="password_doesnt_match">Password don\'t match</string>
+    <string name="utilities">Utilities</string>
+    <string name="panic_alert">Panic alert</string>
+    <string name="subscribed_events">Subscribed events</string>
+    <string name="new_events">New events</string>
+    <string name="register">Register</string>
+    <string name="nav_header_subtitle">Organize yourself!</string>
+
+    <string name="settings_event_filter">Event filter</string>
+
+    <string name="title_activity_settings">Settings</string>
+    <string name="event_location_title">Event location</string>
+    <string name="no_more_events_toast">No more events to show</string>
+    <string name="sort_events">Sort events</string>
+    <string name="order_by_numerous">Sort by more numerous</string>
+    <string name="order_by_newest">Sort by newest</string>
+    <string name="order_by_oldest">Sort by oldest</string>
+    <string name="order_by_distance_asc">Sort by nearest</string>
+
+    <string-array name="filter_location_events">
+        <item>Show events all around the world</item>
+        <item>Show events from only the selected country</item>
+    </string-array>
+
+    <string name="filter_location_events_default_value" translatable="false">only_selected_country</string>
+    <string-array name="filter_location_events_values" translatable="false">
+        <item>all</item>
+        <item>only_selected_country</item>
+    </string-array>
+
+    <string name="panic_alert_text_hint">SMS to send</string>
+    <string name="panic_alert_explanation">When you have turned on the panic alert your mobile must be shaken, at that point the text indicated above along with your location will be sent by SMS to the contact that you have chosen.</string>
+    <string name="no_selected_contact">No contact selected</string>
+    <string name="enable_alert">Turn on alert</string>
+    <string name="disable_alert">Turn off alert</string>
+    <string name="alert_notification_title">Panic alert turned on</string>
+    <string name="alert_notification_body">Turn it off in its corresponding place.</string>
+    <string name="contact_selected">Contact selected</string>
+    <string name="error_selecting_contact">Error selecting contact</string>
+    <string name="select_contact">Select contact</string>
+    <string name="create_event">Create event</string>
+    <string name="choose_image">Choose an image</string>
+    <string name="event_name">Event name</string>
+    <string name="date">Start date: %s</string>
+    <string name="time">Start time: %1$s:%2$s</string>
+    <string name="hour_not_valid">Invalid time</string>
+    <string name="event_description">Event description</string>
+    <string name="event_location">Event location</string>
+    <string name="fill_all_fields_error">You must fill all fields</string>
+    <string name="creating_event">Creating event…</string>
+    <string name="error_uploading_image">Error uploading image</string>
+    <string name="error_creating_event">Error creating event</string>
+    <string name="event_created">Event created</string>
+    <string name="finish_event_info">When the event ends, remember to mark it as ended on its corresponding screen.</string>
+    <string name="configure_panic_alert">Configure panic alert</string>
+    <string name="configure_sensor">Configure sensor</string>
+    <string name="shake_number">Number of shakes</string>
+    <string name="shake_number_explanation">Number of shakes needed to activate the panic alert.</string>
+    <string name="sensor_sensitivity">Sensor sensibility</string>
+    <string name="sensor_sensitivity_explanation">The higher the sensitivity, the stronger you will have to shake your mobile.</string>
+    <string name="time_until_restart">Time to reset</string>
+    <string name="time_until_restart_explanation">The maximum time in milliseconds that must exist between two shakes to not reset the counter.</string>
+    <string name="save_sensor_config">Save sensor configuration</string>
+    <string name="test_sensor">Try sensor</string>
+    <string name="stop_testing_sensor">Stop trying sensor</string>
+    <string name="shake_completed">[%s] SHAKE COMPLETED\n</string>
+    <string name="shake_detected">[%1$s] Shake detected (%2$d)\n</string>
+    <string name="shake_restarted">[%s] SHAKE RESET\n</string>
+    <string name="email_login_hint">Email</string>
+    <string name="repeat_password_hint">Repeat password</string>
+    <string name="image_generation_notice">The profile image is automatically generated from the email entered using the Gravatar service.</string>
+    <string name="terms_and_conditions">Terms and conditions</string>
+    <string name="location_permission_canceled_warning">Some features may not work correctly</string>
+    <string name="empty_contact">You must select a contact first</string>
+    <string name="action_save_image">Save image</string>
+    <string name="write_external_storage_cancelled_warning">Permissions are required to write to the device</string>
+    <string name="error_occurred_saving_image">An error occurred while saving the image</string>
+    <string name="image_saved">Image saved in the downloads folder</string>
+    <string name="view">View</string>
+    <string name="download_image">Download image</string>
+    <string name="join_event">Join event</string>
+    <string name="generate_qr_code">Generate QR code</string>
+    <string name="mute_notifications">Mute notifications</string>
+    <string name="scan_event_qr">Scan event QR</string>
+    <string name="camera_needed">Camera is needed to scan a QR code</string>
+    <string name="invalid_qr_event">Invalid event QR</string>
+    <string name="loading_event">Loading event…</string>
+    <string name="user_already_exists">User already exists</string>
+    <string name="add_admins">Add administrators</string>
+    <string name="add_admins_with_number">Add administrators (%d added)</string>
+    <string name="filter_admin_hint">Enter a username</string>
+    <string name="leave_event">Leave event</string>
+    <string name="error_loading_events">Error loading events</string>
+    <string name="delete_event">Delete event</string>
+    <string name="joining">Joining…</string>
+    <string name="leaving">Leaving…</string>
+    <string name="deleting">Deleting…</string>
+    <string name="delete_event_confirmation">Are you sure? Everything related to this event will be lost.</string>
+    <string name="error_getting_subscribed_events">Error getting subscribed events</string>
+</resources>

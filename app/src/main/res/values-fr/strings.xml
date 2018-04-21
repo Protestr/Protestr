@@ -1,0 +1,114 @@
+<resources>
+    <string name="navigation_drawer_open">Ouvrir menu latéral</string>
+    <string name="navigation_drawer_close">Fermer menu latéral</string>
+
+    <string name="action_settings">Paramètres</string>
+    <string name="action_logout">Se déconnecter</string>
+
+    <string name="username_login_hint">Pseudo</string>
+    <string name="password_login_hint">Mot de passe</string>
+    <string name="btn_sign_up_text">S\'inscrire</string>
+    <string name="btn_login_text">Se connecter</string>
+    <string name="password_empty_error">Il faut renseigner un mot de passe</string>
+    <string name="email_not_valid_error">Email non valide</string>
+    <string name="empty_field">Ce champ ne peux pas être vide</string>
+    <string name="processing_text">Veuillez patienter...</string>
+    <string name="invalid_credentials">Pseudo ou mot de passe incorrects</string>
+    <string name="existing_user">Ce pseudo est déjà pris</string>
+    <string name="dialog_create_new_account">Formulaire d\'inscription</string>
+    <string name="dialog_create_new_account_message">Vous allez créer un compte utilisateur avec l\'e-mail %1$s.\n\nVous pourrez changer le nom d\'utilisateur plus tard. \n\nVeuillez renseigner encore une fois votre mot de passe:</string>
+    <string name="connection_error">Erreur de connexion</string>
+    <string name="password_doesnt_match">Le mot de passe ne correspond pas avec celui renseigné avant</string>
+    <string name="utilities">Outils</string>
+    <string name="panic_alert">Alerte panique</string>
+    <string name="subscribed_events">Mes manifs</string>
+    <string name="new_events">Nouvelles manifs</string>
+    <string name="register">S\'enregistrer</string>
+    <string name="nav_header_subtitle">Organisez-vous!</string>
+
+    <string name="settings_event_filter">Filtre de manifs</string>
+
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="event_location_title">Lieu</string>
+    <string name="no_more_events_toast">Plus d\'autre manif à montrer</string>
+    <string name="sort_events">Trier</string>
+    <string name="order_by_numerous">Tri par nombre</string>
+    <string name="order_by_newest">Tri + récent</string>
+    <string name="order_by_oldest">Tri - récent</string>
+    <string name="order_by_distance_asc">Tri + proche</string>
+
+    <string-array name="filter_location_events">
+        <item>Montrer manifs tout autour du monde</item>
+        <item>Montrer manifs dans un pays</item>
+    </string-array>
+
+    <string name="panic_alert_text_hint">SMS à envoyer</string>
+    <string name="panic_alert_explanation">Une fois vous activerez l\'alerte panique; si vous agitez votre téléphone, le texte que vour renseignez ci-dessous sera envoyé par SMS au contact de votre choix. </string>
+    <string name="no_selected_contact">Pas de contact choisi</string>
+    <string name="enable_alert">Activer alerte</string>
+    <string name="disable_alert">Désactiver alerte</string>
+    <string name="alert_notification_title">Alerte panique activée</string>
+    <string name="alert_notification_body">Veuillez le des désactiver à l\'endroit qui correspond</string>
+    <string name="contact_selected">Contact choisi</string>
+    <string name="error_selecting_contact">Erreur lors du choix du contact</string>
+    <string name="select_contact">Sélectionner contact</string>
+    <string name="create_event">Créer une manif</string>
+    <string name="choose_image">Choisir image</string>
+    <string name="event_name">Nom de la manif</string>
+    <string name="date">Date début: %s</string>
+    <string name="time">Heure début: %1$s : %2$s</string>
+    <string name="hour_not_valid">Heure:minute invalides</string>
+    <string name="event_description">Description de la manif</string>
+    <string name="event_location">Lieu</string>
+    <string name="fill_all_fields_error">Veuillez renseigner tous les champs</string>
+    <string name="creating_event">Création de la manif...</string>
+    <string name="error_uploading_image">Erreur lors du téléchargement de l\'image</string>
+    <string name="error_creating_event">Erreur lors de la création de la manif</string>
+    <string name="event_created">Manif créée</string>
+    <string name="finish_event_info">Quand la manif est finie, souvenez-vous de la marquer comme finie sur l\'écran correspondant.</string>
+    <string name="configure_panic_alert">Configuration de l\'alerte panique</string>
+    <string name="configure_sensor">Configurer capteur</string>
+    <string name="shake_number">Nombre de secousses</string>
+    <string name="shake_number_explanation">Nombre de secousses nécessaires pour activer l\'alerte panique.</string>
+    <string name="sensor_sensitivity">Sensibilité du capteur</string>
+    <string name="sensor_sensitivity_explanation">Plus le seuil de sensibilité est haut, plus fort vous devrez secouer le mobile pour activer l\'alerte.</string>
+    <string name="time_until_restart">Délai de remise à zéro du compteur de secousses</string>
+    <string name="time_until_restart_explanation">Temps max en millisecondes entre deux secousses avant de remettre à zéro le comptage de secousses.</string>
+    <string name="save_sensor_config">Enregistrer config.</string>
+    <string name="test_sensor">Essayez le capteur</string>
+    <string name="stop_testing_sensor">Arrêt de l\'essai</string>
+    <string name="shake_completed">[%s] SECOUSSE COMPLETÉE\n</string>
+    <string name="shake_detected">[%1$s] Secousse captée (%2$d)\n</string>
+    <string name="shake_restarted">[%s] COMPTEUR SECOUSSES À ZÉRO\n</string>
+    <string name="email_login_hint">Email</string>
+    <string name="repeat_password_hint">Ré-tapez le mot de passe</string>
+    <string name="image_generation_notice">L\'image de profil sera automatiquement générée à partir de votre e-mail grâce au service Gravatar.</string>
+    <string name="terms_and_conditions">Conditions d\'utilisation</string>
+    <string name="location_permission_canceled_warning">Quelques fonctionnalitées pourraient avoir des bugs</string>
+    <string name="empty_contact">Veuillez sélectionner un contact d\'abord</string>
+    <string name="action_save_image">Enregistrer image</string>
+    <string name="write_external_storage_cancelled_warning">Votre appareil portable requiert des permis pour y sauvegarder des fichiers</string>
+    <string name="error_occurred_saving_image">Une erreur s\'est produite lors de la sauvegarde de l\'image</string>
+    <string name="image_saved">Image sauvegardée dans le répertoire Téléchargements</string>
+    <string name="view">Aperçu</string>
+    <string name="download_image">Télécharger image</string>
+    <string name="join_event">Rejoindre une manif</string>
+    <string name="generate_qr_code">Générer QR code</string>
+    <string name="mute_notifications">Inactiver les notifications</string>
+    <string name="scan_event_qr">Scanner QR code de la manif</string>
+    <string name="camera_needed">L\'accès à l\'appareil photo est nécessaire pour scanner le QR code</string>
+    <string name="invalid_qr_event">QR code de manif invalide</string>
+    <string name="loading_event">La manif se charge...</string>
+    <string name="user_already_exists">Le pseudo existe déjà</string>
+    <string name="add_admins">Rajouter des administrateurs-rices</string>
+    <string name="add_admins_with_number">Rajouter des administrateurs-rices (%d rajouté-es)</string>
+    <string name="filter_admin_hint">Renseignez un pseudo</string>
+    <string name="leave_event">Quitter la manif</string>
+    <string name="error_loading_events">Erreur lors du chargement de manifs</string>
+    <string name="delete_event">Effacer l\'événement </string>
+    <string name="joining">Entrain de rejoindre...</string>
+    <string name="leaving">Entrain de quitter...</string>
+    <string name="deleting">Entrain d\'effacer...</string>
+    <string name="delete_event_confirmation">Êtes-vous sûr? Tout ce qui est lié à cet événement sera perdu.</string>
+    <string name="error_getting_subscribed_events">Erreur lors de l\'obtention d\'événements auxquels vous êtes abonné</string>
+</resources>

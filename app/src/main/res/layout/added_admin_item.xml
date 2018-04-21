@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/half_activity_default_margin"
+    android:paddingRight="@dimen/half_activity_default_margin"
+    android:paddingTop="@dimen/half_activity_default_margin"
+    android:paddingBottom="@dimen/half_activity_default_margin">
+
+    <RelativeLayout
+        android:layout_width="58dp"
+        android:layout_height="58dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/admin_img"
+            android:layout_width="56dp"
+            android:layout_height="56dp" />
+
+        <FrameLayout
+            android:id="@+id/remove_admin_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:src="@android:color/white"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@android:color/white"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+            <ImageView
+                android:id="@+id/remove_admin_img"
+                android:src="@drawable/ic_cancel_black_48dp"
+                android:tint="@color/gray_500"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+        </FrameLayout>
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_admin_name"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

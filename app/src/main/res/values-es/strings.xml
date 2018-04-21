@@ -1,0 +1,114 @@
+<resources>
+    <string name="navigation_drawer_open">Abrir menú lateral</string>
+    <string name="navigation_drawer_close">Cerrar menú lateral</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Cerrar sesión</string>
+
+    <string name="username_login_hint">Usuario</string>
+    <string name="password_login_hint">Contraseña</string>
+    <string name="btn_sign_up_text">Crear cuenta</string>
+    <string name="btn_login_text">Entrar</string>
+    <string name="password_empty_error">La contraseña no puede estar vacía</string>
+    <string name="email_not_valid_error">El email no es válido</string>
+    <string name="empty_field">El campo no puede estar vacío</string>
+    <string name="processing_text">Procesando…</string>
+    <string name="invalid_credentials">Credenciales inválidas</string>
+    <string name="existing_user">Usuario existente</string>
+    <string name="dialog_create_new_account">Crear nueva cuenta</string>
+    <string name="dialog_create_new_account_message">Estás a punto de crear una nueva cuenta con email %1$s.\n\nPosteriormente podrás cambiar tu nombre de usuario.\n\nVuelve a escibir la contraseña:</string>
+    <string name="connection_error">Ha ocurrido un error de conexión</string>
+    <string name="password_doesnt_match">Las contraseñas no coinciden</string>
+    <string name="utilities">Utilidades</string>
+    <string name="panic_alert">Aviso de pánico</string>
+    <string name="subscribed_events">Eventos suscritos</string>
+    <string name="new_events">Nuevos eventos</string>
+    <string name="register">Registro</string>
+    <string name="nav_header_subtitle">Organízate!</string>
+
+    <string name="settings_event_filter">Filtrado de eventos</string>
+
+    <string name="title_activity_settings">Ajustes</string>
+    <string name="event_location_title">Localización de los eventos</string>
+    <string name="no_more_events_toast">No hay más eventos que mostrar</string>
+    <string name="sort_events">Ordenar eventos</string>
+    <string name="order_by_numerous">Ordenar por más numerosos</string>
+    <string name="order_by_newest">Ordenar por recientes</string>
+    <string name="order_by_oldest">Ordenar por antiguos</string>
+    <string name="order_by_distance_asc">Ordenar por más cercanos</string>
+
+    <string-array name="filter_location_events">
+        <item>Mostrar eventos de todo el mundo</item>
+        <item>Mostrar eventos del país seleccionado</item>
+    </string-array>
+
+    <string name="panic_alert_text_hint">SMS a enviar</string>
+    <string name="panic_alert_explanation">Cuando tengas activado el aviso de pánico tu móvil deberá ser agitado, en ese instante se enviará el texto indicado arriba junto con tu localización (recuerda tenerla activada) por SMS al contacto que hayas elegido.</string>
+    <string name="no_selected_contact">Ningún contacto seleccionado</string>
+    <string name="enable_alert">Activar alerta</string>
+    <string name="disable_alert">Desactivar alerta</string>
+    <string name="alert_notification_title">Alerta de pánico activada</string>
+    <string name="alert_notification_body">Desactívala en su lugar correspondiente.</string>
+    <string name="contact_selected">Contacto seleccionado</string>
+    <string name="error_selecting_contact">Error seleccionando contacto</string>
+    <string name="select_contact">Seleccionar contacto</string>
+    <string name="create_event">Crear evento</string>
+    <string name="choose_image">Elige una imagen</string>
+    <string name="event_name">Nombre del evento</string>
+    <string name="date">Fecha de comienzo: %s</string>
+    <string name="time">Hora de comienzo: %1$s:%2$s</string>
+    <string name="hour_not_valid">Hora no válida</string>
+    <string name="event_description">Descripción del evento</string>
+    <string name="event_location">Localización del evento</string>
+    <string name="fill_all_fields_error">Debes rellenar todos los campos</string>
+    <string name="creating_event">Creando evento…</string>
+    <string name="error_uploading_image">Error subiendo la imagen</string>
+    <string name="error_creating_event">Error creando evento</string>
+    <string name="event_created">Evento creado</string>
+    <string name="finish_event_info">Cuando termine el evento recuerda darlo como finalizado en su pantalla correspondiente.</string>
+    <string name="configure_panic_alert">Configurar alerta de pánico</string>
+    <string name="configure_sensor">Configurar sensor</string>
+    <string name="shake_number">Número de agitaciones</string>
+    <string name="shake_number_explanation">Número de agitaciones necesarias para activar la alerta de pánico.</string>
+    <string name="sensor_sensitivity">Sensibilidad del sensor</string>
+    <string name="sensor_sensitivity_explanation">Cuanto más alta sea la sensibilidad, más fuerte tendrás que agitar tu móvil.</string>
+    <string name="time_until_restart">Tiempo para reiniciar</string>
+    <string name="time_until_restart_explanation">El tiempo máximo en milisegundos que debe existir entre dos agitaciones para no reiniciar el contador.</string>
+    <string name="save_sensor_config">Guardar configuración del sensor</string>
+    <string name="test_sensor">Probar sensor</string>
+    <string name="stop_testing_sensor">Dejar de probar sensor</string>
+    <string name="shake_completed">[%s] AGITACIÓN COMPLETADA\n</string>
+    <string name="shake_detected">[%1$s] Agitación detectada (%2$d)\n</string>
+    <string name="shake_restarted">[%s] AGITACIÓN REINICIADA\n</string>
+    <string name="email_login_hint">Email</string>
+    <string name="repeat_password_hint">Repetir contraseña</string>
+    <string name="image_generation_notice">La imagen de perfil se genera automáticamente a partir del correo introducido usando el servicio de Gravatar.</string>
+    <string name="terms_and_conditions">Términos y condiciones</string>
+    <string name="location_permission_canceled_warning">Algunas funcionalidades podrían no funcionar correctamente</string>
+    <string name="empty_contact">Debes seleccionar un contacto primero</string>
+    <string name="action_save_image">Guardar imagen</string>
+    <string name="write_external_storage_cancelled_warning">Se necesitan permisos para escribir en el dispositivo</string>
+    <string name="error_occurred_saving_image">Ha ocurrido un error mientras se guardaba la imagen</string>
+    <string name="image_saved">Imagen guardada en la carpeta de descargas</string>
+    <string name="view">Ver</string>
+    <string name="download_image">Descargar imagen</string>
+    <string name="join_event">Unirse al evento</string>
+    <string name="generate_qr_code">Generar código QR</string>
+    <string name="mute_notifications">Silenciar notificaciones</string>
+    <string name="scan_event_qr">Escanear QR de evento</string>
+    <string name="camera_needed">Se necesita la cámara para escanear códigos QR</string>
+    <string name="invalid_qr_event">Código QR inválido</string>
+    <string name="loading_event">Cargando evento...</string>
+    <string name="user_already_exists">El usuario ya existe</string>
+    <string name="add_admins">Añadir administradores</string>
+    <string name="add_admins_with_number">Añadir administradores (%d añadido)</string>
+    <string name="filter_admin_hint">Introduce un usuario</string>
+    <string name="leave_event">Dejar evento</string>
+    <string name="error_loading_events">Error cargando eventos</string>
+    <string name="delete_event">Borrar evento</string>
+    <string name="joining">Uniéndose...</string>
+    <string name="leaving">Saliendo...</string>
+    <string name="deleting">Borrando...</string>
+    <string name="delete_event_confirmation">¿Estás seguro? Todo lo relativo a este evento se perderá.</string>
+    <string name="error_getting_subscribed_events">Error obteniendo eventos suscritos</string>
+</resources>

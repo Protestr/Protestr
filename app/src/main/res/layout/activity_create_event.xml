@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.activities.create_event.CreateEventActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/image_cardview"
+                    android:layout_width="match_parent"
+                    android:layout_height="196dp"
+                    android:layout_marginLeft="@dimen/card_margin_horizontal"
+                    android:layout_marginRight="@dimen/card_margin_horizontal"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardCornerRadius="0dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="196dp"
+                        android:background="@android:color/transparent">
+
+                        <ImageView
+                            android:id="@+id/event_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="196dp"
+                            android:scaleType="centerCrop" />
+
+                        <ImageView
+                            android:id="@+id/image_placeholder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:alpha="0.75"
+                            android:src="@drawable/ic_add_a_photo_black_48dp" />
+
+                    </FrameLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/card_margin_horizontal"
+                    android:layout_marginRight="@dimen/card_margin_horizontal"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    app:cardCornerRadius="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/et_event_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/event_name"
+                            android:inputType="textCapSentences"
+                            android:maxLines="1"
+                            android:paddingBottom="@dimen/activity_vertical_margin"
+                            android:paddingTop="@dimen/activity_vertical_margin" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="?android:attr/listDivider" />
+
+                        <EditText
+                            android:id="@+id/et_event_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:background="@android:color/transparent"
+                            android:gravity="start"
+                            android:hint="@string/event_description"
+                            android:inputType="textMultiLine"
+                            android:minLines="6"
+                            android:paddingBottom="@dimen/activity_vertical_margin"
+                            android:paddingTop="@dimen/activity_vertical_margin"
+                            android:scrollHorizontally="false"
+                            android:scrollbars="vertical"
+                            android:singleLine="false" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/card_margin_horizontal"
+                    android:layout_marginRight="@dimen/card_margin_horizontal"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    app:cardCornerRadius="0dp">
+
+                    <TextView
+                        android:id="@+id/tv_admins"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_admins_with_number"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:background="?attr/selectableItemBackground"
+                        android:textSize="18sp" />
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/card_margin_horizontal"
+                    android:layout_marginRight="@dimen/card_margin_horizontal"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    app:cardCornerRadius="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/activity_horizontal_margin"
+                            android:maxLines="1"
+                            android:background="?attr/selectableItemBackground"
+                            android:textSize="18sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="?android:attr/listDivider" />
+
+                        <TextView
+                            android:id="@+id/tv_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/activity_horizontal_margin"
+                            android:maxLines="1"
+                            android:background="?attr/selectableItemBackground"
+                            android:textSize="18sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="?android:attr/listDivider" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/activity_horizontal_margin"
+                            android:text="@string/finish_event_info"/>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/card_margin_horizontal"
+                    android:layout_marginRight="@dimen/card_margin_horizontal"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    app:cardCornerRadius="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/et_event_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/event_location"
+                            android:inputType="textCapSentences"
+                            android:maxLines="1"
+                            android:paddingBottom="@dimen/activity_vertical_margin"
+                            android:paddingTop="@dimen/activity_vertical_margin" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="?android:attr/listDivider" />
+
+                        <org.protestr.app.ui.custom.ScrollFriendlyMapView
+                            android:id="@+id/map_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="192dp" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
+

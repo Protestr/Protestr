@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/settings_event_filter">
+
+        <ListPreference
+            android:title="@string/event_location_title"
+            android:key="filter_location_events"
+            android:entries="@array/filter_location_events"
+            android:entryValues="@array/filter_location_events_values"
+            android:defaultValue="@string/filter_location_events_default_value"/>
+
+        <ListPreference
+            android:title="País seleccionado"
+            android:key="selected_country" />
+
+    </PreferenceCategory>
+</PreferenceScreen>
