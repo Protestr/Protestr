@@ -81,6 +81,8 @@ public class SubscribedEventsFragment extends BaseFragment implements Subscribed
 
     @Override
     public void showError() {
+        if (subscribedEventSwipeRefreshLayout.isRefreshing())
+            subscribedEventSwipeRefreshLayout.setRefreshing(false);
         Toasty.error(getContext(), getString(org.protestr.app.R.string.error_getting_subscribed_events)).show();
     }
 
