@@ -46,6 +46,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="EllipsizeEndNavigationView">
+        <item name="android:ellipsize">end</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
