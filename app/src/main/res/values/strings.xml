@@ -20,7 +20,7 @@
     <string name="dialog_create_new_account">Create new account</string>
     <string name="dialog_create_new_account_message">You are about to create an account with the email %1$s.\n\nYou will be able to change the username later.\n\nEnter your password again:</string>
     <string name="connection_error">Connection error</string>
-    <string name="password_doesnt_match">Password don\'t match</string>
+    <string name="password_doesnt_match">Passwords doesn\'t match</string>
     <string name="utilities">Utilities</string>
     <string name="panic_alert">Panic alert</string>
     <string name="subscribed_events">Subscribed events</string>
