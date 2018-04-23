@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity
         }
 
         super.onCreate(savedInstanceState, org.protestr.app.R.layout.activity_main);
-        FCMHelper.subscribeToFCMTopic(this, FCMHelper.ENTIRE_APP_TOPIC);
+        FCMHelper.subscribeToEntireAppTopic(this);
         requestLocationPermissions();
     }
 
@@ -198,6 +198,7 @@ public class MainActivity extends BaseActivity
         switch (item.getItemId()) {
             case org.protestr.app.R.id.action_logout:
                 Prefs.with(this).clear();
+                FCMHelper.clearInstance();
                 startActivity(new Intent(this, LoginActivity.class));
                 overridePendingTransition(org.protestr.app.R.anim.activity_in, org.protestr.app.R.anim.activity_out);
                 finish();

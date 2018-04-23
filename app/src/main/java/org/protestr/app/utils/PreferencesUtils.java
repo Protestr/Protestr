@@ -28,6 +28,7 @@ public class PreferencesUtils {
     public static final String PREFERENCES_SHAKE_NUMBER = "shake_number";
     public static final String PREFERENCES_SENSOR_SENSITIVITY = "sensor_sensitivity";
     public static final String PREFERENCES_TIME_TO_RESTART = "time_to_restart";
+    public static final String PREFERENCES_NEEDS_EVENTS_SUBSCRIBTION = "needs_events_subscription";
 
     public static void storeLoggedUser(@NonNull Context context, User user) {
         Prefs.with(context).write(PREFERENCES_USER_ID, user.getId());

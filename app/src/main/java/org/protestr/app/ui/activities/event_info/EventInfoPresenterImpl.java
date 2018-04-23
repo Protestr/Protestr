@@ -1,6 +1,9 @@
 package org.protestr.app.ui.activities.event_info;
 
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+
+import org.protestr.app.data.fcm.FCMHelper;
 
 public class EventInfoPresenterImpl implements EventInfoPresenter, EventInfoInteractor.OnEventJoinedListener,
         EventInfoInteractor.OnEventLeftListener, EventInfoInteractor.OnEventDeletedListener {
@@ -28,7 +31,8 @@ public class EventInfoPresenterImpl implements EventInfoPresenter, EventInfoInte
     }
 
     @Override
-    public void onEventJoined() {
+    public void onEventJoined(String eventId) {
+        FCMHelper.subscribeToEvent(eventId);
         eventInfoView.hideProgress();
         eventInfoView.onEventJoined();
     }
@@ -39,7 +43,8 @@ public class EventInfoPresenterImpl implements EventInfoPresenter, EventInfoInte
     }
 
     @Override
-    public void onEventLeft() {
+    public void onEventLeft(String eventId) {
+        FCMHelper.unsubscribeFromEvent(eventId);
         eventInfoView.hideProgress();
         eventInfoView.onEventLeft();
     }
@@ -50,7 +55,8 @@ public class EventInfoPresenterImpl implements EventInfoPresenter, EventInfoInte
     }
 
     @Override
-    public void onEventDeleted() {
+    public void onEventDeleted(String eventId) {
+        FCMHelper.unsubscribeFromEvent(eventId);
         eventInfoView.hideProgress();
         eventInfoView.onEventDeleted();
     }

@@ -450,7 +450,6 @@ public class CreateEventActivity extends BaseActivity implements CreateEventView
                 KeyboardUtils.closeKeyboard(getCurrentFocus());
                 if (checkIfCanSubmit()) {
                     showProgress();
-                    long a = TimeUtils.getTimeInMillis(year, month, dayOfMonth, hour, minutes);
                     createEventPresenter.createEvent(ImagePicker.getImageFromResult(this,
                             ImagePicker.PICK_IMAGE_REQUEST_CODE, RESULT_OK, eventBitmapIntent),
                             etEventName.getText().toString().trim(), etEventDescription.getText().toString().trim(),

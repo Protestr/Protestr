@@ -2,19 +2,19 @@ package org.protestr.app.ui.activities.event_info;
 
 public interface EventInfoInteractor {
     interface OnEventJoinedListener {
-        void onEventJoined();
+        void onEventJoined(String eventId);
 
         void onEventJoinedError();
     }
 
     interface OnEventLeftListener {
-        void onEventLeft();
+        void onEventLeft(String eventId);
 
         void onEventLeftError();
     }
 
     interface OnEventDeletedListener {
-        void onEventDeleted();
+        void onEventDeleted(String eventId);
 
         void onEventDeletedError();
     }

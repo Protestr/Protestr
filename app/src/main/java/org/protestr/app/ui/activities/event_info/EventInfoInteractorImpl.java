@@ -15,7 +15,7 @@ public class EventInfoInteractorImpl implements EventInfoInteractor {
         WebService.getInstance().getApiInterface().joinEvent(userEmail, userPassword, eventId).enqueue(new Callback<ResponseStatus>() {
             @Override
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
-                onEventJoinedListener.onEventJoined();
+                onEventJoinedListener.onEventJoined(response.body().getMessage());
             }
 
             @Override
@@ -30,7 +30,7 @@ public class EventInfoInteractorImpl implements EventInfoInteractor {
         WebService.getInstance().getApiInterface().leaveEvent(userEmail, userPassword, eventId, isAdmin).enqueue(new Callback<ResponseStatus>() {
             @Override
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
-                onEventLeftListener.onEventLeft();
+                onEventLeftListener.onEventLeft(response.body().getMessage());
             }
 
             @Override
@@ -45,7 +45,7 @@ public class EventInfoInteractorImpl implements EventInfoInteractor {
         WebService.getInstance().getApiInterface().deleteEvent(userEmail, userPassword, eventId).enqueue(new Callback<ResponseStatus>() {
             @Override
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
-                onEventDeletedListener.onEventDeleted();
+                onEventDeletedListener.onEventDeleted(response.body().getMessage());
             }
 
             @Override

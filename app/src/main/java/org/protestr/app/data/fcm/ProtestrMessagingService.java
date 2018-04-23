@@ -10,6 +10,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.util.SparseIntArray;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -28,7 +29,9 @@ import org.protestr.app.ui.activities.splash.SplashActivity;
 
 public class ProtestrMessagingService extends FirebaseMessagingService {
 
-    public static HashMap<String, Integer> notificationCount = new HashMap<>();
+    public static SparseIntArray notificationCount = new SparseIntArray();
+
+    public static final String DEFAULT_PROTESTR_EVENT_CHANNEL = "EVENTS_CHANNEL";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -43,21 +46,24 @@ public class ProtestrMessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        if (!notificationCount.containsKey(notification.getSenderId())) {
-            notificationCount.put(notification.getSenderId(), 0);
+        if (notificationCount.indexOfKey(notification.getRecipientId().hashCode()) < 0) {
+            notificationCount.put(notification.getRecipientId().hashCode(), 0);
         } else {
-            notificationCount.put(notification.getSenderId(),
-                    notificationCount.get(notification.getSenderId()) + 1);
+            notificationCount.put(notification.getRecipientId().hashCode(),
+                    notificationCount.get(notification.getRecipientId().hashCode()) + 1);
         }
 
+        final int currentCount = notificationCount.get(notification.getRecipientId().hashCode());
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, DEFAULT_PROTESTR_EVENT_CHANNEL)
                 .setLights(Color.WHITE, 1000, 1000)
-                .setContentTitle(notification.getTitle().isEmpty() ? getString(org.protestr.app.R.string.app_name) :
-                        notification.getTitle())
-                .setContentText(notification.getBody())
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), org.protestr.app.R.mipmap.ic_launcher))
-                .setSmallIcon(org.protestr.app.R.drawable.ic_goriot_flat)
+                .setContentTitle(notification.getTitle().isEmpty() ?
+                        (notification.getRecipientName().isEmpty() ? getString(R.string.app_name) : notification.getRecipientName())
+                        : notification.getTitle())
+                .setContentText(currentCount > 1 ? getString(R.string.people_talking_about_event) : notification.getBody())
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .setSmallIcon(R.drawable.ic_goriot_flat)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
@@ -66,15 +72,16 @@ public class ProtestrMessagingService extends FirebaseMessagingService {
             notificationBuilder.setPriority(android.app.Notification.PRIORITY_DEFAULT);
 
             NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
-            bigTextStyle.setBigContentTitle(notification.getTitle().isEmpty() ? getString(org.protestr.app.R.string.app_name) :
-                    notification.getTitle());
-            bigTextStyle.bigText(notification.getBody());
+            bigTextStyle.setBigContentTitle(notification.getTitle().isEmpty() ?
+                    (notification.getRecipientName().isEmpty() ? getString(org.protestr.app.R.string.app_name) : notification.getRecipientName())
+                    : notification.getTitle());
+            bigTextStyle.bigText(currentCount > 1 ? getString(R.string.people_talking_about_event) : notification.getBody());
 
             notificationBuilder.setStyle(bigTextStyle);
         }
 
-        if (notification.getType() != 0) {
-            notificationBuilder.setNumber(notificationCount.get(notification.getSenderId()));
+        if (notification.getType() != Notification.NOTIFICATION_TYPE_ENTIRE_APP) {
+            notificationBuilder.setNumber(notificationCount.get(notification.getRecipientId().hashCode()));
         }
 
         NotificationManager notificationManager =
@@ -83,9 +90,11 @@ public class ProtestrMessagingService extends FirebaseMessagingService {
         android.app.Notification notificationToShow = notificationBuilder.build();
         notificationToShow.defaults |= android.app.Notification.DEFAULT_VIBRATE;
 
-        notificationManager.notify(notification.getType() == 0 ?
-                notificationCount.get(notification.getSenderId()) :
-                Integer.parseInt(notification.getSenderId()), notificationToShow);
+        if (notificationManager != null) {
+            notificationManager.notify(notification.getType() == Notification.NOTIFICATION_TYPE_ENTIRE_APP ?
+                    notificationCount.get(notification.getRecipientId().hashCode()) :
+                    notification.getRecipientId().hashCode(), notificationToShow);
+        }
     }
 
 }

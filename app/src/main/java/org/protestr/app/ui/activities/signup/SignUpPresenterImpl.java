@@ -39,6 +39,7 @@ public class SignUpPresenterImpl implements SignUpPresenter, SignUpInteractor.On
     public void onSignUpSuccess(User user) {
         Prefs.with((SignUpActivity) signUpView).writeBoolean(PreferencesUtils.PREFERENCES_LOGGED_IN, true);
         PreferencesUtils.storeLoggedUser((SignUpActivity) signUpView, user);
+        Prefs.with((SignUpActivity) signUpView).writeBoolean(PreferencesUtils.PREFERENCES_NEEDS_EVENTS_SUBSCRIBTION, false);
         signUpView.endLoadingAnimation();
     }
 
