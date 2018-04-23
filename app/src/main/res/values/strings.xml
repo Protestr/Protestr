@@ -73,7 +73,7 @@
     <string name="error_uploading_image">Error uploading image</string>
     <string name="error_creating_event">Error creating event</string>
     <string name="event_created">Event created</string>
-    <string name="finish_event_info">When the event ends, remember to mark it as ended on its corresponding screen.</string>
+    <string name="finish_event_info">When the event ends, remember to delete it on its corresponding screen. Otherwise, it will be automatically deleted in the following days upon completion.</string>
     <string name="configure_panic_alert">Configure panic alert</string>
     <string name="configure_sensor">Configure sensor</string>
     <string name="shake_number">Number of shakes</string>
@@ -90,7 +90,7 @@
     <string name="shake_restarted">[%s] SHAKE RESET\n</string>
     <string name="email_login_hint">Email</string>
     <string name="repeat_password_hint">Repeat password</string>
-    <string name="image_generation_notice">The profile image is automatically generated from the email entered using the Gravatar service.</string>
+    <string name="image_generation_notice">The profile image is automatically generated from the email entered using the Gravatar service. If you want to change it, visit their website.</string>
     <string name="terms_and_conditions">Terms and conditions</string>
     <string name="location_permission_canceled_warning">Some features may not work correctly</string>
     <string name="empty_contact">You must select a contact first</string>

@@ -438,12 +438,12 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
     @OnClick(org.protestr.app.R.id.tv_terms_and_conditions)
     @Override
     public void openTermsAndConditions() {
-        /*CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
         builder.setStartAnimations(this, R.anim.activity_in, R.anim.activity_out);
         builder.setExitAnimations(this, R.anim.activity_back_in, R.anim.activity_back_out);
         CustomTabsIntent customTabsIntent = builder.build();
-        customTabsIntent.launchUrl(this, Uri.parse(Constants.TERMS_URL));*/
+        customTabsIntent.launchUrl(this, Uri.parse(Constants.TERMS_URL));
     }
 
     @Override
