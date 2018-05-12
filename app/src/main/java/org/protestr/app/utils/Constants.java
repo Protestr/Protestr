@@ -23,6 +23,8 @@ public class Constants {
     public static final String JOIN_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/join";
     public static final String LEAVE_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/leave";
     public static final String DELETE_EVENT_ENDPOINT = EVENTS_ENDPOINT + "/delete";
+    public static final String UPDATES_ENDPOINT = API_URL + "/updates";
+    public static final String POST_UPDATE_ENDPOINT = UPDATES_ENDPOINT + "/post";
     public static final String UPLOAD_IMAGE_URL = "https://api.imgur.com/3/image";
     public static final String TERMS_URL = BASE_URL + "terms";
 

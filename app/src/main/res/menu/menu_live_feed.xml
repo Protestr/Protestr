@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.protestr.app.ui.activities.live_feed.LiveFeedActivity">
+
+    <item
+        android:id="@+id/action_mute"
+        android:orderInCategory="100"
+        android:title="@string/action_mute"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_unmute"
+        android:orderInCategory="100"
+        android:title="@string/action_unmute"
+        app:showAsAction="never" />
+</menu>

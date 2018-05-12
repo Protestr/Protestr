@@ -25,6 +25,11 @@ public class FormatUtils {
         return dateFormat.format(timeInMilliseconds);
     }
 
+    public static String formatEventUpdate(long timeInMilliseconds) {
+        DateFormat dateFormat = new SimpleDateFormat("dd MMM HH:mm a", Locale.getDefault());
+        return dateFormat.format(timeInMilliseconds);
+    }
+
     public static boolean isValidEmailFormat(CharSequence email) {
         return !TextUtils.isEmpty(email)
                 && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();

@@ -7,10 +7,6 @@ import org.protestr.app.utils.InternetUtils;
 import org.protestr.app.utils.PreferencesUtils;
 
 import es.dmoral.prefs.Prefs;
-import org.protestr.app.R;
-import org.protestr.app.data.models.dao.User;
-import org.protestr.app.utils.InternetUtils;
-import org.protestr.app.utils.PreferencesUtils;
 
 /**
  * Created by someone on 1/07/17.
@@ -39,7 +35,7 @@ public class SignUpPresenterImpl implements SignUpPresenter, SignUpInteractor.On
     public void onSignUpSuccess(User user) {
         Prefs.with((SignUpActivity) signUpView).writeBoolean(PreferencesUtils.PREFERENCES_LOGGED_IN, true);
         PreferencesUtils.storeLoggedUser((SignUpActivity) signUpView, user);
-        Prefs.with((SignUpActivity) signUpView).writeBoolean(PreferencesUtils.PREFERENCES_NEEDS_EVENTS_SUBSCRIBTION, false);
+        Prefs.with((SignUpActivity) signUpView).writeBoolean(PreferencesUtils.PREFERENCES_NEEDS_EVENTS_SUBSCRIPTION, false);
         signUpView.endLoadingAnimation();
     }
 

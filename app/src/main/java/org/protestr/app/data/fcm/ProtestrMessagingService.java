@@ -1,5 +1,6 @@
 package org.protestr.app.data.fcm;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,13 +16,17 @@ import android.util.SparseIntArray;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.greenrobot.eventbus.EventBus;
+import org.protestr.app.data.models.dao.EventUpdate;
 import org.protestr.app.data.models.dao.Notification;
 
 import java.util.HashMap;
 
 import org.protestr.app.R;
 import org.protestr.app.data.models.dao.Notification;
+import org.protestr.app.data.models.dao.User;
 import org.protestr.app.ui.activities.splash.SplashActivity;
+import org.protestr.app.utils.PreferencesUtils;
 
 /**
  * Created by someone on 26/06/17.
@@ -31,12 +36,24 @@ public class ProtestrMessagingService extends FirebaseMessagingService {
 
     public static SparseIntArray notificationCount = new SparseIntArray();
 
-    public static final String DEFAULT_PROTESTR_EVENT_CHANNEL = "EVENTS_CHANNEL";
+    public static final String PROTESTR_EVENT_CHANNEL = "EVENTS_CHANNEL";
+    public static final String PROTESTR_ENTIRE_APP_CHANNEL = "ENTIRE_APP_CHANEL";
+
+    public static String currentShownEventId;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        sendNotification(new Notification(remoteMessage.getData()));
+        final User user = PreferencesUtils.getLoggedUser(getApplicationContext());
+        final Notification notification = new Notification(remoteMessage.getData());
+        if (!PreferencesUtils.isEventMuted(getApplicationContext(), notification.getRecipientId()) &&
+                !user.getId().equals(notification.getSenderId()) ||
+                (currentShownEventId == null || !currentShownEventId.equals(notification.getRecipientId()))) {
+            sendNotification(notification);
+        }
+        if (notification.getType() != Notification.NOTIFICATION_TYPE_ENTIRE_APP) {
+            EventBus.getDefault().post(notification.toEventUpdate());
+        }
     }
 
     private void sendNotification(Notification notification) {
@@ -55,8 +72,35 @@ public class ProtestrMessagingService extends FirebaseMessagingService {
 
         final int currentCount = notificationCount.get(notification.getRecipientId().hashCode());
 
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            /* Create or update. */
+            NotificationChannel eventChannel = new NotificationChannel(PROTESTR_EVENT_CHANNEL,
+                    getString(R.string.event_related_notifications),
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel entireAppChannel = new NotificationChannel(PROTESTR_ENTIRE_APP_CHANNEL,
+                    getString(R.string.protestr_team_announcements),
+                    NotificationManager.IMPORTANCE_HIGH);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(eventChannel);
+                notificationManager.createNotificationChannel(entireAppChannel);
+            }
+        }
+
+        final String channelId;
+        switch (notification.getType()) {
+            case Notification.NOTIFICATION_TYPE_ADMIN_MESSAGE:
+            case Notification.NOTIFICATION_TYPE_USER_MESSAGE:
+                channelId = PROTESTR_EVENT_CHANNEL;
+                break;
+            default:
+                channelId = PROTESTR_ENTIRE_APP_CHANNEL;
+        }
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, DEFAULT_PROTESTR_EVENT_CHANNEL)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
                 .setLights(Color.WHITE, 1000, 1000)
                 .setContentTitle(notification.getTitle().isEmpty() ?
                         (notification.getRecipientName().isEmpty() ? getString(R.string.app_name) : notification.getRecipientName())
@@ -83,9 +127,6 @@ public class ProtestrMessagingService extends FirebaseMessagingService {
         if (notification.getType() != Notification.NOTIFICATION_TYPE_ENTIRE_APP) {
             notificationBuilder.setNumber(notificationCount.get(notification.getRecipientId().hashCode()));
         }
-
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         android.app.Notification notificationToShow = notificationBuilder.build();
         notificationToShow.defaults |= android.app.Notification.DEFAULT_VIBRATE;

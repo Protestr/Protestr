@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:fitsSystemWindows="true"
+        app:layout_behavior="org.protestr.app.ui.custom.FixAppBarLayoutBehavior"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -20,7 +21,7 @@
             android:background="@color/colorAccent"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
+            android:foreground="?android:attr/selectableItemBackground"
             app:expandedTitleTextAppearance="@style/CollapsingToolbarTitle"
             app:expandedTitleMarginBottom="36dp"
             app:statusBarScrim="@android:color/transparent"
@@ -52,7 +53,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="?android:attr/actionBarSize"
                 android:paddingRight="@dimen/activity_default_margin"
                 android:paddingEnd="@dimen/activity_default_margin"
                 app:layout_collapseMode="pin"

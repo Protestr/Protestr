@@ -32,5 +32,7 @@ public interface EventInfoView {
 
     void onEventDeleted();
 
+    void openLiveFeed();
+
     void generateQr();
 }

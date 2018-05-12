@@ -70,6 +70,12 @@ public interface ApiInterface {
     @POST(Constants.SUBSCRIBED_EVENTS_ENDPOINT)
     Call<ArrayList<Event>> getSubscribedEvents(@Field("user_email") String email, @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST(Constants.POST_UPDATE_ENDPOINT)
+    Call<ResponseStatus> postUpdate(@Field("user_email") String email, @Field("password") String password,
+                                    @Field("event_id") String eventId, @Field("event_name") String eventName,
+                                    @Field("message") String message, @Field("timestamp") long timestamp);
+
     @GET(Constants.EVENTS_ENDPOINT + "?")
     Call<ArrayList<Event>> getAllNewEvents(@Query("offset") int offset, @Query("limit") int limit,
                                            @Query("order") String order, @Query("lat") double lat,

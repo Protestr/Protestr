@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import es.dmoral.prefs.Prefs;
 import org.protestr.app.data.models.dao.User;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by someone on 5/07/17.
  */
@@ -28,7 +31,8 @@ public class PreferencesUtils {
     public static final String PREFERENCES_SHAKE_NUMBER = "shake_number";
     public static final String PREFERENCES_SENSOR_SENSITIVITY = "sensor_sensitivity";
     public static final String PREFERENCES_TIME_TO_RESTART = "time_to_restart";
-    public static final String PREFERENCES_NEEDS_EVENTS_SUBSCRIBTION = "needs_events_subscription";
+    public static final String PREFERENCES_NEEDS_EVENTS_SUBSCRIPTION = "needs_events_subscription";
+    public static final String PREFERENDES_MUTED_EVENTS = "muted_events";
 
     public static void storeLoggedUser(@NonNull Context context, User user) {
         Prefs.with(context).write(PREFERENCES_USER_ID, user.getId());
@@ -46,5 +50,22 @@ public class PreferencesUtils {
                 Prefs.with(context).read(PREFERENCES_PASSWORD),
                 Prefs.with(context).read(PREFERENCES_PROFILE_PIC_URL)
         );
+    }
+
+    public static void muteEvent(@NonNull Context context, @NonNull String eventId) {
+        Set<String> mutedEvents = Prefs.with(context).getStringSet(PREFERENDES_MUTED_EVENTS, new HashSet<String>());
+        mutedEvents.add(eventId);
+        Prefs.with(context).putStringSet(PREFERENDES_MUTED_EVENTS, mutedEvents);
+    }
+
+    public static void unmuteEvent(@NonNull Context context, @NonNull String eventId) {
+        Set<String> mutedEvents = Prefs.with(context).getStringSet(PREFERENDES_MUTED_EVENTS, new HashSet<String>());
+        mutedEvents.remove(eventId);
+        Prefs.with(context).putStringSet(PREFERENDES_MUTED_EVENTS, mutedEvents);
+    }
+
+    public static boolean isEventMuted(@NonNull Context context, @NonNull String eventId) {
+        Set<String> mutedEvents = Prefs.with(context).getStringSet(PREFERENDES_MUTED_EVENTS, new HashSet<String>());
+        return mutedEvents.contains(eventId);
     }
 }

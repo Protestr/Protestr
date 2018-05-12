@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.protestr.app.data.models.dao.Event;
 import org.protestr.app.data.models.dao.User;
 import org.protestr.app.ui.activities.event_info.image_viewer.ImageViewerActivity;
+import org.protestr.app.ui.activities.live_feed.LiveFeedActivity;
 import org.protestr.app.utils.Constants;
 import org.protestr.app.utils.FormatUtils;
 import org.protestr.app.utils.ImageUtils;
@@ -49,22 +50,15 @@ import java.io.ByteArrayOutputStream;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
+
 import org.protestr.app.R;
-import org.protestr.app.data.models.dao.Event;
-import org.protestr.app.data.models.dao.User;
 import org.protestr.app.ui.activities.BaseActivity;
-import org.protestr.app.ui.activities.event_info.image_viewer.ImageViewerActivity;
-import org.protestr.app.utils.Constants;
-import org.protestr.app.utils.FormatUtils;
-import org.protestr.app.utils.ImageUtils;
-import org.protestr.app.utils.PreferencesUtils;
 
 public class EventInfoActivity extends BaseActivity implements EventInfoView, OnMapReadyCallback {
 
     @BindView(org.protestr.app.R.id.toolbar)
     Toolbar toolbar;
-    @BindView(org.protestr.app.R.id.fab)
-    FloatingActionButton fab;
     @BindView(org.protestr.app.R.id.toolbar_layout)
     CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(org.protestr.app.R.id.event_image_container)
@@ -346,6 +340,19 @@ public class EventInfoActivity extends BaseActivity implements EventInfoView, On
                     }
                 })
                 .show();
+    }
+
+    @OnClick(R.id.fab)
+    @Override
+    public void openLiveFeed() {
+        if (event.isSubscribed()) {
+            Intent liveFeedIntent = new Intent(this, LiveFeedActivity.class);
+            liveFeedIntent.putExtra(Constants.EVENT_INFO_EXTRA, event);
+            startActivity(liveFeedIntent);
+            overridePendingTransition(org.protestr.app.R.anim.activity_in, org.protestr.app.R.anim.activity_out);
+        } else {
+            Toasty.info(this, getString(R.string.live_feed_event_not_subscribed), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

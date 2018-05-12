@@ -16,6 +16,7 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".ProtestrApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
@@ -87,6 +88,10 @@
             android:name=".ui.activities.create_event.add_admins.AddAdminsActivity"
             android:label="@string/add_admins"
             android:theme="@style/TintedNavNoActionBar" />
+        <activity
+            android:name=".ui.activities.live_feed.LiveFeedActivity"
+            android:theme="@style/TintedNavNoActionBar"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>

@@ -9,10 +9,6 @@ import org.protestr.app.utils.InternetUtils;
 import org.protestr.app.utils.PreferencesUtils;
 
 import es.dmoral.prefs.Prefs;
-import org.protestr.app.R;
-import org.protestr.app.data.models.dao.User;
-import org.protestr.app.utils.InternetUtils;
-import org.protestr.app.utils.PreferencesUtils;
 
 import java.util.ArrayList;
 
@@ -42,7 +38,7 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnAttemptLog
 
     @Override
     public void resubscribeToEventsIfNeeded(User user) {
-        if (Prefs.with((LoginActivity) loginView).readBoolean(PreferencesUtils.PREFERENCES_NEEDS_EVENTS_SUBSCRIBTION, true)) {
+        if (Prefs.with((LoginActivity) loginView).readBoolean(PreferencesUtils.PREFERENCES_NEEDS_EVENTS_SUBSCRIPTION, true)) {
             loginInteractor.getSubscribedEvents(this, user.getEmail(), user.getPassword());
         } else {
             loginView.hideProgress();
@@ -78,13 +74,13 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnAttemptLog
             eventIds.add(event.getEventId());
         }
         FCMHelper.subscribeToEvents(eventIds);
-        Prefs.with((LoginActivity) loginView).writeBoolean(PreferencesUtils.PREFERENCES_NEEDS_EVENTS_SUBSCRIBTION, false);
+        Prefs.with((LoginActivity) loginView).writeBoolean(PreferencesUtils.PREFERENCES_NEEDS_EVENTS_SUBSCRIPTION, false);
         loginView.hideProgress();
         loginView.loginSuccess();
     }
 
     @Override
     public void onSubscribedEventsReceivedError() {
-        Prefs.with((LoginActivity) loginView).writeBoolean(PreferencesUtils.PREFERENCES_NEEDS_EVENTS_SUBSCRIBTION, true);
+        Prefs.with((LoginActivity) loginView).writeBoolean(PreferencesUtils.PREFERENCES_NEEDS_EVENTS_SUBSCRIPTION, true);
     }
 }

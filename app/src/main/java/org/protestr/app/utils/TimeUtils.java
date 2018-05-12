@@ -31,6 +31,11 @@ public class TimeUtils {
         return auxCalendar.getTimeInMillis();
     }
 
+    public static long getCurrentTimeInMillis() {
+        final Calendar auxCalendar = Calendar.getInstance();
+        return auxCalendar.getTimeInMillis();
+    }
+
     public static long getCurrentTimeInMillisStartingFromMinutes() {
         final Calendar auxCalendar = Calendar.getInstance();
         auxCalendar.clear(Calendar.SECOND);

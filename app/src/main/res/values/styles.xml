@@ -23,6 +23,7 @@
     </style>
 
     <color name="viewer_bg_color">#303030</color>
+
     <style name="AppTheme.Viewer" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@color/viewer_bg_color</item>
         <item name="android:textColorPrimary">@android:color/white</item>
