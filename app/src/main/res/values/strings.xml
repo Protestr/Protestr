@@ -120,8 +120,6 @@
     <string name="delete_event_confirmation">Are you sure? Everything related to this event will be lost.</string>
     <string name="error_getting_subscribed_events">Error getting subscribed events</string>
     <string name="people_talking_about_event">People are talking about this event</string>
-    <string name="title_activity_live_feed">LiveFeedActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
     <string name="tab_text_admin">Admin</string>
     <string name="tab_text_all">All</string>
     <string name="whats_happening">What\'s happening?</string>
