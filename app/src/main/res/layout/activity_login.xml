@@ -28,12 +28,14 @@
             android:padding="@dimen/activity_default_margin"
             android:orientation="vertical">
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/login_logo"
                 android:text="@string/app_name"
                 android:textColor="@color/colorPrimary"
                 android:gravity="center_horizontal"
                 android:textSize="48sp"
+                android:maxLines="1"
+                app:autoSizeTextType="uniform"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -83,6 +85,7 @@
                     android:id="@+id/button_sign_up"
                     android:text="@string/btn_sign_up_text"
                     android:layout_marginRight="@dimen/half_activity_default_margin"
+                    android:layout_marginEnd="@dimen/half_activity_default_margin"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:theme="@style/AppTheme.SignUpButton"
@@ -94,6 +97,7 @@
                     android:id="@+id/button_login"
                     android:text="@string/btn_login_text"
                     android:layout_marginLeft="@dimen/half_activity_default_margin"
+                    android:layout_marginEnd="@dimen/half_activity_default_margin"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:theme="@style/AppTheme.LoginButton"

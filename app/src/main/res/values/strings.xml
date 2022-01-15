@@ -20,7 +20,7 @@
     <string name="dialog_create_new_account">Create new account</string>
     <string name="dialog_create_new_account_message">You are about to create an account with the email %1$s.\n\nYou will be able to change the username later.\n\nEnter your password again:</string>
     <string name="connection_error">Connection error</string>
-    <string name="password_doesnt_match">Password don\'t match</string>
+    <string name="password_doesnt_match">Passwords doesn\'t match</string>
     <string name="utilities">Utilities</string>
     <string name="panic_alert">Panic alert</string>
     <string name="subscribed_events">Subscribed events</string>
@@ -73,7 +73,7 @@
     <string name="error_uploading_image">Error uploading image</string>
     <string name="error_creating_event">Error creating event</string>
     <string name="event_created">Event created</string>
-    <string name="finish_event_info">When the event ends, remember to mark it as ended on its corresponding screen.</string>
+    <string name="finish_event_info">When the event ends, remember to delete it on its corresponding screen. Otherwise, it will be automatically deleted in the following days upon completion.</string>
     <string name="configure_panic_alert">Configure panic alert</string>
     <string name="configure_sensor">Configure sensor</string>
     <string name="shake_number">Number of shakes</string>
@@ -90,7 +90,7 @@
     <string name="shake_restarted">[%s] SHAKE RESET\n</string>
     <string name="email_login_hint">Email</string>
     <string name="repeat_password_hint">Repeat password</string>
-    <string name="image_generation_notice">The profile image is automatically generated from the email entered using the Gravatar service.</string>
+    <string name="image_generation_notice">The profile image is automatically generated from the email entered using the Gravatar service. If you want to change it, visit their website.</string>
     <string name="terms_and_conditions">Terms and conditions</string>
     <string name="location_permission_canceled_warning">Some features may not work correctly</string>
     <string name="empty_contact">You must select a contact first</string>
@@ -119,4 +119,13 @@
     <string name="deleting">Deleting…</string>
     <string name="delete_event_confirmation">Are you sure? Everything related to this event will be lost.</string>
     <string name="error_getting_subscribed_events">Error getting subscribed events</string>
+    <string name="people_talking_about_event">People are talking about this event</string>
+    <string name="tab_text_admin">Admin</string>
+    <string name="tab_text_all">All</string>
+    <string name="whats_happening">What\'s happening?</string>
+    <string name="action_mute">Mute</string>
+    <string name="event_related_notifications">Event related notifications</string>
+    <string name="protestr_team_announcements">Protestr team announcements</string>
+    <string name="live_feed_event_not_subscribed">You need to subscribe to this event in order to view its live feed</string>
+    <string name="action_unmute">Unmute</string>
 </resources>

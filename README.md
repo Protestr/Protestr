@@ -1,7 +1,7 @@
 # Protestr [UNDER DEV]
 
 <div align="center">
-	<img src="https://raw.githubusercontent.com/GrenderG/Protestr/master/art/web_hi_res_512.png" width="128">
+	<img src="https://raw.githubusercontent.com/Protestr/Protestr/master/art/web_hi_res_512.png" width="128">
 </div>
 
 App for organizing demonstrations.
@@ -18,7 +18,7 @@ App for organizing demonstrations.
 - [x] Users can view their subscribed events.
 - [ ] Real time chat / feed (Twitter-style) for every subscribed event (split into Admin Messages and All).
 - [ ] Add an option to view events anonymously.
-- [ ] **Everything that will eventually come to my mind.**
+- [ ] **Everything that will eventually come to our mind.**
 
 ## Translation
 
@@ -26,4 +26,4 @@ Wanna help translating this app? [Come here](https://www.transifex.com/protestr/
 
 ## Screenshots of the current available work. (outdated screenshots).
 
-![Screenshots](https://raw.githubusercontent.com/GrenderG/Protestr/master/art/all_images.jpg)
+![Screenshots](https://raw.githubusercontent.com/Protestr/Protestr/master/art/all_images.jpg)

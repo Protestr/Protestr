@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="es.dmoral.protestr.ui.activities.event_info.EventInfoActivity"
+    tools:context="org.protestr.app.ui.activities.event_info.EventInfoActivity"
     tools:showIn="@layout/activity_event_info">
 
     <LinearLayout
@@ -137,7 +137,7 @@
                     android:id="@+id/tv_event_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
+                    android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
                     android:padding="@dimen/activity_default_margin"
@@ -148,7 +148,7 @@
                     android:layout_height="1px"
                     android:background="?android:attr/listDivider" />
 
-                <es.dmoral.protestr.ui.custom.ScrollFriendlyMapView
+                <org.protestr.app.ui.custom.ScrollFriendlyMapView
                     android:id="@+id/map_view"
                     android:layout_width="match_parent"
                     android:layout_height="192dp" />

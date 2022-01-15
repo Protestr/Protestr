@@ -23,6 +23,7 @@
     </style>
 
     <color name="viewer_bg_color">#303030</color>
+
     <style name="AppTheme.Viewer" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@color/viewer_bg_color</item>
         <item name="android:textColorPrimary">@android:color/white</item>
@@ -44,6 +45,10 @@
     <style name="CollapsingToolbarTitle">
         <item name="android:textSize">21sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EllipsizeEndNavigationView">
+        <item name="android:ellipsize">end</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

@@ -2,7 +2,7 @@
     <string name="navigation_drawer_open">Abrir menú lateral</string>
     <string name="navigation_drawer_close">Cerrar menú lateral</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Ajustes</string>
     <string name="action_logout">Cerrar sesión</string>
 
     <string name="username_login_hint">Usuario</string>

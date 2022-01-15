@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:editTextStyle">@style/App_EditTextStyle</item>
+        <item name="editTextStyle">@style/App_EditTextStyle</item>
+    </style>
+
+    <style name="App_EditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:importantForAutofill">noExcludeDescendants</item>
+    </style>
+</resources>
